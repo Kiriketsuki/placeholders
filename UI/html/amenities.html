@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,600&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- own styles -->
+    <link rel = "stylesheet" href = "styles\amenities.css">
+
+    <title>Placeholders</title>
+</head>
+
+<body>
+    <div id = "background">
+    </div>
+
+    <div id = "main_content">
+        <form>
+            <div class = "form-group">
+                <label for = "mrt_distance">
+                    Distance from MRT
+                </label>
+                <input type = "text" class = "form-control" id = "mrt_distance" aria-describedby = "mrt" placeholder = "Enter the maximum distance you are willing to travel"/>
+            </div>
+
+            <div class = "form-group">
+                <label for = "gym_distance">
+                    Distance from gym
+                </label>
+                <input type = "text" class = "form-control" id = "gym_distance" aria-describedby = "gym" placeholder = "Enter the maximum distance you are willing to travel"/>
+            </div>
+
+            <div class = "form-group">
+                <label for = "convenience_distance">
+                    Distance from convenience store
+                </label>
+                <input type = "text" class = "form-control" id = "convenience_distance" aria-describedby = "mrt" placeholder = "Enter the maximum distance you are willing to travel"/>
+            </div>
+
+            <div class = "form-group">
+                <label for = "supermarket_distance">
+                    Distance from supermarket
+                </label>
+                <input type = "text" class = "form-control" id = "supermarket_distance" aria-describedby = "mrt" placeholder = "Enter the maximum distance you are willing to travel"/>
+            </div>
+        </form>
+
+        <button type = "button" class = "btn btn-outline-primary">
+            Submit 
+        </button>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</html>

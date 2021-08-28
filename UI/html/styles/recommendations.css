@@ -1,0 +1,39 @@
+:root {
+    font-size: calc(0.6vw + 0.6vh + 0.5vmin);
+    font-family: 'Raleway';
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --transition-speed: 600ms;
+    text-shadow: 1px 1px black;
+}
+
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#background {
+    background: url(backgrounds/room_type.jpg) repeat center center fixed;
+    background-size: cover;
+    opacity: 0.3;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* #buffer { */
+    /* height: 30vh; */
+    /* width: 100vw; */
+    /* align-self: flex-start; */
+/* } */
+
+#main_content {
+    /* background: rgba(100,100,100, 0.5); */
+    opacity: 1;
+}
