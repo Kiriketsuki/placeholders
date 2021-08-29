@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,600&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- own styles -->
+    <link rel = "stylesheet" href = "styles\price_range.css">
+
+    <title>Placeholders</title>
+</head>
+
+<body>
+    <div id = "background">
+        <label for="location">Choose your location from the list:</label>
+        <input list="locations" name="location" id="location">
+        
+        <datalist id="locations">
+            <option>AH HOOD RD</option>
+            <option>ALEXANDRA RD</option>
+            <option>ALJUNIED CRES</option>
+            <option>ALJUNIED RD</option>
+            <option>ANG MO KIO AVE 1</option>
+            <option>ANG MO KIO AVE 10</option>
+            <option>ANG MO KIO AVE 2</option>
+            <option>ANG MO KIO AVE 3</option>
+            <option>ANG MO KIO AVE 4</option>
+            <option>ANG MO KIO AVE 5</option>
+            <option>ANG MO KIO AVE 6</option>
+            <option>ANG MO KIO AVE 8</option>
+            <option>ANG MO KIO AVE 9</option>
+            <option>ANG MO KIO ST 11</option>
+            <option>ANG MO KIO ST 21</option>
+            <option>ANG MO KIO ST 31</option>
+            <option>BAIN ST</option>
+            <option>BALAM RD</option>
+            <option>BANGKIT RD</option>
+            <option>BEACH RD</option>
+            <option>BEDOK NTH AVE 1</option>
+            <option>BEDOK NTH AVE 2</option>
+            <option>BEDOK NTH AVE 3</option>
+            <option>BEDOK NTH AVE 4</option>
+            <option>BEDOK NTH RD</option>
+            <option>BEDOK NTH ST 1</option>
+            <option>BEDOK NTH ST 2</option>
+            <option>BEDOK NTH ST 3</option>
+            <option>BEDOK NTH ST 4</option>
+            <option>BEDOK RESERVOIR RD</option>
+            <option>BEDOK STH AVE 1</option>
+            <option>BEDOK STH AVE 2</option>
+            <option>BEDOK STH AVE 3</option>
+            <option>BEDOK STH RD</option>
+            <option>BENDEMEER RD</option>
+            <option>BEO CRES</option>
+            <option>BISHAN ST 11</option>
+            <option>BISHAN ST 12</option>
+            <option>BISHAN ST 13</option>
+            <option>BISHAN ST 22</option>
+            <option>BISHAN ST 23</option>
+            <option>BISHAN ST 24</option>
+            <option>BOON KENG RD</option>
+            <option>BOON LAY AVE</option>
+            <option>BOON LAY DR</option>
+            <option>BOON LAY PL</option>
+            <option>BRIGHT HILL DR</option>
+            <option>BT BATOK CTRL</option>
+            <option>BT BATOK EAST AVE 3</option>
+            <option>BT BATOK EAST AVE 4</option>
+            <option>BT BATOK EAST AVE 5</option>
+            <option>BT BATOK ST 11</option>
+            <option>BT BATOK ST 21</option>
+            <option>BT BATOK ST 31</option>
+            <option>BT BATOK ST 32</option>
+            <option>BT BATOK ST 33</option>
+            <option>BT BATOK ST 34</option>
+            <option>BT BATOK ST 51</option>
+            <option>BT BATOK ST 52</option>
+            <option>BT BATOK WEST AVE 2</option>
+            <option>BT BATOK WEST AVE 4</option>
+            <option>BT BATOK WEST AVE 6</option>
+            <option>BT BATOK WEST AVE 7</option>
+            <option>BT BATOK WEST AVE 8</option>
+            <option>BT MERAH CTRL</option>
+            <option>BT MERAH LANE 1</option>
+            <option>BT MERAH VIEW</option>
+            <option>BT PANJANG RING RD</option>
+            <option>BT PURMEI RD</option>
+            <option>BUANGKOK STH FARMWAY 1</option>
+            <option>BUFFALO RD</option>
+            <option>CAMBRIDGE RD</option>
+            <option>CASHEW RD</option>
+            <option>CASSIA CRES</option>
+            <option>CHAI CHEE AVE</option>
+            <option>CHAI CHEE DR</option>
+            <option>CHAI CHEE RD</option>
+            <option>CHAI CHEE ST</option>
+            <option>CHANDER RD</option>
+            <option>CHIN SWEE RD</option>
+            <option>CHOA CHU KANG AVE 1</option>
+            <option>CHOA CHU KANG AVE 2</option>
+            <option>CHOA CHU KANG AVE 3</option>
+            <option>CHOA CHU KANG AVE 4</option>
+            <option>CHOA CHU KANG CTRL</option>
+            <option>CHOA CHU KANG LOOP</option>
+            <option>CHOA CHU KANG NTH 5</option>
+            <option>CHOA CHU KANG NTH 6</option>
+            <option>CHOA CHU KANG NTH 7</option>
+            <option>CHOA CHU KANG ST 51</option>
+            <option>CHOA CHU KANG ST 52</option>
+            <option>CHOA CHU KANG ST 53</option>
+            <option>CHOA CHU KANG ST 62</option>
+            <option>CIRCUIT RD</option>
+            <option>CLARENCE LANE</option>
+            <option>CLEMENTI AVE 1</option>
+            <option>CLEMENTI AVE 2</option>
+            <option>CLEMENTI AVE 3</option>
+            <option>CLEMENTI AVE 4</option>
+            <option>CLEMENTI AVE 5</option>
+            <option>CLEMENTI AVE 6</option>
+            <option>CLEMENTI ST 13</option>
+            <option>CLEMENTI ST 14</option>
+            <option>CLEMENTI WEST ST 1</option>
+            <option>CLEMENTI WEST ST 2</option>
+            <option>CRAWFORD LANE</option>
+            <option>C'WEALTH AVE</option>
+            <option>C'WEALTH AVE WEST</option>
+            <option>C'WEALTH CL</option>
+            <option>C'WEALTH CRES</option>
+            <option>C'WEALTH DR</option>
+            <option>DAKOTA CRES</option>
+            <option>DELTA AVE</option>
+            <option>DEPOT RD</option>
+            <option>DORSET RD</option>
+            <option>DOVER CL EAST</option>
+            <option>DOVER CRES</option>
+            <option>DOVER RD</option>
+            <option>EAST COAST RD</option>
+            <option>ELIAS RD</option>
+            <option>EMPRESS RD</option>
+            <option>EUNOS CRES</option>
+            <option>EUNOS RD 5</option>
+            <option>EVERTON PK</option>
+            <option>FAJAR RD</option>
+            <option>FARRER RD</option>
+            <option>FRENCH RD</option>
+            <option>GANGSA RD</option>
+            <option>GEYLANG BAHRU</option>
+            <option>GEYLANG EAST AVE 1</option>
+            <option>GEYLANG EAST AVE 2</option>
+            <option>GEYLANG EAST CTRL</option>
+            <option>GEYLANG SERAI</option>
+            <option>GHIM MOH RD</option>
+            <option>GLOUCESTER RD</option>
+            <option>HAIG RD</option>
+            <option>HAVELOCK RD</option>
+            <option>HENDERSON CRES</option>
+            <option>HENDERSON RD</option>
+            <option>HILLVIEW AVE</option>
+            <option>HO CHING RD</option>
+            <option>HOLLAND AVE</option>
+            <option>HOLLAND CL</option>
+            <option>HOLLAND DR</option>
+            <option>HOUGANG AVE 1</option>
+            <option>HOUGANG AVE 10</option>
+            <option>HOUGANG AVE 2</option>
+            <option>HOUGANG AVE 3</option>
+            <option>HOUGANG AVE 4</option>
+            <option>HOUGANG AVE 5</option>
+            <option>HOUGANG AVE 6</option>
+            <option>HOUGANG AVE 7</option>
+            <option>HOUGANG AVE 8</option>
+            <option>HOUGANG CTRL</option>
+            <option>HOUGANG ST 11</option>
+            <option>HOUGANG ST 21</option>
+            <option>HOUGANG ST 22</option>
+            <option>HOUGANG ST 51</option>
+            <option>HOUGANG ST 52</option>
+            <option>HOUGANG ST 61</option>
+            <option>HOY FATT RD</option>
+            <option>HU CHING RD</option>
+            <option>INDUS RD</option>
+            <option>JLN BAHAGIA</option>
+            <option>JLN BATU</option>
+            <option>JLN BERSEH</option>
+            <option>JLN BT HO SWEE</option>
+            <option>JLN BT MERAH</option>
+            <option>JLN DAMAI</option>
+            <option>JLN DUA</option>
+            <option>JLN DUSUN</option>
+            <option>JLN KLINIK</option>
+            <option>JLN KUKOH</option>
+            <option>JLN MA'MOR</option>
+            <option>JLN MEMBINA BARAT</option>
+            <option>JLN PASAR BARU</option>
+            <option>JLN RAJAH</option>
+            <option>JLN RUMAH TINGGI</option>
+            <option>JLN TENAGA</option>
+            <option>JLN TENTERAM</option>
+            <option>JOO CHIAT RD</option>
+            <option>JOO SENG RD</option>
+            <option>JURONG EAST AVE 1</option>
+            <option>JURONG EAST ST 13</option>
+            <option>JURONG EAST ST 21</option>
+            <option>JURONG EAST ST 24</option>
+            <option>JURONG EAST ST 31</option>
+            <option>JURONG EAST ST 32</option>
+            <option>JURONG WEST AVE 1</option>
+            <option>JURONG WEST AVE 5</option>
+            <option>JURONG WEST ST 41</option>
+            <option>JURONG WEST ST 42</option>
+            <option>JURONG WEST ST 51</option>
+            <option>JURONG WEST ST 52</option>
+            <option>JURONG WEST ST 71</option>
+            <option>JURONG WEST ST 72</option>
+            <option>JURONG WEST ST 73</option>
+            <option>JURONG WEST ST 74</option>
+            <option>JURONG WEST ST 75</option>
+            <option>JURONG WEST ST 81</option>
+            <option>JURONG WEST ST 91</option>
+            <option>JURONG WEST ST 92</option>
+            <option>JURONG WEST ST 93</option>
+            <option>KALLANG BAHRU</option>
+            <option>KELANTAN RD</option>
+            <option>KENT RD</option>
+            <option>KG ARANG RD</option>
+            <option>KG BAHRU HILL</option>
+            <option>KG KAYU RD</option>
+            <option>KIM CHENG ST</option>
+            <option>KIM KEAT AVE</option>
+            <option>KIM KEAT LINK</option>
+            <option>KIM PONG RD</option>
+            <option>KIM TIAN PL</option>
+            <option>KIM TIAN RD</option>
+            <option>KING GEORGE'S AVE</option>
+            <option>KRETA AYER RD</option>
+            <option>LENGKOK BAHRU</option>
+            <option>LENGKONG TIGA</option>
+            <option>LIM CHU KANG RD</option>
+            <option>LIM LIAK ST</option>
+            <option>LOR 1 TOA PAYOH</option>
+            <option>LOR 2 TOA PAYOH</option>
+            <option>LOR 3 GEYLANG</option>
+            <option>LOR 3 TOA PAYOH</option>
+            <option>LOR 4 TOA PAYOH</option>
+            <option>LOR 5 TOA PAYOH</option>
+            <option>LOR 6 TOA PAYOH</option>
+            <option>LOR 7 TOA PAYOH</option>
+            <option>LOR 8 TOA PAYOH</option>
+            <option>LOR AH SOO</option>
+            <option>LOR LEW LIAN</option>
+            <option>LOR LIMAU</option>
+            <option>LOWER DELTA RD</option>
+            <option>MACPHERSON LANE</option>
+            <option>MARGARET DR</option>
+            <option>MARINE CRES</option>
+            <option>MARINE DR</option>
+            <option>MARINE TER</option>
+            <option>MARSILING CRES</option>
+            <option>MARSILING DR</option>
+            <option>MARSILING LANE</option>
+            <option>MARSILING RD</option>
+            <option>MARSILING RISE</option>
+            <option>MCNAIR RD</option>
+            <option>MEI LING ST</option>
+            <option>MOH GUAN TER</option>
+            <option>MOULMEIN RD</option>
+            <option>NEW MKT RD</option>
+            <option>NEW UPP CHANGI RD</option>
+            <option>NILE RD</option>
+            <option>NTH BRIDGE RD</option>
+            <option>OLD AIRPORT RD</option>
+            <option>OUTRAM HILL</option>
+            <option>OUTRAM PK</option>
+            <option>OWEN RD</option>
+            <option>PANDAN GDNS</option>
+            <option>PASIR RIS DR 1</option>
+            <option>PASIR RIS DR 10</option>
+            <option>PASIR RIS DR 3</option>
+            <option>PASIR RIS DR 4</option>
+            <option>PASIR RIS DR 6</option>
+            <option>PASIR RIS ST 11</option>
+            <option>PASIR RIS ST 12</option>
+            <option>PASIR RIS ST 13</option>
+            <option>PASIR RIS ST 21</option>
+            <option>PASIR RIS ST 41</option>
+            <option>PASIR RIS ST 51</option>
+            <option>PASIR RIS ST 52</option>
+            <option>PASIR RIS ST 53</option>
+            <option>PASIR RIS ST 71</option>
+            <option>PASIR RIS ST 72</option>
+            <option>PAYA LEBAR WAY</option>
+            <option>PENDING RD</option>
+            <option>PETIR RD</option>
+            <option>PINE CL</option>
+            <option>PIPIT RD</option>
+            <option>POTONG PASIR AVE 1</option>
+            <option>POTONG PASIR AVE 2</option>
+            <option>POTONG PASIR AVE 3</option>
+            <option>QUEEN ST</option>
+            <option>QUEEN'S CL</option>
+            <option>QUEEN'S RD</option>
+            <option>QUEENSWAY</option>
+            <option>RACE COURSE RD</option>
+            <option>REDHILL CL</option>
+            <option>REDHILL RD</option>
+            <option>ROCHOR RD</option>
+            <option>ROWELL RD</option>
+            <option>SAGO LANE</option>
+            <option>SAUJANA RD</option>
+            <option>SELEGIE RD</option>
+            <option>SELETAR WEST FARMWAY 6</option>
+            <option>SEMBAWANG RD</option>
+            <option>SENG POH RD</option>
+            <option>SERANGOON AVE 1</option>
+            <option>SERANGOON AVE 2</option>
+            <option>SERANGOON AVE 3</option>
+            <option>SERANGOON AVE 4</option>
+            <option>SERANGOON CTRL</option>
+            <option>SERANGOON CTRL DR</option>
+            <option>SERANGOON NTH AVE 1</option>
+            <option>SERANGOON NTH AVE 2</option>
+            <option>SERANGOON NTH AVE 4</option>
+            <option>SHORT ST</option>
+            <option>SHUNFU RD</option>
+            <option>SILAT AVE</option>
+            <option>SIMEI RD</option>
+            <option>SIMEI ST 1</option>
+            <option>SIMEI ST 2</option>
+            <option>SIMEI ST 4</option>
+            <option>SIMS AVE</option>
+            <option>SIMS DR</option>
+            <option>SIMS PL</option>
+            <option>SIN MING AVE</option>
+            <option>SIN MING RD</option>
+            <option>SMITH ST</option>
+            <option>SPOTTISWOODE PK RD</option>
+            <option>ST. GEORGE'S LANE</option>
+            <option>ST. GEORGE'S RD</option>
+            <option>STIRLING RD</option>
+            <option>STRATHMORE AVE</option>
+            <option>street_name</option>
+            <option>TAMAN HO SWEE</option>
+            <option>TAMPINES AVE 4</option>
+            <option>TAMPINES AVE 5</option>
+            <option>TAMPINES AVE 7</option>
+            <option>TAMPINES AVE 8</option>
+            <option>TAMPINES AVE 9</option>
+            <option>TAMPINES CTRL 1</option>
+            <option>TAMPINES ST 11</option>
+            <option>TAMPINES ST 12</option>
+            <option>TAMPINES ST 21</option>
+            <option>TAMPINES ST 22</option>
+            <option>TAMPINES ST 23</option>
+            <option>TAMPINES ST 24</option>
+            <option>TAMPINES ST 32</option>
+            <option>TAMPINES ST 33</option>
+            <option>TAMPINES ST 34</option>
+            <option>TAMPINES ST 41</option>
+            <option>TAMPINES ST 42</option>
+            <option>TAMPINES ST 43</option>
+            <option>TAMPINES ST 44</option>
+            <option>TAMPINES ST 45</option>
+            <option>TAMPINES ST 72</option>
+            <option>TAMPINES ST 81</option>
+            <option>TAMPINES ST 82</option>
+            <option>TAMPINES ST 83</option>
+            <option>TAMPINES ST 84</option>
+            <option>TAMPINES ST 91</option>
+            <option>TANGLIN HALT RD</option>
+            <option>TAO CHING RD</option>
+            <option>TEBAN GDNS RD</option>
+            <option>TECK WHYE AVE</option>
+            <option>TECK WHYE LANE</option>
+            <option>TELOK BLANGAH CRES</option>
+            <option>TELOK BLANGAH DR</option>
+            <option>TELOK BLANGAH HTS</option>
+            <option>TELOK BLANGAH RISE</option>
+            <option>TELOK BLANGAH WAY</option>
+            <option>TESSENSOHN RD</option>
+            <option>TG PAGAR PLAZA</option>
+            <option>TIONG BAHRU RD</option>
+            <option>TOA PAYOH CTRL</option>
+            <option>TOA PAYOH EAST</option>
+            <option>TOA PAYOH NTH</option>
+            <option>TOH YI DR</option>
+            <option>TOWNER RD</option>
+            <option>UBI AVE 1</option>
+            <option>UPP ALJUNIED LANE</option>
+            <option>UPP BOON KENG RD</option>
+            <option>UPP CROSS ST</option>
+            <option>UPP SERANGOON RD</option>
+            <option>VEERASAMY RD</option>
+            <option>WATERLOO ST</option>
+            <option>WEST COAST DR</option>
+            <option>WEST COAST RD</option>
+            <option>WHAMPOA DR</option>
+            <option>WHAMPOA RD</option>
+            <option>WHAMPOA STH</option>
+            <option>WHAMPOA WEST</option>
+            <option>WOODLANDS AVE 1</option>
+            <option>WOODLANDS AVE 3</option>
+            <option>WOODLANDS AVE 4</option>
+            <option>WOODLANDS AVE 5</option>
+            <option>WOODLANDS CTR RD</option>
+            <option>WOODLANDS DR 50</option>
+            <option>WOODLANDS ST 11</option>
+            <option>WOODLANDS ST 13</option>
+            <option>WOODLANDS ST 31</option>
+            <option>WOODLANDS ST 32</option>
+            <option>WOODLANDS ST 41</option>
+            <option>WOODLANDS ST 81</option>
+            <option>WOODLANDS ST 82</option>
+            <option>WOODLANDS ST 83</option>
+            <option>YISHUN AVE 11</option>
+            <option>YISHUN AVE 2</option>
+            <option>YISHUN AVE 3</option>
+            <option>YISHUN AVE 4</option>
+            <option>YISHUN AVE 5</option>
+            <option>YISHUN AVE 6</option>
+            <option>YISHUN AVE 7</option>
+            <option>YISHUN AVE 9</option>
+            <option>YISHUN CTRL</option>
+            <option>YISHUN CTRL 1</option>
+            <option>YISHUN RING RD</option>
+            <option>YISHUN ST 11</option>
+            <option>YISHUN ST 21</option>
+            <option>YISHUN ST 22</option>
+            <option>YISHUN ST 61</option>
+            <option>YISHUN ST 71</option>
+            <option>YISHUN ST 72</option>
+            <option>YISHUN ST 81</option>
+            <option>YUNG AN RD</option>
+            <option>YUNG HO RD</option>
+            <option>YUNG KUANG RD</option>
+            <option>YUNG PING RD</option>
+            <option>ZION RD</option>  
+        </datalist>
+    </div>
+
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</html>
