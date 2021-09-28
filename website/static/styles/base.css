@@ -1,0 +1,265 @@
+/* base */
+
+:root {
+    font-size: calc(0.6vw + 0.6vh + 0.5vmin);
+    font-family: 'Roboto';
+    background-color: #23232e;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --transition-speed: 600ms;
+    text-shadow: 1px 1px black;
+}
+
+body {
+    color: black;
+    background-color: #23232e;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-areas: 
+        "side_nav main right_padding";
+    grid-template-rows: 1fr;
+    grid-template-columns: 3fr 94fr 3fr;
+}
+
+main {
+    grid-area: main;
+    display: grid;
+    grid-template-areas: 
+        "title_bar title_bar title_bar title_bar"
+        "a b c d"
+        "e f g h"
+        "i j k l"
+        "m n o p";
+    grid-template-rows: 4fr 24fr 24fr 24fr 24fr;
+    grid-template-columns: 25fr 25fr 25fr 25fr;
+}
+
+/* for templating using cssgrid */
+
+#title_bar {
+    grid-area: title_bar;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#a {
+    grid-area: a;
+    border: 1px solid red;
+    text-align: center;
+}
+
+#b {
+    grid-area: b;
+    border: 1px solid orange;
+    text-align: center;
+}
+
+#c {
+    grid-area: c;
+    border: 1px solid yellow;
+    text-align: center;
+}
+
+#d {
+    grid-area: d;
+    border: 1px solid green;
+    text-align: center;
+}
+
+#e {
+    grid-area: e;
+    border: 1px solid blue;
+    text-align: center;
+}
+
+#f {
+    grid-area: f;
+    border: 1px solid indigo;
+    text-align: center;
+}
+
+#g {
+    grid-area: g;
+    border: 1px solid violet;
+    text-align: center;
+}
+
+#h {
+    grid-area: h;
+    border: 1px solid magenta;
+    text-align: center;
+}
+
+#i {
+    grid-area: i;
+    border: 1px solid palevioletred;
+    text-align: center;
+}
+
+#j {
+    grid-area: j;
+    border: 1px solid red;
+    text-align: center;
+}
+
+#k {
+    grid-area: k;
+    border: 1px solid orange;
+    text-align: center;
+}
+
+#l {
+    grid-area: l;
+    border: 1px solid yellow;
+    text-align: center;
+}
+
+#m {
+    grid-area: m;
+    border: 1px solid green;
+    text-align: center;
+}
+
+#n {
+    grid-area: n;
+    border: 1px solid blue;
+    text-align: center;
+}
+
+#o {
+    grid-area: o;
+    border: 1px solid indigo;
+    text-align: center;
+}
+
+#p {
+    grid-area: p;
+    border: 1px solid violet;
+    text-align: center;
+}
+
+/* nav bar DO NOT TOUCH */
+.navbar {
+    grid-area: sidenav;
+    width: 4rem;
+    height: 100vh; 
+    position: fixed;
+    background-color: rgba(255,255,255,0);
+    transition: width 600ms ease;
+    overflow: hidden;
+}
+  
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-items: flex-start;
+}
+
+.nav-item:last-child {
+    margin-top: auto;
+}
+
+.nav-item {
+    width: 100%;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+    height: 3rem;
+    color: #66a9f5;
+    text-decoration: none;
+    /* font-size: 20px; */
+    filter: grayscale(100%) opacity(1);
+    transition: var(--transition-speed);
+}
+
+.link-text {
+    display: none;
+    /* margin-left: 0.5rem; */
+    text-shadow: 2px 2px black;
+}
+
+
+.navbar:hover {
+    width: 17vw;
+}
+
+.navbar:hover .link-text {
+    font-size: 1.2rem;
+    display:block;
+}
+
+#nav_title {
+    font-size: 1.4rem;
+}
+
+.nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+}
+
+.logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #3790f7;
+    font-size: 1.5rem;
+    letter-spacing: 0.3ch;
+    width: 100%;
+    /* padding-left: 0.4vw; */
+}
+
+.navbar:hover .logo img {
+    transform: rotate(-360deg);
+    /* animation: bounce; */
+}
+
+.nav-link i {
+    min-width: 3rem;
+    font-size: 1rem;
+    margin: 0.5rem;
+}
+
+.logo img {
+    font-size: 2rem;
+    transform: rotate(0deg);
+    transition: transform 450ms;
+    margin: 0.79vw;
+}
+
+.navbar:hover .logo i {
+    /* transform: rotate(-360deg); */
+    animation: bounce;
+}
+
+.about {
+    color: #f5e466;
+}
+
+.about:hover {
+    color: #f5e466;
+    filter: grayscale(0%) opacity(1);
+    animation: bounce;
+}
+
+.no_select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
