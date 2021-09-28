@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block bonus_css %}
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/index.css')}}">
+{% endblock %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block main_content %}
+<div id = "title_bar">
+    Find My HDB
+</div>
+
+<div id = "redirect_buttons">
+    <div class = "btn-group-vertical btn-group-lg" role = "group" aria-label = "Vertical button group" id = "button_group">
+        <button type = "button" class = "btn btn-primary">
+            Login
+        </button>
+        <button type = "button" class = "btn btn-primary">
+            Register
+        </button>
+        <button type = "button" class = "btn btn-secondary">
+            Continue as guest
+        </button>
+    </div>
+</div>
+{% endblock%}

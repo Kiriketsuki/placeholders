@@ -1,0 +1,30 @@
+#title_bar{
+    grid-area: title_bar;
+    border: 0px;
+    font-family: 'Lobster';
+    font-size: 1rem;
+    color: aquamarine;
+    max-height: 100%;
+
+}
+
+#redirect_buttons {
+    grid-row-start: f;
+    grid-column-start: f;
+    grid-row-end: j;
+    grid-column-end: g;
+    display: grid;
+    grid-template-areas: 
+        "top"
+        "mid"
+        "bottom";
+    grid-template-rows: 10fr 80fr 10fr;
+}
+
+#button_group {
+    grid-area: mid;
+    width: 75%;
+    height: 100%;
+    justify-content: center;
+    justify-self: center;
+}
