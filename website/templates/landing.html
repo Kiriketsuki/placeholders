@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles/landing.css') }}">
+
+        <title>Find My HDB</title>
+    </head>
+    <body>
+            <div class="landing-img"></div>
+            <div class="landing">
+                <div class="logo">
+                    <img src="{{url_for('static',filename='Assets/app_logo-removebg.png')}}" alt="logo" class="logo-img">
+                </div>
+                <div class="btn-container">
+                    <button id="login-btn" type='button' class="btn btn-dark custom-btn">Login</button>
+                    <button id="register-btn" type='button' class="btn btn-dark custom-btn">Register</button>
+                    <button id="guset-btn" type='button' class="btn btn-secondary custom-btn">
+                        Continue as Guest 
+                        <div class="icon">
+                            <div class="icon baseline"><img src="{{url_for('static',filename='Assets/arrow_east_black_24dp.svg')}}" alt="right arrow"></div>
+                        </div>
+                    </button>
+                </div>
+                <div class="sign-in-container">
+                    <button type="button" class="btn-cross">
+                        <img src="{{url_for('static',filename='Assets/close_white_24dp.svg')}}" alt="x" class="sign-in-close">
+                    </button>
+                    <h1 class="sign-in-text">Welcome Back</h1>
+                    <form class="flex-vertical" method="POST">
+                        <input type="text" id="email" name="email">
+                        <input type="password" id="password" name="password">
+                        <a href="/forgot_password" class="forgot-pw">Forgot Password?</a>
+                        <button type="submit" class="btn btn-light custom-btn">Login</button>
+                    </form>
+                </div>
+            </div>
+            <script src="{{url_for('static', filename='scripts/landing.js')}}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    </body>
+</html>

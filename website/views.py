@@ -5,7 +5,7 @@ views = Blueprint(__name__, "views")
 
 @views.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("landing.html")
 
 @views.route("/base_template")
 def base_template():
@@ -20,3 +20,7 @@ def profile():
 @views.route("/go_to_home")
 def home_redirect():
     return redirect(url_for("views.home"))
+
+@views.route("/forgot_password")
+def forgot_password():
+    pass
