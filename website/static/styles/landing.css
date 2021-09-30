@@ -59,6 +59,7 @@
 .custom-btn {
     margin: .5rem; 
     border-radius: 500px;
+    width: 100%;
 }
 
 .sign-in-container {
