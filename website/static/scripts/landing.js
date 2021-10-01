@@ -10,6 +10,7 @@ loginBtn.addEventListener('click', () => {
 
 const closeLoginContainer = document.querySelector('.btn-cross');
 
+// Close the sign in form
 closeLoginContainer.addEventListener('click', () => {
     console.log('close');
     gsap.fromTo(".sign-in-container", {opacity: 1}, {duration: 0.5, opacity: 0});
