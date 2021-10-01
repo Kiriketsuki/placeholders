@@ -5,5 +5,4 @@ def hasSpecialCharacters(string: str):
     special_characters = "\"!@#$%^&*()-+?_=,<>/\""
     if any(char in special_characters for char in string):
         return True
-        
     return False
