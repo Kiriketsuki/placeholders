@@ -13,18 +13,20 @@
         <title>Find My HDB</title>
     </head>
     <body>
+        <main>
             <div class="landing-img"></div>
             <div class="landing">
                 <div class="logo">
                     <img src="{{url_for('static',filename='Assets/app_logo-removebg.png')}}" alt="logo" class="logo-img">
                 </div>
                 <div class="btn-container">
-                    <button id="login-btn" type='button' class="btn btn-dark custom-btn">Login</button>
-                    <a href="/signup"><button id="register-btn" type='button' class="btn btn-dark custom-btn">Register</button></a>
-                    <button id="guset-btn" type='button' class="btn btn-secondary custom-btn">
-                        Continue as Guest 
+                    <button id="login-btn" type='button' class="btn btn-dark btn-round">Login</button>
+                    <a href="/signup"><button id="register-btn" type='button' class="btn btn-dark btn-round">Register</button></a>
+                    <button id="guest-btn" type='button' class="btn btn-secondary btn-round">
+                        Continue as Guest
                         <div class="icon">
-                            <div class="icon baseline"><img src="{{url_for('static',filename='Assets/arrow_east_black_24dp.svg')}}" alt="right arrow"></div>
+                            <div class="icon baseline"><img src="{{url_for('static',filename='Assets/arrow_east_black_24dp.svg')}}"
+                                    alt="right arrow"></div>
                         </div>
                     </button>
                 </div>
@@ -34,14 +36,15 @@
                     </button>
                     <h1 class="sign-in-text">Welcome Back</h1>
                     <form class="flex-vertical" method="POST">
-                        <input type="text" id="email" name="email">
+                        <input type="email" id="email" name="email">
                         <input type="password" id="password" name="password">
                         <a href="/forgot_password" class="forgot-pw">Forgot Password?</a>
-                        <button type="submit" class="btn btn-light custom-btn">Login</button>
+                        <button type="submit" class="btn btn-light btn-round">Login</button>
                     </form>
                 </div>
             </div>
-            <script src="{{url_for('static', filename='scripts/landing.js')}}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+        </main>
+        <script src="{{url_for('static', filename='scripts/landing.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     </body>
 </html>

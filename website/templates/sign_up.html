@@ -4,9 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/sign_up.css') }}">
     <title>Sign Up!</title>
 </head>
 <body>
-    <h1>Sign me up</h1>
+    <main>
+        <div class="page-container">
+            <div class="sign-up-img"></div>
+            <div class="sign-up-form">
+                <a href="/">
+                    <button id="back-btn" type='button' class="btn-back">
+                        <div class="icon">
+                            <div class="icon baseline">
+                                <img src="{{url_for('static',filename='Assets/arrow_back_black_24dp.svg')}}" alt="back"
+                            class="sign-in-close">
+                            </div>
+                        </div>
+                            Back
+                    </button>
+                </a>    
+                <h1 class="sign-up-txt">Create Account</h1>
+                    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                    messages %} {% for category, message in messages %} {% if category ==
+                    'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alert-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %} {% endfor %} {% endif %} {% endwith %}
+                <form method="POST" class="flex-vertical">
+                    <input type="text" id="first-name" name="first-name" placeholder="First Name">
+                    <input type="text" id="last-name" name="last-name" placeholder="Last Name">
+                    <input type="email" id="email" name="email" placeholder="Enter your email address">
+                    <input type="password" id="password" name="password" placeholder="Password">
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
+                    <button type="submit" class="btn btn-dark btn-round">Register</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>
