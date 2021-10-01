@@ -1,7 +1,10 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from helper import hasDigit, hasSpecialCharacters
+from .helper import hasDigit, hasSpecialCharacters
+from .models import User
+from werkzeug.security import generate_password_hash, check_password_hash
+from . import db
 
-views = Blueprint(__name__, "views")
+views = Blueprint("views", __name__)
 
 # Landing page
 @views.route("/", methods=["GET", "POST"])
@@ -48,8 +51,15 @@ def signup():
         elif password != confirmPassword:
             flash('Passwords do not match.', category='error')
         else:
+            # add user to DB
+            newUser = User(firstName=firstName, lastName=lastName, email=email, password=generate_password_hash(password, method='sha256'))
+            db.session.add(newUser)
+            db.session.commit()
+
             flash('Account created!', category='success')
-            #add user to DB
+
+            return redirect(url_for('views.home'))
+
 
     return render_template("sign_up.html")
 
@@ -57,6 +67,11 @@ def signup():
 @views.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
     return render_template("forgot_pw.html")
+
+# Homepage
+@views.route("/home")
+def home():
+    return render_template("home.html")
 
 @views.route("/profile")
 def profile():
