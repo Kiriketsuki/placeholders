@@ -55,14 +55,15 @@ def signup():
             # add user to DB
             newUser = User(firstName=firstName, lastName=lastName, email=email, password=generate_password_hash(password, method='sha256'))
             db.session.add(newUser)
+
+            # check if account already exists
             try:
                 db.session.commit()
                 flash('Account created!', category='success')
-    
                 return redirect(url_for('views.home'))
             except sqlalchemy.exc.IntegrityError:
                 flash('Account already exists.', category='error')
-                
+
     return render_template("sign_up.html")
 
 # Forgot password page
