@@ -20,7 +20,7 @@ def signup():
         email = request.form.get("email")
         password = request.form.get("password")
         confirmPassword = request.form.get("confirm-password")
-        print(firstName, lastName)
+        
         # Error checking
         if firstName == None:
             flash('First name cannot be empty.', category='error')
