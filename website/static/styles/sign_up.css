@@ -11,46 +11,46 @@
 }
 
 html {
-    max-height: 100vh;
-    max-width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
 }
 
 .flex-vertical {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    width: max-content;
-    height: fit-content;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  max-width: 800px;
+  height: fit-content;
 }
 
 .page-container {
-    display: grid;
-    grid-template-areas: "left right";
-    grid-template-columns: 35% 65%;
-    grid-template-rows: 1fr;
+  display: grid;
+  grid-template-areas: "left right";
+  grid-template-columns: 35% 65%;
+  grid-template-rows: 1fr;
 }
 
 .sign-up-img {
-    grid-area: left;
-    background-image: url(../Assets/john-t-4_ZMMBcz4fU-unsplash.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
+  grid-area: left;
+  background-image: url(../Assets/john-t-4_ZMMBcz4fU-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 .sign-up-form {
-    grid-area: right;
-    display: flex;
-    flex-direction: column;
-    padding: .5rem;
-    position: relative;
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  position: relative;
 }
 
 .icon {
   display: inline-flex;
   align-self: center;
-  margin-right: .25em;
+  margin-right: 0.25em;
 }
 .icon img {
   height: 1em;
@@ -62,82 +62,82 @@ html {
 }
 
 .btn-back {
-    border: none;
-    background: transparent;
-    height: 25px;
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: 10px;
-    margin-top: 10px;
-    transition: transform 200ms ease;
+  border: none;
+  background: transparent;
+  height: 25px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 10px;
+  margin-top: 10px;
+  transition: transform 200ms ease;
 }
 
 .btn-back:hover {
-    transform: scale(1.15);
+  transform: scale(1.15);
 }
 
 .sign-up-txt {
-    font-family: var(--font-title);
-    font-size: 2.5rem;
-    margin-top: 4rem;
-    align-self: center;
-    height: min-content;
-    width: max-content;
-    margin-bottom: 4rem;
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  margin-top: 4rem;
+  align-self: center;
+  height: min-content;
+  width: max-content;
+  margin-bottom: 4rem;
 }
 
 input {
-    max-width: 500px;
-    height: 20px;
-    border: none;
-    border-bottom: 1px solid black;
-    margin-bottom: 2rem;
-    padding: 1rem;
+  width: 600px;
+  height: 20px;
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 2rem;
+  padding: 1rem;
 }
 
 .btn-round {
-    margin-top: 2rem;
-    border-radius: 500px;
-    max-width: 450px;
-    align-self: center;
-    transition: transform 200ms ease;
+  margin-top: 2rem;
+  border-radius: 500px;
+  max-width: 450px;
+  align-self: center;
+  transition: transform 200ms ease;
 }
 
 .btn-round:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .close {
-    background: transparent;
-    border: none;
+  background: transparent;
+  border: none;
 }
 
 @media (max-width: 830px) {
-    .page-container {
-        display: flex;
-        justify-content: center;
-        align-items: center
-    }
+  .page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .flex-vertical {
-        align-self: center;
-        display: flex;
-        flex-direction: column;
-        padding: 0.5rem;
-        /* max-width: 330px; */
-        height: fit-content;
-    }
+  .flex-vertical {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    max-width: 330px;
+    height: fit-content;
+  }
 
-    input {
-        max-width: 290px;
-    }
+  input {
+    max-width: 290px;
+  }
 
-    .btn-round {
-        max-width:250px;
-    }
+  .btn-round {
+    max-width: 250px;
+  }
 }
