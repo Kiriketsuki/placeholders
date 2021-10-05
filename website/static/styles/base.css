@@ -188,7 +188,7 @@ main {
 
 .link-text {
     display: none;
-    /* margin-left: 0.5rem; */
+    margin-left: -1rem;
     text-shadow: 2px 2px black;
 }
 
@@ -230,11 +230,11 @@ main {
 .nav-link i {
     min-width: 3rem;
     font-size: 1rem;
-    margin: 0.5rem;
+    margin: 1.8rem;
 }
 
 .logo img {
-    font-size: 2rem;
+    font-size: 1.5rem;
     transform: rotate(0deg);
     transition: transform 450ms;
     margin: 0.79vw;
