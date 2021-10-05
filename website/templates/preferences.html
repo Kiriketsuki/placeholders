@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+	<script>
+	$(document).ready(function () {
+
+		var list1 = document.getElementById('List1');
+
+		list1.options[0] = new Option('--Select--', '');
+		list1.options[1] = new Option('3 Room', '3 Room');
+		list1.options[2] = new Option('4 Room', '4 Room');
+		});
+	</script>
+
+{% block main_content %}
+	<div class="col-md-20">
+		<form>
+		<h4>What type of house are you looking for?</h4>
+		<select class="form-control"  id='List1' name='List1'>
+		</select>
+
+		<h4>What is your budget?</h4>
+		<select class="form-control"  id='List2' name='List2' >
+		</select>
+
+		<h4>What is your monthly income?</h4>
+		<select class="form-control"  id='List3' name='List3' >
+		</select>
+
+		<h4>What type of house are you looking for?</h4>
+		<select class="form-control"  id='List4' name='List4'>
+		</select>
+
+		<h4>What are your current CPF savings?</h4>
+		<select class="form-control"  id='List5' name='List5' >
+		</select>
+
+		<h4>Do you own a car?</h4>
+		<select class="form-control"  id='List6' name='List6' >
+		</select>
+
+		<h4>What type of house are you looking for?</h4>
+		<select class="form-control"  id='List7' name='List7'>
+		</select>
+
+		<h4>Preferred locations?</h4>
+		<select class="form-control"  id='List8' name='List8' >
+		</select>
+		</form>
+	</div>
+{% endblock%}
