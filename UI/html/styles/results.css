@@ -1,0 +1,173 @@
+:root {
+    box-sizing: border-box;
+    /* --font-size: calc(0.6vw + 0.6vh + 0.5vmin); */
+    --font-title: "Lobster", cursive;
+    font-family: "Roboto";
+    background-color: #fff;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --transition-speed: 600ms;
+    text-shadow: 1px 1px black;
+  }
+  
+  html {
+      max-height: 100vh;
+      max-width: 100vw;
+  }
+  
+  a {
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+      line-height: 1.7em;
+  }
+  
+  .flex-vertical {
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      width: max-content;
+      height: fit-content;
+  }
+  
+  .page-container {
+      display: grid;
+      grid-template-areas: 
+          "top" 
+          "bottom";
+      grid-template-columns: 100%;
+      grid-template-rows: 60% 40%;
+      height: 100vh;
+  }
+  
+  .sign-up-img {
+      grid-area: top;
+      background-image: url(../Assets/googlemaps_img.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin: 2% 3% 2%;
+      
+  }
+  
+  .sign-up-form {
+      grid-area: bottom;
+      display: grid;
+      grid-template-areas: 
+          "header header header" 
+          "content-pic content-info content-ans";
+      grid-template-columns: 20% 40% 40%;
+      grid-template-rows: 100%;
+  }
+  .form-header {
+      background-color: turquoise;
+      grid-area: header;   
+  }
+  
+  .form-content-pic {
+      background-color: violet;
+      grid-area: content-pic;
+  }
+  .form-content-info {
+      background-color: yellow;
+      grid-area: content-info;
+  }
+  .form-content-ans {
+      background-color: gray;
+      grid-area: content-ans;
+  }
+  
+  /* .icon {
+    display: inline-flex;
+    align-self: center;
+    margin-right: .25em;
+  }
+  .icon img {
+    height: 1em;
+    width: 1em;
+  }
+  .icon.baseline img {
+    top: 0.125em;
+    position: relative;
+  }
+  
+  .btn-back {
+      border: none;
+      background: transparent;
+      height: 25px;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: 10px;
+      margin-top: 10px;
+      transition: transform 200ms ease;
+  }
+  
+  .btn-back:hover {
+      transform: scale(1.15);
+  }
+  
+  .sign-up-txt {
+      font-family: var(--font-title);
+      font-size: 2.5rem;
+      margin-top: 4rem;
+      align-self: center;
+      height: min-content;
+      width: max-content;
+      margin-bottom: 4rem;
+  }
+  
+  input {
+      max-width: 500px;
+      height: 20px;
+      border: none;
+      border-bottom: 1px solid black;
+      margin-bottom: 2rem;
+      padding: 1rem;
+  }
+  
+  .btn-round {
+      margin-top: 2rem;
+      border-radius: 500px;
+      max-width: 450px;
+      align-self: center;
+      transition: transform 200ms ease;
+  }
+  
+  .btn-round:hover {
+      transform: scale(1.05);
+  } */
+  
+  /* .close {
+      background: transparent;
+      border: none;
+  } */
+  
+  @media (max-width: 830px) {
+      .page-container {
+          display: flex;
+          justify-content: center;
+          align-items: center
+      }
+  
+      .flex-vertical {
+          align-self: center;
+          display: flex;
+          flex-direction: column;
+          padding: 0.5rem;
+          /* max-width: 330px; */
+          height: fit-content;
+      }
+  
+      input {
+          max-width: 290px;
+      }
+  
+      .btn-round {
+          max-width:250px;
+      }
+  }
