@@ -1,0 +1,72 @@
+/* .navbar :hover {
+    position: relative;
+    background-color: violet;
+    z-index: 1000;
+} */
+
+:root {
+    scrollbar-color: rgba(108, 122, 137, 0.45);
+    scrollbar-width: 0.25rem;
+}
+
+html {
+    scrollbar-color: rgba(108, 122, 137, 0.45);
+    scrollbar-width: 0.25rem;
+}
+
+::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  
+::-webkit-scrollbar-track {
+background: rgba(108, 122, 137, 0.45);
+}
+
+::-webkit-scrollbar-thumb {
+background: rgba(46, 49, 49, 0.8);
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    scrollbar-color: rgba(108, 122, 137, 0.45);
+    scrollbar-width: 0.25rem;
+}
+
+#title_bar {
+    font-family: "Lora", serif;
+    font-style: italic;
+    color: white;
+    font-size: 2.5rem;
+}
+
+#main_div {
+    grid-row-start: b;
+    grid-row-end: n;
+    grid-column-start: b;
+    grid-column-end: d;
+    height: 100%;
+    width: 100%;
+    margin-left: -10vw;
+}
+
+#hdb_image {
+    width: 20vw;
+    height: 20vw;
+    justify-self: center;
+    align-self: center;
+}
+
+#list {
+    height: 100%;
+    width: 100%;
+    border: 1px white;
+}
+
+.li {
+    border-radius: 1px 1px 1px 1px;
+}
+
+.ul {
+    border-radius: 1px;
+}

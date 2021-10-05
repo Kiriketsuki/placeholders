@@ -16,10 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,600&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap" rel="stylesheet">
 
     <!-- animate -->
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -57,8 +57,18 @@
 
             <li class = "nav-item no_select">
                 <a href = "/" class = "nav-link">
-                    <i class="fas fa-home"></i>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span class = "link-text">
+                        {% block username %}
+                        Username
+                        {% endblock %}
+                    </span>
+                </a>
+            </li>
 
+            <li class = "nav-item no_select">
+                <a href = "/" class = "nav-link">
+                    <i class="fas fa-home"></i>
                     <span class = "link-text">
                         Home
                     </span>
@@ -66,28 +76,28 @@
             </li>
 
             <li class = "nav-item no_select">
-                <a href = "/login" class = "nav-link">
-                    <i class="fas fa-sign-in-alt"></i>
+                <a href = "/favourites" class = "nav-link">
+                    <i class="fa-solid fa-star"></i>
                     <span class = "link-text">
-                        Login
+                        Favourites
                     </span>
                 </a>
             </li>
 
             <li class = "nav-item no_select">
-                <a href = "/sign_up" class = "nav-link">
-                    <i class="fas fa-user-plus"></i>
+                <a href = "/settings" class = "nav-link">
+                    <i class="fa-solid fa-gears"></i>
                     <span class = "link-text">
-                        Sign Up
+                        Settings
                     </span>
                 </a>
             </li>
             
             <li class = "nav-item no_select">
-                <a href="/account" class = "nav-link">
-                    <i class="fas fa-user"></i>
+                <a href="/sell" class = "nav-link">
+                    <i class="fa-solid fa-money-bill"></i>
                     <span class = "link-text">
-                        Account
+                        Sell My House
                     </span>
                 </a>
             </li>
@@ -116,77 +126,10 @@
     <!-- boiler template -->
     <main>
         {% block main_content %}
-        <div id = 'title_bar'>
-            Here is the title bar
-        </div>
-
-        <div id = 'a'>
-            This is a
-        </div>
-
-        <div id = 'b'>
-            This is b
-        </div>
-
-        <div id = 'c'>
-            This is c
-        </div>
-
-        <div id = 'd'>
-            This is d
-        </div>
-
-        <div id = 'e'>
-            This is e
-        </div>
-
-        <div id = 'f'>
-            This is f
-        </div>
-
-        <div id = 'g'>
-            This is g
-        </div>
-
-        <div id = 'h'>
-            This is h
-        </div>
-
-        <div id = 'i'>
-            This is i
-        </div>
-
-        <div id = 'j'>
-            This is j
-        </div>
-
-        <div id = 'k'>
-            This is k
-        </div>
-
-        <div id = 'l'>
-            This is l
-        </div>
-
-        <div id = 'm'>
-            This is m
-        </div>
-
-        <div id = 'n'>
-            This is n
-        </div>
-
-        <div id = 'o'>
-            This is o
-        </div>
-
-        <div id = 'p'>
-            This is p
-        </div>
 
         {% endblock %}
     </main>
 </body>
-<script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
 
+<script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
 </html>

@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block bonus_css %}
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/top_picks.css')}}">
+{% endblock %}
+
+{% block main_content %}
+<h1 id = "title_bar">
+Top Recommendations
+</h1>
+
+<div id = "main_div">
+    <ul id = "list" class = "list-group list-group-flush no_select justify-content-between align-items-stretch" style = "height: 100%; width: 100%;" onload = "scrollTop = 0">
+        <li class = "list-group-item d-flex justify-content-between" style = "text-shadow: 1px 1px white; background-color: rgba(255,255,255,0);">
+            <div id = "hdb_image" class = "align-self-stretch overflow-hidden">
+                <img src = "{{ url_for('static',filename='assets/john-t-4_ZMMBcz4fU-unsplash.jpg') }}"/>
+            </div>
+
+            <ul class = "list-group list-group-flush no_select flex-grow-1 align-self-stretch align-items-stretch">
+
+                <li id = "block" class="list-group-item flex-fill">
+                    Block: 123
+                </li>
+
+                <li id = "address" class="list-group-item flex-fill">
+                    Address: Ang Mo Kio Ave 13
+                </li>
+
+                <li id = "resale_price" class="list-group-item flex-fill">
+                    Resale Price: Free cos haunted
+                </li>
+
+                <li id = "floor_area" class="list-group-item flex-fill">
+                    Floor Area SQM: 1 because joteo say small space can liao
+                </li>
+
+                <li id = "amenities"  class="list-group-item flex-fill">
+                    Amenities: kopitiam to lim kopi with jo teo
+                </li>
+
+                <li id = "links" class="list-group-item flex-fill">
+                    <a href = ""> 
+                        View Map
+                    </a>
+
+                    <a href = "">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class = "list-group-item d-flex justify-content-between" style = "text-shadow: 1px 1px white; background-color: rgba(255,255,255,0);">
+            <div id = "hdb_image" class = "align-self-stretch overflow-hidden">
+                <img src = "{{ url_for('static',filename='assets/john-t-4_ZMMBcz4fU-unsplash.jpg') }}"/>
+            </div>
+
+            <ul class = "list-group list-group-flush no_select flex-grow-1 align-self-stretch align-items-stretch">
+
+                <li id = "block" class="list-group-item flex-fill">
+                    Block: 123
+                </li>
+
+                <li id = "address" class="list-group-item flex-fill">
+                    Address: Ang Mo Kio Ave 13
+                </li>
+
+                <li id = "resale_price" class="list-group-item flex-fill">
+                    Resale Price: Free cos haunted
+                </li>
+
+                <li id = "floor_area" class="list-group-item flex-fill">
+                    Floor Area SQM: 1 because joteo say small space can liao
+                </li>
+
+                <li id = "amenities"  class="list-group-item flex-fill">
+                    Amenities: kopitiam to lim kopi with jo teo
+                </li>
+
+                <li id = "links" class="list-group-item flex-fill">
+                    <a href = ""> 
+                        View Map
+                    </a>
+
+                    <a href = "">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+            
+        </li>
+        <li class = "list-group-item d-flex justify-content-between" style = "text-shadow: 1px 1px white; background-color: rgba(255,255,255,0);">
+            <div id = "hdb_image" class = "align-self-stretch overflow-hidden">
+                <img src = "{{ url_for('static',filename='assets/john-t-4_ZMMBcz4fU-unsplash.jpg') }}"/>
+            </div>
+
+            <ul class = "list-group list-group-flush no_select flex-grow-1 align-self-stretch align-items-stretch">
+
+                <li id = "block" class="list-group-item flex-fill">
+                    Block: 123
+                </li>
+
+                <li id = "address" class="list-group-item flex-fill">
+                    Address: Ang Mo Kio Ave 13
+                </li>
+
+                <li id = "resale_price" class="list-group-item flex-fill">
+                    Resale Price: Free cos haunted
+                </li>
+
+                <li id = "floor_area" class="list-group-item flex-fill">
+                    Floor Area SQM: 1 because joteo say small space can liao
+                </li>
+
+                <li id = "amenities"  class="list-group-item flex-fill">
+                    Amenities: kopitiam to lim kopi with jo teo
+                </li>
+
+                <li id = "links" class="list-group-item flex-fill">
+                    <a href = ""> 
+                        View Map
+                    </a>
+
+                    <a href = "">
+                        Contact
+                    </a>
+
+                </li>
+            </ul>
+        </li>
+        <li class = "list-group-item d-flex justify-content-between" style = "text-shadow: 1px 1px white; background-color: rgba(255,255,255,0);">
+            <div id = "hdb_image" class = "align-self-stretch overflow-hidden">
+                <img src = "{{ url_for('static',filename='assets/john-t-4_ZMMBcz4fU-unsplash.jpg') }}"/>
+            </div>
+
+            <ul class = "list-group list-group-flush no_select flex-grow-1 align-self-stretch align-items-stretch">
+
+                <li id = "block" class="list-group-item flex-fill">
+                    Block: 123
+                </li>
+
+                <li id = "address" class="list-group-item flex-fill">
+                    Address: Ang Mo Kio Ave 13
+                </li>
+
+                <li id = "resale_price" class="list-group-item flex-fill">
+                    Resale Price: Free cos haunted
+                </li>
+
+                <li id = "floor_area" class="list-group-item flex-fill">
+                    Floor Area SQM: 1 because joteo say small space can liao
+                </li>
+
+                <li id = "amenities"  class="list-group-item flex-fill">
+                    Amenities: kopitiam to lim kopi with jo teo
+                </li>
+
+                <li id = "links" class="list-group-item flex-fill">
+                    <a href = ""> 
+                        View Map
+                    </a>
+
+                    <a href = "">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
+{% endblock %}
