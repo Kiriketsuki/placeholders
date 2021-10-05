@@ -3,7 +3,7 @@
 :root {
     font-size: calc(0.6vw + 0.6vh + 0.5vmin);
     font-family: 'Roboto';
-    background-color: #23232e;
+    background-color: #fff;
     --bg-primary: #23232e;
     --bg-secondary: #141418;
     --transition-speed: 600ms;
