@@ -95,7 +95,7 @@ def home_redirect():
 @views.route("/recommendations")
 def recommendations():
     logged_in = True;
-    if not logged_in:
+    if logged_in:
         return render_template("top_picks_logged_in.html")
     else:
         return render_template("top_picks_guest.html")
@@ -104,3 +104,14 @@ def recommendations():
 def base_template():
     render_template("base.html")
 
+# @views.route("/results")
+# def base_template():
+#     render_template("base.html")
+
+@views.route("/map")
+def map():
+    render_template("map.html")
+
+@views.route("/compare")
+def compare():
+    render_template("compare.html")
