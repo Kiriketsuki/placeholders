@@ -8,6 +8,25 @@
     --bg-secondary: #141418;
     --transition-speed: 600ms;
     text-shadow: 1px 1px black;
+    scrollbar-color: rgba(108, 122, 137, 0.45);
+    scrollbar-width: 0.25rem;
+}
+
+html {
+    scrollbar-color: rgba(108, 122, 137, 0.45);
+    scrollbar-width: 0.25rem;
+}
+
+::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  
+::-webkit-scrollbar-track {
+background: rgba(108, 122, 137, 0.45);
+}
+
+::-webkit-scrollbar-thumb {
+background: rgba(46, 49, 49, 0.8);
 }
 
 body {
@@ -24,6 +43,8 @@ body {
         "side_nav main right_padding";
     grid-template-rows: 1fr;
     grid-template-columns: 3fr 94fr 3fr;
+    scrollbar-color: rgba(108, 122, 137, 0.45);
+    scrollbar-width: 0.25rem;
 }
 
 main {
@@ -43,7 +64,7 @@ main {
 
 #title_bar {
     grid-area: title_bar;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     text-align: center;
 }
 
@@ -234,7 +255,7 @@ main {
 }
 
 .logo img {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     transform: rotate(0deg);
     transition: transform 450ms;
     margin: 0.79vw;
