@@ -20,3 +20,12 @@ def profile():
 @views.route("/go_to_home")
 def home_redirect():
     return redirect(url_for("views.home"))
+
+@views.route("/recommendations")
+def recommendations():
+    logged_in = True;
+    if not logged_in:
+        return render_template("top_picks_logged_in.html")
+    else:
+        return render_template("top_picks_guest.html")
+        
