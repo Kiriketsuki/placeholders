@@ -12,7 +12,7 @@
 html {
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
-    background-color: #fff;
+    background-color: #5927e5;
 }
 
 ::-webkit-scrollbar {
@@ -32,7 +32,7 @@ html, body {
     overflow-x: hidden;
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
-    background-color: #fff;
+    background-color: #5927e5;
 }
 
 #title_bar {
