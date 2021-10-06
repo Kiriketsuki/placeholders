@@ -1,1 +1,28 @@
 {% extends "base.html" %}
+
+{% block main_content %}
+<form>
+  <div style = "position:relative; left:200px; top:2px;">
+
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="name" class="form-control" id="firstName" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="name" class="form-control" id="lastName" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="">
+  </div>
+
+</form>
+{% endblock%}
