@@ -2,11 +2,12 @@
 
 {% block main_content %}
 <form>
-  <div style = "position:relative; left:200px; top:2px;">
+<div style = "position:relative; left:200px; top:2px;">
 
   <div class="form-group">
     <label for="typeOfHouse">What type of house are you looking for?</label>
     <select class="form-control" id="typeOfHouse">
+      <option>1 Room</option>
       <option>2 Room</option>
       <option>3 Room</option>
       <option>4 Room</option>
@@ -18,38 +19,48 @@
   <div class="form-group">
     <label for="budget">What is your budget?</label>
     <select class="form-control" id="budget">
-      <option>$0 < x < $20</option>
-      <option>$10 < x < $20</option>
-      <option>$20 < x < $20</option>
-      <option>$30 < x < $20</option>
-      <option>$40 < x < $20</option>
+      <option>below $300,000</option>
+      <option>$300,000 to $400,000</option>
+      <option>$400,000 to $500,000</option>
+      <option>$500,000 to $600,000</option>
+      <option>$600,000 to $700,000</option>
+      <option>$700,000 to $800,000</option>
+      <option>$800,000 to $1,000,000</option>
+      <option>above $1,000,000</option>
     </select>
   </div>  <div class="form-group">
-    <label for="monthlyIncome">What is your monthly income?</label>
+    <label for="monthlyIncome">What is your monthly income?(including employer CPF contributions)</label>
     <select class="form-control" id="monthlyIncome">
-      <option>3 Room</option>
-      <option>4 Room</option>
-      <option>5 Room</option>
-      <option>4</option>
-      <option>5</option>
+      <option>below $1,000 </option>
+      <option>$1,000 to $2,000</option>
+      <option>$2,000 to $3,000</option>
+      <option>$3,000 to $4,000</option>
+      <option>$4,000 to $5,000</option>
+      <option>$5,000 to $6,000</option>
+      <option>$6,000 to $7,000</option>
+      <option>$7,000 to $8,000</option>
+      <option>$8,000 to $10,000</option>
+      <option>above $10,000</option>
     </select>
   </div>  <div class="form-group">
     <label for="maritalStatus">What is your marital status</label>
     <select class="form-control" id="maritalStatus">
       <option>Married</option>
       <option>Single</option>
-      <option>Widowed??:(</option>
-      <option>4</option>
-      <option>5</option>
     </select>
   </div>  <div class="form-group">
     <label for="cpfSavings"></label>
     <select class="form-control" id="cpfSavings">
-      <option>$0 < x < $20</option>
-      <option>$10 < x < $20</option>
-      <option>$20 < x < $20</option>
-      <option>$30 < x < $20</option>
-      <option>$40 < x < $20</option>
+      <option>below $20,000 </option>
+      <option>$20,000 to $40,000</option>
+      <option>$40,000 to $60,000</option>
+      <option>$60,000 to $80,000</option>
+      <option>$80,000 to $100,000</option>
+      <option>$100,000 to $120,000</option>
+      <option>$120,000 to $140,000</option>
+      <option>$140,000 to $160,000</option>
+      <option>$160,000 to $200,000</option>
+      <option>above $200,000</option>
     </select>
   </div>  <div class="form-group">
     <label for="ownCar">Do you own a car?</label>
@@ -57,6 +68,19 @@
       <option>Yes</option>
       <option>No</option>
     </select>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+  <select class="selectpicker" multiple data-live-search="true">
+    <option>Mustard</option>
+    <option>Ketchup</option>
+    <option>Relish</option>
+  </select>
+
   </div>  <div class="form-group">
     <label for="amenities">Must-have amenities?</label>
     <select class="form-control" id="amenities">
@@ -74,8 +98,41 @@
       <option>3</option>
       <option>4</option>
       <option>5</option>
+      <!-- Sembawang
+Woodlands
+Yishun
+North-East
+Ang Mo Kio
+Hougang
+Punggol
+Sengkang
+Serangoon
+
+Bedok
+Pasir Ris
+Tampines
+
+Bukit Batok
+Bukit Panjang
+Choa Chu Kang
+Clementi
+Jurong East
+Jurong West
+Tengah
+
+Bishan
+Bukit Merah
+Bukit Timah
+Central Area
+Geylang
+Kallang/ Whampoa
+Marine Parade
+Queenstown
+Toa Payoh -->
     </select>
   </div>
-  </div>
+  <button type="submit" class="btn btn-primary">Update Preferences</button>
+
+</div>
 </form>
 {% endblock%}
