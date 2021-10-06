@@ -2,7 +2,15 @@
 
 {% block main_content %}
 <form>
-<div style = "position:relative; left:200px; top:2px;">
+
+<div style="position:relative; left:200px; top:2px;">
+  <a href="/account/settings" class="btn btn-secondary disabled" role="button" disabled="true">Edit Profile</a>
+  <div></div>
+  <a href="/account/preferences" class="btn btn-info" role="button">Edit Preferences</a>
+</div>
+
+
+<div style = "position:relative; left:400px; top:-78px;">
 
   <div class="form-group">
     <label for="firstName">First Name</label>
@@ -28,7 +36,7 @@
       <!-- check for length -->
   </div>
 
-  <button type="submit" class="btn btn-primary">Save</button>
+  <div style="position:relative; left:140px; top:50px;"><button type="submit" class="btn btn-primary">Save</button></div>
 
 </div>
 </form>
