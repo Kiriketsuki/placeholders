@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
-</head>
-<body>
-    <h1>I forgot my password :(</h1>
-</body>
-</html>
+{% extends "sign_up.html" %}
+
+{% block tabtitle %}
+    <title>Forgot password</title>
+{% endblock %}
+
+{% block title %}
+    <h1 class="sign-up-txt">Forgot Password</h1>
+{% endblock %}
+
+{% block form %}
+    <form method="POST" class="flex-vertical">
+        <input type="email" id="email" name="email" placeholder="Enter your email address">
+        <button type="submit" class="btn btn-dark btn-round">Submit</button>
+    </form>
+{% endblock %}
+
