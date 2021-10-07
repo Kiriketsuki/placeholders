@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/sign_up.css') }}">
-    <title>Sign Up!</title>
+    {% block tabtitle %}
+        <title>Sign Up!</title>
+    {% endblock %}
 </head>
 <body>
     <main>
@@ -46,8 +48,12 @@
                         </div>
                             Back
                     </button>
-                </a>    
+                </a>
+                {% block title %}
                 <h1 class="sign-up-txt">Create Account</h1>
+                {% endblock %}
+
+                {% block form %}
                 <form method="POST" class="flex-vertical">
                     <input type="text" id="first-name" name="first-name" placeholder="First Name">
                     <input type="text" id="last-name" name="last-name" placeholder="Last Name">
@@ -56,6 +62,7 @@
                     <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
                     <button type="submit" class="btn btn-dark btn-round">Register</button>
                 </form>
+                {% endblock %}
             </div>
         </div>
     </main>

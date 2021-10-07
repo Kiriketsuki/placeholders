@@ -101,6 +101,25 @@ def logout():
 # Forgot password page
 @views.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
+    if request.method == "POST":
+        email = request.POST.get('email')
+
+        if email == None:
+            flash('Email required.', category='error') 
+
+        # Check if credentials are valid
+        # Check database for such user
+        user = User.query.filter_by(email = email).first()
+    
+        # If user email exists
+        if not user:
+            flash('Email does not exist.', category='error')
+        else:
+            # generate random new password
+            # reset database with the new password
+            # send email containing new password to user
+            pass
+        
     return render_template("forgot_pw.html")
 
 # Homepage
