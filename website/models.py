@@ -9,5 +9,5 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
 
-class building(db.Model):
-    address = db.column(db.String)
+# class building(db.Model):
+#     address = db.column(db.String)

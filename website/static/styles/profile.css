@@ -1,0 +1,37 @@
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+    background-color: gainsboro;
+    border-radius: 40px;
+    height: 100vh;
+}  
+
+.flex-child2 {
+    flex: 3;
+    background-color: gainsboro;
+    border-radius: 40px;
+    height: 100vh;
+}  
+
+.flex-child:first-child {
+    margin-right: 30px;
+} 
+
+#settingslogo {
+    padding-left: 25px;
+    background-image: url(../Assets/settings_black_24dp.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: 1.5%;
+  }
+  
+  #editlogo {
+    padding-left: 25px;
+    background-image: url(../Assets/edit_black_24dp.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: 1.5%;
+  }
