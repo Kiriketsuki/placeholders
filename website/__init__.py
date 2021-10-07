@@ -16,9 +16,17 @@ def createApp():
 
     app.register_blueprint(views, url_prefix = "/")
 
-    # from .models import User
-
     createDatabase(app)
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'views.landing'
+    login_manager.init_app(app)
+
+    from .models import User
+
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
 
     return app
 

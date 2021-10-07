@@ -15,6 +15,19 @@ html {
   max-width: 100vw;
 }
 
+.alert-container {
+  position: relative;
+  width: 100vw;
+}
+
+.alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 .flex-vertical {
   align-self: center;
   display: flex;
@@ -115,6 +128,11 @@ input {
 .close {
   background: transparent;
   border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 25px;
+  font-size: 35px;
 }
 
 @media (max-width: 830px) {

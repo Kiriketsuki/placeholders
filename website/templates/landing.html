@@ -14,6 +14,25 @@
     </head>
     <body>
         <main>
+            <div class="alert-container">
+                {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                messages %} {% for category, message in messages %} {% if category ==
+                'error' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% else %}
+                <div class="alert alert-success alert-dismissable fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %} {% endfor %} {% endif %} {% endwith %}
+            </div>
             <div class="landing-img"></div>
             <div class="landing">
                 <div class="logo">
@@ -22,13 +41,15 @@
                 <div class="btn-container">
                     <button id="login-btn" type='button' class="btn btn-dark btn-round">Login</button>
                     <a href="/signup"><button id="register-btn" type='button' class="btn btn-dark btn-round">Register</button></a>
-                    <button id="guest-btn" type='button' class="btn btn-secondary btn-round">
-                        Continue as Guest
-                        <div class="icon">
-                            <div class="icon baseline"><img src="{{url_for('static',filename='Assets/arrow_east_black_24dp.svg')}}"
-                                    alt="right arrow"></div>
-                        </div>
-                    </button>
+                    <a href="/recommendations/guest">
+                        <button id="guest-btn" type='button' class="btn btn-secondary btn-round">
+                            Continue as Guest
+                            <div class="icon">
+                                <div class="icon baseline"><img src="{{url_for('static',filename='Assets/arrow_east_black_24dp.svg')}}"
+                                        alt="right arrow"></div>
+                            </div>
+                        </button>
+                    </a>
                 </div>
                 <div class="sign-in-container">
                     <button type="button" class="btn-cross">
@@ -46,5 +67,14 @@
         </main>
         <script src="{{url_for('static', filename='scripts/landing.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     </body>
 </html>

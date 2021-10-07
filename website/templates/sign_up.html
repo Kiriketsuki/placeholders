@@ -14,6 +14,25 @@
 </head>
 <body>
     <main>
+        <div class="alert-container">
+            {% with messages = get_flashed_messages(with_categories=true) %} {% if
+            messages %} {% for category, message in messages %} {% if category ==
+            'error' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% else %}
+            <div class="alert alert-success alert-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %} {% endfor %} {% endif %} {% endwith %}
+        </div>
         <div class="page-container">
             <div class="sign-up-img"></div>
             <div class="sign-up-form">
@@ -29,23 +48,6 @@
                     </button>
                 </a>    
                 <h1 class="sign-up-txt">Create Account</h1>
-                    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-                    messages %} {% for category, message in messages %} {% if category ==
-                    'error' %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    {% else %}
-                    <div class="alert alert-success alert-dismissable fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    {% endif %} {% endfor %} {% endif %} {% endwith %}
                 <form method="POST" class="flex-vertical">
                     <input type="text" id="first-name" name="first-name" placeholder="First Name">
                     <input type="text" id="last-name" name="last-name" placeholder="Last Name">
