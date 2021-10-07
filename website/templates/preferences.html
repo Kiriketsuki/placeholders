@@ -1,50 +1,81 @@
 {% extends "base.html" %}
 
-	<script>
-	$(document).ready(function () {
-
-		var list1 = document.getElementById('List1');
-
-		list1.options[0] = new Option('--Select--', '');
-		list1.options[1] = new Option('3 Room', '3 Room');
-		list1.options[2] = new Option('4 Room', '4 Room');
-		});
-	</script>
-
 {% block main_content %}
-	<div class="col-md-20" style="grid-area:b">
-		<form>
-		<h4>What type of house are you looking for?</h4>
-		<select class="form-control"  id='List1' name='List1'>
-		</select>
+<form>
+  <div style = "position:relative; left:200px; top:2px;">
 
-		<h4>What is your budget?</h4>
-		<select class="form-control"  id='List2' name='List2' >
-		</select>
-
-		<h4>What is your monthly income?</h4>
-		<select class="form-control"  id='List3' name='List3' >
-		</select>
-
-		<h4>What type of house are you looking for?</h4>
-		<select class="form-control"  id='List4' name='List4'>
-		</select>
-
-		<h4>What are your current CPF savings?</h4>
-		<select class="form-control"  id='List5' name='List5' >
-		</select>
-
-		<h4>Do you own a car?</h4>
-		<select class="form-control"  id='List6' name='List6' >
-		</select>
-
-		<h4>What type of house are you looking for?</h4>
-		<select class="form-control"  id='List7' name='List7'>
-		</select>
-
-		<h4>Preferred locations?</h4>
-		<select class="form-control"  id='List8' name='List8' >
-		</select>
-		</form>
-	</div>
+  <div class="form-group">
+    <label for="typeOfHouse">What type of house are you looking for?</label>
+    <select class="form-control" id="typeOfHouse">
+      <option>2 Room</option>
+      <option>3 Room</option>
+      <option>4 Room</option>
+      <option>5 Room</option>
+      <option>3-generation</option>
+      <option>Executive</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="budget">What is your budget?</label>
+    <select class="form-control" id="budget">
+      <option>$0 < x < $20</option>
+      <option>$10 < x < $20</option>
+      <option>$20 < x < $20</option>
+      <option>$30 < x < $20</option>
+      <option>$40 < x < $20</option>
+    </select>
+  </div>  <div class="form-group">
+    <label for="monthlyIncome">What is your monthly income?</label>
+    <select class="form-control" id="monthlyIncome">
+      <option>3 Room</option>
+      <option>4 Room</option>
+      <option>5 Room</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>  <div class="form-group">
+    <label for="maritalStatus">What is your marital status</label>
+    <select class="form-control" id="maritalStatus">
+      <option>Married</option>
+      <option>Single</option>
+      <option>Widowed??:(</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>  <div class="form-group">
+    <label for="cpfSavings"></label>
+    <select class="form-control" id="cpfSavings">
+      <option>$0 < x < $20</option>
+      <option>$10 < x < $20</option>
+      <option>$20 < x < $20</option>
+      <option>$30 < x < $20</option>
+      <option>$40 < x < $20</option>
+    </select>
+  </div>  <div class="form-group">
+    <label for="ownCar">Do you own a car?</label>
+    <select class="form-control" id="ownCar">
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+  </div>  <div class="form-group">
+    <label for="amenities">Must-have amenities?</label>
+    <select class="form-control" id="amenities">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>  <div class="form-group">
+    <label for="locations">Preferred Locations?</label>
+    <select class="form-control" id="locations">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  </div>
+</form>
 {% endblock%}
