@@ -36,7 +36,7 @@ def landing():
         else:
             flash('Email does not exist.', category='error')
 
-    return render_template("landing.html")
+    return render_template("landing.html", user=current_user)
 
 # Sign up page
 @views.route("/signup", methods=["GET", "POST"])
@@ -88,7 +88,7 @@ def signup():
             except sqlalchemy.exc.IntegrityError:
                 flash('Account already exists.', category='error')
 
-    return render_template("sign_up.html")
+    return render_template("sign_up.html", user=current_user)
 
 @views.route('/logout')
 @login_required
@@ -127,11 +127,11 @@ def home_redirect():
 @views.route("/recommendations")
 @login_required
 def recommendations():
-    return render_template("top_picks_logged_in.html")
+    return render_template("top_picks_logged_in.html", user=current_user)
 
 @views.route('/recommendations/guest')
 def recommendations_guest():
-    return render_template("top_picks_guest.html")
+    return render_template("top_picks_guest.html", user=current_user)
         
 @views.route("/base_template")
 def base_template():

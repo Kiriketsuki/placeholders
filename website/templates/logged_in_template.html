@@ -55,19 +55,14 @@
                 </a>
             </li>
 
-            <li class = "nav-item no_select">
-                <a href = "/" class = "nav-link">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <span class = "link-text">
-                        {% block username %}
-                        Username
-                        {% endblock %}
-                    </span>
-                </a>
-            </li>
+            <span class = "link-text">
+                {% block username %}
+                    Hello, {{user.firstName}} {{user.lastName}}
+                {% endblock %}
+            </span>
 
             <li class = "nav-item no_select">
-                <a href = "/" class = "nav-link">
+                <a href = "/recommendations" class = "nav-link">
                     <i class="fas fa-home"></i>
                     <span class = "link-text">
                         Home
