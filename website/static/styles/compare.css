@@ -1,0 +1,128 @@
+:root {
+    box-sizing: border-box;
+    /* --font-size: calc(0.6vw + 0.6vh + 0.5vmin); */
+    --font-title: "Lobster", cursive;
+    font-family: "Roboto";
+    background-color: #fff;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --transition-speed: 600ms;
+    
+  }
+  
+html {
+    height: 120%;
+    width: 100%;
+}
+main{
+    display: flex;
+    flex-direction: column;
+}
+p{
+    font-size: 0.8em;
+    word-wrap: break-word;
+}
+img{
+    height: 180px;
+    width: 200px;
+}
+.flex-vertical {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    width: max-content;
+    height: fit-content;
+}
+.page-container {
+    display: grid;
+    padding: 8% 10% 2% 10%;
+    grid-template-areas: "first second third";
+    grid-template-columns: 350px 350px 350px;
+    grid-template-rows: 500px;
+    justify-content: center;
+    grid-gap: 5%;
+}
+
+.box {
+    grid-area: first;
+    border-radius: 50px;
+    box-shadow: 5px 10px;
+}
+.box1 {
+    grid-area: second;
+    border-radius: 50px;
+    box-shadow: 5px 10px;
+}
+.box2 {
+    grid-area: third;
+    border-radius: 50px;
+    box-shadow: 5px 10px;
+}
+.output{
+    margin: 37px 20px;
+    height: 350px;
+    text-align: center;
+}
+.imgbox {
+    height: 180px;
+    margin-bottom: 30px;
+}
+.contentleft, .contentright {
+    float: left;
+    width: 45%;
+    text-align: left;
+}
+.vl {
+    border-left: 3px solid black;
+    padding-right: 4%;
+    height: 210px;
+    width: 5%;
+    float: left;
+  }
+.btn {
+    border: none;
+    border-radius: 100px;
+    background-color: black;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+    box-shadow: 2px 3px gray;
+}
+.btn-container{
+    text-align: center;  
+}
+
+
+@media (max-width: 830px) {
+    .page-container {
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    .flex-vertical {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+        /* max-width: 330px; */
+        height: fit-content;
+    }
+
+    input {
+        max-width: 290px;
+    }
+
+    .btn-round {
+        max-width:250px;
+    }
+}
+
+
+
