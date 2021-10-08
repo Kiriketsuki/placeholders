@@ -4,16 +4,51 @@
     z-index: 1000;
 } */
 
+/* !colour scheme : */
+/* main : #a6e2ec */
+/* secondary: #eea9c6 */
+/* complimentary: #a4c784 */
+
+/* todo figure out sass and modify bootstrap colours */
+
 :root {
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
+    --bs-list-group-bg: #eea9c6;
 }
 
 html {
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
-    background-color: #5927e5;
+    background-color: rgba(166,226,236,255);
 }
+
+.alert-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 999;
+}
+
+.alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 25px;
+  font-size: 35px;
+}
+
 
 ::-webkit-scrollbar {
     width: 0.25rem;
@@ -32,13 +67,13 @@ html, body {
     overflow-x: hidden;
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
-    background-color: #5927e5;
+    background-color: #a6e2ec;
 }
 
 #title_bar {
-    font-family: "Lora", serif;
+    font-family: "Lobster", serif;
     font-style: italic;
-    color: white;
+    color: #eea9c6;
     font-size: 2.5rem;
 }
 
@@ -65,10 +100,7 @@ html, body {
     border: 1px white;
 }
 
-.li {
-    border-radius: 1px 1px 1px 1px;
-}
 
-.ul {
-    border-radius: 1px;
+li> ul> li {
+    background-color: #c3b175;
 }

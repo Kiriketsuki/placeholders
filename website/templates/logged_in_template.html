@@ -55,26 +55,16 @@
                 </a>
             </li>
 
+            
             <li class = "nav-item no_select">
-                <a href = "/" class = "nav-link">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <span class = "link-text">
-                        {% block username %}
-                        Username
-                        {% endblock %}
-                    </span>
-                </a>
-            </li>
-
-            <li class = "nav-item no_select">
-                <a href = "/" class = "nav-link">
+                <a href = "/recommendations" class = "nav-link">
                     <i class="fas fa-home"></i>
                     <span class = "link-text">
                         Home
                     </span>
                 </a>
             </li>
-
+            
             <li class = "nav-item no_select">
                 <a href = "/favourites" class = "nav-link">
                     <i class="fa-solid fa-star"></i>
@@ -83,7 +73,7 @@
                     </span>
                 </a>
             </li>
-
+            
             <li class = "nav-item no_select">
                 <a href = "/settings" class = "nav-link">
                     <i class="fa-solid fa-gears"></i>
@@ -101,7 +91,7 @@
                     </span>
                 </a>
             </li>
-
+            
             <li class = "nav-item no_select">
                 <a href = "/logout" class = "nav-link">
                     <i class="fas fa-sign-out-alt"></i>
@@ -110,7 +100,13 @@
                     </span>
                 </a>
             </li>
-
+            
+            <!-- ! ivan why you touch i said no touching -->
+            <li class = "link-text"> 
+                {% block username %}
+                    Hello, {{user.firstName}} {{user.lastName}}
+                {% endblock %}
+            </li>
 
             <li class = "nav-item no_select">
                 <a href="/about" class = "nav-link about" id = "about">
@@ -125,11 +121,21 @@
 
     <!-- boiler template -->
     <main>
+    </div>
         {% block main_content %}
-
+        
         {% endblock %}
     </main>
 </body>
 
 <script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 </html>

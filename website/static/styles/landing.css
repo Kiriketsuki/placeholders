@@ -3,7 +3,7 @@
   /* --font-size: calc(0.6vw + 0.6vh + 0.5vmin); */
   --font-title: "Lobster", cursive;
   font-family: "Roboto";
-  background-color: #fff;
+  background-color: rgba(166,226,236,255);
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
@@ -13,6 +13,29 @@
 html {
   width: 100vw;
   height: 100vh;
+}
+
+.alert-container {
+  position: relative;
+  width: 100vw;
+}
+
+.alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 25px;
+  font-size: 35px;
 }
 
 .landing-img {
@@ -31,6 +54,7 @@ html {
   flex-direction: column;
   margin-top: 0.5rem;
   position: relative;
+  width: 100vw;
 }
 
 .logo {
@@ -85,7 +109,7 @@ html {
   width: 25%;
   min-width: 320px;
   max-width: 400px;
-  min-height: 110%;;
+  min-height: 110%;
   background-color: #000000;
   position: absolute;
   top: -10%;
