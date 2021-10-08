@@ -119,3 +119,7 @@ def compare():
 @views.route("/results")
 def results():
     return render_template("results.html")
+
+@views.route("/sidebar")
+def sidebar():
+    return render_template("sidebar.html")
