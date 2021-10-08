@@ -55,12 +55,7 @@
                 </a>
             </li>
 
-            <span class = "link-text">
-                {% block username %}
-                    Hello, {{user.firstName}} {{user.lastName}}
-                {% endblock %}
-            </span>
-
+            
             <li class = "nav-item no_select">
                 <a href = "/recommendations" class = "nav-link">
                     <i class="fas fa-home"></i>
@@ -69,7 +64,7 @@
                     </span>
                 </a>
             </li>
-
+            
             <li class = "nav-item no_select">
                 <a href = "/favourites" class = "nav-link">
                     <i class="fa-solid fa-star"></i>
@@ -78,7 +73,7 @@
                     </span>
                 </a>
             </li>
-
+            
             <li class = "nav-item no_select">
                 <a href = "/settings" class = "nav-link">
                     <i class="fa-solid fa-gears"></i>
@@ -96,7 +91,7 @@
                     </span>
                 </a>
             </li>
-
+            
             <li class = "nav-item no_select">
                 <a href = "/logout" class = "nav-link">
                     <i class="fas fa-sign-out-alt"></i>
@@ -105,7 +100,13 @@
                     </span>
                 </a>
             </li>
-
+            
+            <!-- ! ivan why you touch i said no touching -->
+            <li class = "link-text"> 
+                {% block username %}
+                    Hello, {{user.firstName}} {{user.lastName}}
+                {% endblock %}
+            </li>
 
             <li class = "nav-item no_select">
                 <a href="/about" class = "nav-link about" id = "about">

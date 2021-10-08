@@ -12,6 +12,11 @@
     scrollbar-width: 0.25rem;
 }
 
+/* !colour scheme : */
+/* main : #a6e2ec */
+/* secondary: #eea9c6 */
+/* complimentary: #a4c784 */
+
 html {
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
@@ -55,7 +60,7 @@ background: rgba(46, 49, 49, 0.8);
 
 body {
     color: black;
-    background-color: #23232e;
+    background-color: rgba(166,226,236,255);
     width: 100vw;
     height: 100vh;
     max-width: 100vw;
@@ -224,7 +229,7 @@ main {
     align-items: center;
     /* justify-content: flex-start; */
     height: 3rem;
-    color: #66a9f5;
+    color: #eea9c6;
     text-decoration: none;
     /* font-size: 20px; */
     filter: grayscale(100%) opacity(1);
@@ -234,7 +239,8 @@ main {
 .link-text {
     display: none;
     margin-left: -1rem;
-    text-shadow: 2px 2px black;
+    /* text-shadow: 2px 2px black; */
+    color: #eea9c6;
 }
 
 
@@ -260,7 +266,7 @@ main {
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     text-align: center;
-    color: #3790f7;
+    color: #eea9c6;
     font-size: 1.5rem;
     letter-spacing: 0.3ch;
     width: 100%;
