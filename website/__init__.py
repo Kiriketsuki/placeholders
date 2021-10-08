@@ -1,7 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
+import os
 from flask_login import LoginManager
+import pandas as pd
+# from .models import import_buildings
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -16,8 +18,7 @@ def createApp():
 
     app.register_blueprint(views, url_prefix = "/")
 
-    createDatabase(app)
-
+    createDatabase(app, DB_NAME)
     login_manager = LoginManager()
     login_manager.login_view = 'views.landing'
     login_manager.init_app(app)
@@ -29,8 +30,9 @@ def createApp():
         return User.query.get(int(id))
 
     return app
-
-def createDatabase(app):
-    if not path.exists('website/' + DB_NAME):
+    
+def createDatabase(app, name):
+    if not os.path.exists('website/' + name):
         db.create_all(app=app)
         print("Database created.")
+
