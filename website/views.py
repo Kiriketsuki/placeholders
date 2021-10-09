@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from sqlalchemy.orm import query
 from .helper import hasDigit, hasSpecialCharacters
-from .models import User, building, Preference
+from .models import User, building
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from . import db
@@ -87,8 +87,8 @@ def signup():
         
         if len(password) < 8:
             flash('Password too short.', category='error')
-        elif not hasSpecialCharacters(password):
-            flash('Password must include at least one special character.', category='error')
+        # elif not hasSpecialCharacters(password):
+        #     flash('Password must include at least one special character.', category='error')
         elif password != confirmPassword:
             flash('Passwords do not match.', category='error')
         else:
@@ -100,8 +100,8 @@ def signup():
             try:
                 db.session.commit()
                 flash('Account created!', category='success')
-                login_user(newUser, remember=True) # remember allows user to stay logged in
-                return redirect(url_for('views.recommendations'))
+                # login_user(newUser, remember=True) # remember allows user to stay logged in
+                return redirect(url_for('views.landing'))
             except sqlalchemy.exc.IntegrityError:
                 flash('Account already exists.', category='error')
 
@@ -114,12 +114,12 @@ def logout():
     flash('Logged out successfully!', category='success')
     return redirect(url_for('views.landing'))
 
-# TODO: implement this function
+
 # Forgot password page
 @views.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
     if request.method == "POST":
-        email = request.form.get('email')
+        email = request.POST.get('email')
 
         if email == None:
             flash('Email required.', category='error') 
@@ -148,89 +148,13 @@ def submit_preferences():
 def update_preferences():
     return render_template("update_preferences.html", user = current_user)
 
-
 @views.route("/account")
 def profile():
     return render_template("profile.html", user = current_user)
 
-@views.route("/account/settings", methods=["GET", "POST"])
-@login_required
-def profile():
-    if request.method == "POST":
-        thisUser = User.query.filter_by(id=current_user.get_id()).first()
-
-        if request.form.get('firstName') == "" and request.form.get('lastName') == "" and request.form.get('email') == "" and request.form.get('password') == "":
-            flash("Empty fields.", category='error')
-        else:
-            firstName = thisUser.firstName if request.form.get('firstName') == "" else request.form.get('firstName')
-            lastName = thisUser.lastName if request.form.get('lastName') == "" else request.form.get('lastName')
-            email = thisUser.email if request.form.get('email') == "" else request.form.get('email')
-
-            # Check if credentials meet requirements
-            if hasDigit(firstName):
-                flash('First name must not contain numerical characters.', category='error')
-            elif len(firstName) < 2:
-                flash('First name is too short.', category='error')
-
-            if hasDigit(lastName):
-                flash('Last name must not contain numerical characters.', category='error')
-            elif len(lastName) < 2:
-                flash('Last name is too short.', category='error')
-
-            if len(email) < 10 or "@" not in email:
-                flash('Not a valid email.', category='error')
-
-            if request.form.get('password') == "":
-                pwChanged = False # Boolean var to check if pw changed. False -> pw not changed
-                password = thisUser.password 
-            else: 
-                pwChanged = True # Boolean var to check if pw changed. True -> pw changed
-                password = request.form.get('password')
-                if len(password) < 8:
-                    flash('Password too short.', category='error')
-                elif not hasSpecialCharacters(password):
-                    flash('Password must include at least one special character.', category='error')
-                else:
-                    # Update user profile
-                    thisUser.firstName = firstName
-                    thisUser.lastName = lastName
-                    thisUser.email = email
-                    thisUser.password = generate_password_hash(password, method = 'sha256') if pwChanged else password
-
-                pwChanged = False # Reset
-            
-            db.session.commit()
-            flash('Profile updated!', category='success')
-            print(firstName, lastName, email, password)
-
-        print("Submit")
-
-    return render_template("profile.html", username = current_user)
-
-@views.route("/account/preferences", methods=["GET", "POST"])
-@login_required
+@views.route("/account/preferences")
 def preferences():
-
     return render_template("preferences.html", user = current_user)
-=======
-    if request.method == "POST":
-        houseType = request.form.get('typeOfHouse')
-        budget = request.form.get('budget')
-        maritalStatus = request.form.get('maritalStatus')
-        cpf = request.form.get('cpfSavings')
-        ownCar = True if request.form.get('ownCar') == "Yes" else False
-        amenities = request.form.getlist('amenities')
-        preferredLocations = request.form.getlist('locations')
-
-        print(houseType, budget, maritalStatus, cpf, ownCar, amenities, preferredLocations)
-
-        newPreference = Preference(houseType= houseType, budget=budget, maritalStatus=maritalStatus, cpf=cpf, ownCar=ownCar, amenities=amenities, preferredLocations=preferredLocations, uid=current_user.get_id())
-
-        db.session.add(newPreference)
-        db.session.commit()
-
-    return render_template("preferences.html", username = current_user)
-
 
 @views.route("/go_to_home")
 def home_redirect():
@@ -238,21 +162,16 @@ def home_redirect():
 
 @views.route("/recommendations")
 def recommendations():
-
     if current_user.is_authenticated:
         return render_template("top_picks_logged_in.html", user = current_user)
     else:
         return render_template("top_picks_guest.html", user = current_user)
 
-    admin = User.query.filter_by(firstName = "admin").first()
-    return render_template("top_picks_logged_in.html", user=current_user)
-
-
 # @views.route('/recommendations/guest')
 # def recommendations_guest():
 #     return render_template("top_picks_guest.html", user = current_user)
 
-# TODO combine the top two into one (dont need! because recommendations require login and guest dosen't)
+# TODO combine the top two into one
         
 @views.route("/base_template")
 def base_template():
@@ -261,7 +180,7 @@ def base_template():
 
 @views.route("/map")
 def map():
-    return render_template("map.html", user = current_user)
+    return render_template("map.html")
 
 @views.route("/compare")
 def compare():
@@ -325,7 +244,6 @@ def create_admin():
         db.session.commit()
     return redirect(url_for("views.landing"))
 
-
 def init_db():
     if db.session.query(User).count() == 0:
         import_buildings()
@@ -336,10 +254,3 @@ def jovian():
     user = User.query.filter_by(firstName ="admin").first()
 
     return render_template("top_picks_logged_in.html", user = user)
-=======
-# ! does not work because I HAVENT LEARNT DATABASES HOW DO I SQL?????
-@views.route("/testing_sql")
-def testing_sql():
-    for building in db.session.query("building"):
-        print(building.block)
-

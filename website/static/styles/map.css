@@ -9,29 +9,6 @@
     scrollbar-width: 0.25rem;
 }
 
-.alert-container {
-  position: relative;
-  width: 100vw;
-}
-
-.alert {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-}
-
-.close {
-  background: transparent;
-  border: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-right: 25px;
-  font-size: 35px;
-}
-
 html {
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
