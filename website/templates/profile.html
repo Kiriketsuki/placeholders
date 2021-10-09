@@ -17,7 +17,7 @@
 
 
 <body>
-<form>
+<form method="POST">
 
 <nav class="navbar navbar-expend-lg navbar-dark bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
@@ -35,6 +35,25 @@
   </div>
 
 </nav>
+<div class="alert-container">
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %} {% if category ==
+  'error' %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% else %}
+  <div class="alert alert-success alert-dismissable fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+</div>
 
 
 <div class="flex-container">
@@ -57,25 +76,25 @@
     <div><hr size="3" width="90%" color="black"></div>
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input type="name" class="form-control" id="firstName" placeholder="">
+      <input type="name" class="form-control" id="firstName" name="firstName" placeholder="">
         <!-- check for length -->
     </div>
   
     <div class="form-group">
       <label for="lastName">Last Name</label>
-      <input type="name" class="form-control" id="lastName" placeholder="">
+      <input type="name" class="form-control" id="lastName" name="lastName" placeholder="">
         <!-- check for length -->
     </div>
   
     <div class="form-group">
       <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="">
+      <input type="email" class="form-control" id="email" name="email" placeholder="">
         <!-- check for length -->
     </div>
   
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="">
+      <input type="password" class="form-control" id="password" name="password" placeholder="">
         <!-- check for length -->
     </div>
   
@@ -85,5 +104,11 @@
 
   
 </form>
-{% endblock%}
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

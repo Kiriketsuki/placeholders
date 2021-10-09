@@ -17,7 +17,7 @@
 
 
 <body>
-<form>
+<form method="POST">
 
 <nav class="navbar navbar-expend-lg navbar-dark bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
@@ -56,7 +56,7 @@
     <div><hr size="3" width="90%" color="black"></div>
       <div class="form-group">
         <label for="typeOfHouse">What type of house are you looking for?</label>
-        <select class="form-control" id="typeOfHouse">
+        <select class="form-select" id="typeOfHouse" name="typeOfHouse">
           <option selected disabled value="null" style="color:lightgrey">--Select--</option>
           <option>1 Room</option>
           <option>2 Room</option>
@@ -70,7 +70,7 @@
     
       <div class="form-group">
         <label for="budget">What is your budget?</label>
-        <select class="form-control" id="budget">
+        <select class="form-control" id="budget" name="budget">
           <option selected disabled value="null" style="color:lightgrey">--Select--</option>
           <option>below $300,000</option>
           <option>$300,000 to $400,000</option>
@@ -85,7 +85,7 @@
       
       <div class="form-group">
         <label for="monthlyIncome">What is your monthly income?(including employer CPF contributions)</label>
-        <select class="form-control" id="monthlyIncome">
+        <select class="form-control" id="monthlyIncome" name="monthlyIncome">
           <option selected disabled value="null" style="color:lightgrey">--Select--</option>
           <option>below $1,000 </option>
           <option>$1,000 to $2,000</option>
@@ -102,7 +102,7 @@
     
       <div class="form-group">
         <label for="maritalStatus">What is your marital status</label>
-        <select class="form-control" id="maritalStatus">
+        <select class="form-control" id="maritalStatus" name="maritalStatus">
           <option selected disabled value="null" style="color:lightgrey">--Select--</option>
           <option>Married</option>
           <option>Single</option>
@@ -111,7 +111,7 @@
     
       <div class="form-group">
         <label for="cpfSavings">What are your current CPF savings?</label>
-        <select class="form-control" id="cpfSavings">
+        <select class="form-control" id="cpfSavings" name="cpfSavings">
           <option selected disabled value="null" style="color:lightgrey">--Select--</option>
           <option>below $20,000 </option>
           <option>$20,000 to $40,000</option>
@@ -128,7 +128,7 @@
     
       <div class="form-group">
         <label for="ownCar">Do you own a car?</label>
-        <select class="form-control" id="ownCar">
+        <select class="form-control" id="ownCar" name="ownCar">
           <option selected disabled value="null" style="color:lightgrey">--Select--</option>
           <option>Yes</option>
           <option>No</option>
@@ -143,7 +143,7 @@
     
       <div class="form-group">
         <label for="amenities">Must-have amenities?</label>
-        <select class="selectpicker" data-width="100%" multiple data-live-search="true" multiple data-max-options="">
+        <select class="selectpicker" data-width="100%" multiple data-live-search="true" multiple data-max-options="" id="amenities" name="amenities">
           <option>Supermarket</option>
           <option>Foodcourt</option> 
           <!-- update data dict -->
@@ -153,7 +153,7 @@
     
       <div class="form-group">
         <label for="locations">Preferred Locations?</label>
-        <select class="selectpicker" data-width="100%" multiple data-live-search="true" multiple data-max-options="">
+        <select class="selectpicker" data-width="100%" multiple data-live-search="true" multiple data-max-options="" id="locations", name="locations">
           <option>Sembawang</option>
           <option>Woodlands</option>
           <option>Yishun</option>
