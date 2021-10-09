@@ -100,7 +100,7 @@ def logout():
     flash('Logged out successfully!', category='success')
     return redirect(url_for('views.landing'))
 
-
+# TODO: implement this function
 # Forgot password page
 @views.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
@@ -219,7 +219,7 @@ def recommendations():
 def recommendations_guest():
     return render_template("top_picks_guest.html", user=current_user)
 
-# TODO combine the top two into one (dont need. because recommendations require login and guest dosen't)
+# TODO combine the top two into one (dont need! because recommendations require login and guest dosen't)
         
 @views.route("/base_template")
 def base_template():
