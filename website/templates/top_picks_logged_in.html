@@ -34,9 +34,8 @@ Top Recommendations
     <ul id = "list" class = "rounded-top rounded-end list-group list-group-flush no_select justify-content-between align-items-stretch" style = "height: 100%; width: 100%;" onload = "scrollTop = 0">
         {% for to_display in user.recommended %}
             <li class = "list-group-item d-flex justify-content-between" style = "text-shadow: 1px 1px white; background-color: rgba(255,255,255,0);">
-                <!-- TODO make images from magic idk the database no images wtd -->
                 <div id = "hdb_image" class = "align-self-stretch overflow-hidden">
-                    <img src = "{{ url_for('static',filename='assets/john-t-4_ZMMBcz4fU-unsplash.jpg') }}"/>
+                    <img src = "{{to_display.image_path}}"/>
                 </div>
 
                 <ul class = "rounded-top rounded-end list-group list-group-flush no_select flex-grow-1 align-self-stretch align-items-stretch">

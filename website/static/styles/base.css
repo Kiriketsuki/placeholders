@@ -58,6 +58,14 @@ background: rgba(46, 49, 49, 0.8);
   font-size: 35px;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    scrollbar-color: rgba(108, 122, 137, 0.45);
+    scrollbar-width: 0.25rem;
+    background-color: #a6e2ec;
+}
+
 body {
     color: black;
     background-color: rgba(166,226,236,255);

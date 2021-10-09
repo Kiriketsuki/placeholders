@@ -37,15 +37,15 @@
     background-position: 1.5%;
   }
   
-  #editlogo {
+#editlogo {
     padding-left: 25px;
     background-image: url(../Assets/edit_black_24dp.svg);
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: 1.5%;
-  }
+}
 
-  .navbar {
+.navbar {
     grid-area: sidenav;
     width: 4rem;
     height: 100vh; 
