@@ -55,7 +55,13 @@
                 </a>
             </li>
 
-            
+            <li class="link-text">
+                {% block username %}
+                Hello, {{user.firstName}} {{user.lastName}}
+                {% endblock %}
+            </li>
+
+
             <li class = "nav-item no_select">
                 <a href = "/recommendations" class = "nav-link">
                     <i class="fas fa-home"></i>
@@ -75,7 +81,7 @@
             </li>
             
             <li class = "nav-item no_select">
-                <a href = "/settings" class = "nav-link">
+                <a href = "/account/settings" class = "nav-link">
                     <i class="fa-solid fa-gears"></i>
                     <span class = "link-text">
                         Settings
@@ -102,11 +108,7 @@
             </li>
             
             <!-- ! ivan why you touch i said no touching -->
-            <li class = "link-text"> 
-                {% block username %}
-                    Hello, {{user.firstName}} {{user.lastName}}
-                {% endblock %}
-            </li>
+
 
             <li class = "nav-item no_select">
                 <a href="/about" class = "nav-link about" id = "about">
