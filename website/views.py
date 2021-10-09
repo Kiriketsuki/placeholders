@@ -213,7 +213,7 @@ def home_redirect():
 @login_required
 def recommendations():
     admin = User.query.filter_by(firstName = "admin").first()
-    return render_template("top_picks_logged_in.html", user=admin)
+    return render_template("top_picks_logged_in.html", user=current_user)
 
 @views.route('/recommendations/guest')
 def recommendations_guest():
