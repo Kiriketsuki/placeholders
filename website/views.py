@@ -73,8 +73,8 @@ def signup():
         
         if len(password) < 8:
             flash('Password too short.', category='error')
-        # elif not hasSpecialCharacters(password):
-        #     flash('Password must include at least one special character.', category='error')
+        elif not hasSpecialCharacters(password):
+            flash('Password must include at least one special character.', category='error')
         elif password != confirmPassword:
             flash('Passwords do not match.', category='error')
         else:
@@ -134,13 +134,11 @@ def home():
 def profile():
     args = request.args
     username = args.get('username')
-    return render_template("profile.html", username = username)
+    return render_template("profile.html", user = current_user)
 
 @views.route("/account/preferences")
 def preferences():
-    args = request.args
-    username = args.get('username')
-    return render_template("preferences.html", username = username)
+    return render_template("preferences.html", user = current_user)
 
 @views.route("/go_to_home")
 def home_redirect():
@@ -149,36 +147,29 @@ def home_redirect():
 @views.route("/recommendations")
 @login_required
 def recommendations():
-    admin = User.query.filter_by(firstName = "admin").first()
-    return render_template("top_picks_logged_in.html", user=admin)
+    return render_template("top_picks_logged_in.html", user=current_user)
 
 @views.route('/recommendations/guest')
 def recommendations_guest():
     return render_template("top_picks_guest.html", user=current_user)
-
-# TODO combine the top two into one
         
-@views.route("/base_template")
-def base_template():
-    return render_template("base.html")
-
-# @views.route("/results")
-# def base_template():
-#     render_template("base.html")
-
 @views.route("/map")
 def map():
-    return render_template("map.html")
+    return render_template("map.html", user=current_user)
 
 @views.route("/compare")
 def compare():
-    return render_template("compare.html")
-@views.route("/testing")
-def testing():
-    return render_template("testing.html")
-@views.route("/sidebar")
-def sidebar():
-    return render_template("sidebar.html")
+    return render_template("compare.html", user=current_user)
+
+# @views.route("/testing")
+# def testing():
+#     return render_template("testing.html")
+
+# @views.route("/sidebar")
+# def sidebar():
+#     return render_template("sidebar.html")
+
+######################################################################################
 
 @views.route("/csv")
 def csv():
