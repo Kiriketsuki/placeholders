@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="en" dir="ltr">
+  <head>
 
     <!-- boiler plate html -->
     <meta charset="UTF-8">
@@ -24,10 +23,12 @@
     <!-- animate -->
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel = "stylesheet" href="{{ url_for('static',filename='styles/hover.css') }}">
-
-    <!-- base css -->
-    <link rel = "stylesheet" href = "{{ url_for('static',filename='styles/base.css') }}">
-
+    
+    <!-- side css -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/sidebar.css') }}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    
     <!-- bonus css -->
     {% block bonus_css %}
     {% endblock %}
@@ -38,89 +39,71 @@
         Base template
         {% endblock %}
     </title>
-</head>
+
+   </head>
+
+
+
 
 <body>
-    
-    <!-- navbar DO NOT TOUCH -->
-    <nav class = "navbar no_select" id = "navbar">
-        <ul class = "navbar-nav no_select">
-            <li class = "logo">
-                <a href = "#" class = "nav-link">
-                    <!-- <i class="fab fa-connectdevelop"></i> -->
-                    <img src = "{{ url_for('static',filename='styles/logo/hdb_logo.svg') }}"/>
-                    <span class = "link-text logo-text" id = "nav_title">
-                        Place
-                        holders
-                    </span>
+    <!-- NAV BAR -->
+  <div class="sidebar">
+    <div class="logo-top">
+        <!-- <i class='bx bx-log-out' id="log_out" ></i> -->
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <div class="logo-details">
+        <div class="profile">
+            <div class="profile-details">
+                <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" height="152px" width="180px">
+                <div class="name">TESTING!</div>
+            </div>
+        </div>
+    </div>
+    <ul class="nav-list">
+        <li>
+            <a href="#">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+        </li>
+        <li>
+        <a href="#">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">Favorites</span>
+        </a>
+        <span class="tooltip">Favorites</span>
+        </li>
+        <li>
+        <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Setting</span>
+        </a>
+        <span class="tooltip">Setting</span>
+        </li>
+        <li>
+            <a href="#">
+            <i class='bx bx-cart-alt' ></i>
+            <span class="links_name">Sell My House</span>
+            </a>
+            <span class="tooltip">Sell My House</span>
+        </li>
+        <li>
+            <div class="logout">
+                <a href="#">
+                <i class='bx bx-log-out' id="log_out" ></i>
+                <span class="links_name">Logout</span>
                 </a>
-            </li>
-
-
-
-            <li class = "nav-item no_select">
-                <a href = "/" class = "nav-link">
-                    <i class="fas fa-home"></i>
-
-                    <span class = "link-text">
-                        Home
-                    </span>
-                </a>
-            </li>
-
-            <li class="nav-item no_select">
-                <a href="/account" class="nav-link">
-                    <i class="fas fa-user"></i>
-                    <span class="link-text">
-                        Account
-                    </span>
-                </a>
-            </li>
-            
-            <li class="nav-item no_select">
-                <a href="/logout" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span class="link-text">
-                        Logout
-                    </span>
-                </a>
-            </li>
-
-
-
-            <li class = "nav-item no_select">
-                <a href = "/" class = "nav-link">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span class = "link-text">
-                        Login
-                    </span>
-                </a>
-            </li>
-
-            <li class = "nav-item no_select">
-                <a href = "/signup" class = "nav-link">
-                    <i class="fas fa-user-plus"></i>
-                    <span class = "link-text">
-                        Sign Up
-                    </span>
-                </a>
-            </li>
-
-
-            <li class = "nav-item no_select">
-                <a href="/about" class = "nav-link about" id = "about">
-                    <i class="fa-solid fa-building"></i>
-                    <span class = "link-text">
-                        About        
-                    </span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-
-    <!-- boiler template -->
-    <main>
+                <span class="tooltip">Logout</span>
+            </div>
+        </li>
+        
+    </ul>
+  </div>
+  <section class="home-section">
+      <!-- Input content here -->
+      <main>
         <div class="alert-container">
             {% with messages = get_flashed_messages(with_categories=true) %} {% if
             messages %} {% for category, message in messages %} {% if category ==
@@ -140,6 +123,7 @@
             </div>
             {% endif %} {% endfor %} {% endif %} {% endwith %}
         </div>
+
         {% block main_content %}
         <div id = 'title_bar'>
             Here is the title bar
@@ -211,7 +195,37 @@
 
         {% endblock %}
     </main>
-</body>
-<script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
+  </section>
 
+
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
+</body>
 </html>

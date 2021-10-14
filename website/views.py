@@ -173,10 +173,12 @@ def map():
 @views.route("/compare")
 def compare():
     return render_template("compare.html")
-
-@views.route("/results")
-def results():
-    return render_template("results.html")
+@views.route("/testing")
+def testing():
+    return render_template("testing.html")
+@views.route("/sidebar")
+def sidebar():
+    return render_template("sidebar.html")
 
 @views.route("/csv")
 def csv():

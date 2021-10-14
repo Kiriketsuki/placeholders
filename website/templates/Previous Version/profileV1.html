@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/profile.css') }}">
+
+  <title>Preferences</title>
+</head>
+
+
+<body>
+<form>
+
+<nav class="navbar navbar-expend-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+      <span class="navbar-toggler-icon"></span>
+
+  </button>
+  <div class="collapse navbar-collapse" id="navbar">
+      <div class="navbar-nav">
+          <a class="nav-item nav-link" id="logout" href="/">Logout</a>
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="favorites" href="/">Favorites</a>
+          <a class="nav-item nav-link" id="settings" href="/">Settings</a>
+          <a class="nav-item nav-link" id="sell_my_house" href="/">Sell My House</a>
+      </div>
+  </div>
+
+</nav>
+
+
+<div class="flex-container">
+
+  <div class="flex-child">
+
+    <a id="settingslogo"></a> Settings
+    <div></div>
+    <div><hr size="3" width="90%" color="black"></div>
+    <a id="editlogo"></a> <a href="/account/settings" class="btn btn-secondary disabled" role="button" disabled="true">Edit Profile</a>
+    <div></div>
+    <a id="editlogo"></a> <a href="/account/preferences" class="btn btn-info" role="button">Edit Preferences</a>
+
+  </div>
+  
+  <div class="flex-child2">
+
+    <a id="editlogo"></a> Edit Profile
+    <div></div>
+    <div><hr size="3" width="90%" color="black"></div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="name" class="form-control" id="firstName" placeholder="">
+        <!-- check for length -->
+    </div>
+  
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="name" class="form-control" id="lastName" placeholder="">
+        <!-- check for length -->
+    </div>
+  
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="">
+        <!-- check for length -->
+    </div>
+  
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="">
+        <!-- check for length -->
+    </div>
+  
+    <div style="position:relative; left:140px; top:50px;"><button type="submit" class="btn btn-dark">Save</button></div>
+  
+  </div>
+
+  
+</form>
+{% endblock%}
+</div>
