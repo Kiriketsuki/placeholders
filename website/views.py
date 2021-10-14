@@ -132,15 +132,11 @@ def home():
 
 @views.route("/account/settings")
 def profile():
-    args = request.args
-    username = args.get('username')
-    return render_template("profile.html", username = username)
+    return render_template("profile.html", user = current_user)
 
 @views.route("/account/preferences")
 def preferences():
-    args = request.args
-    username = args.get('username')
-    return render_template("preferences.html", username = username)
+    return render_template("preferences.html", user = current_user)
 
 @views.route("/go_to_home")
 def home_redirect():
@@ -168,14 +164,16 @@ def base_template():
 
 @views.route("/map")
 def map():
-    return render_template("map.html")
+    return render_template("map.html", user = current_user)
 
 @views.route("/compare")
 def compare():
-    return render_template("compare.html")
+    return render_template("compare.html", user = current_user)
+
 @views.route("/testing")
 def testing():
     return render_template("testing.html")
+
 @views.route("/sidebar")
 def sidebar():
     return render_template("sidebar.html")
