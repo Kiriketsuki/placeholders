@@ -134,13 +134,13 @@ def home():
 def profile():
     args = request.args
     username = args.get('username')
-    return render_template("profile.html", username = username)
+    return render_template("profile.html", user = current_user)
 
 @views.route("/account/preferences")
 def preferences():
     args = request.args
     username = args.get('username')
-    return render_template("preferences.html", username = username)
+    return render_template("preferences.html", user = current_user)
 
 @views.route("/go_to_home")
 def home_redirect():
