@@ -1,13 +1,16 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
-from .helper import hasDigit, hasSpecialCharacters
-from .models import User, building, Preference
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, logout_user, current_user
-from . import db
-import sqlalchemy
 import os
+
 import pandas as pd
+import sqlalchemy
 from dateutil import parser
+from flask import (Blueprint, flash, jsonify, redirect, render_template,
+                   request, url_for)
+from flask_login import current_user, login_required, login_user, logout_user
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from . import db
+from .helper import hasDigit, hasSpecialCharacters
+from .models import Preference, User, building
 
 views = Blueprint("views", __name__)
 

@@ -1,7 +1,8 @@
-from . import db
-from flask_login import UserMixin
 from flask import Flask
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+
+from . import db
 
 # association table
 recommendations = db.Table(
