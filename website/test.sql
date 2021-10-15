@@ -1,2 +1,2 @@
 SELECT *
-FROM preference
+FROM user

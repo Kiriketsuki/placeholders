@@ -160,7 +160,7 @@ def profile():
 
             if request.form.get('password') == "":
                 pwChanged = False # Boolean var to check if pw changed. False -> pw not changed
-                password = thisUser.password 
+                thisUser.password = thisUser.password 
             else: 
                 pwChanged = True # Boolean var to check if pw changed. True -> pw changed
                 password = request.form.get('password')
@@ -170,16 +170,19 @@ def profile():
                     flash('Password must include at least one special character.', category='error')
                 else:
                     # Update user profile
-                    thisUser.firstName = firstName
-                    thisUser.lastName = lastName
-                    thisUser.email = email
                     thisUser.password = generate_password_hash(password, method = 'sha256') if pwChanged else password
 
-                pwChanged = False # Reset
+            thisUser.firstName = firstName
+            thisUser.lastName = lastName
+            thisUser.email = email
+
+            print(firstName, lastName, email, pwChanged) # DEBUGGING
+
+            pwChanged = False # Reset
             
             db.session.commit()
+           
             flash('Profile updated!', category='success')
-            print(firstName, lastName, email, password)
 
         print("Submit")
         
@@ -189,20 +192,44 @@ def profile():
 @login_required
 def preferences():
     if request.method == "POST":
-        houseType = request.form.get('typeOfHouse')
-        budget = request.form.get('budget')
-        monthlyIncome = request.form.get('monthlyIncome')
-        maritalStatus = request.form.get('maritalStatus')
-        cpf = request.form.get('cpfSavings')
-        ownCar = True if request.form.get('ownCar') == "Yes" else False
-        amenities = request.form.getlist('amenities')
-        preferredLocations = request.form.getlist('locations')
+        # Check if db has user preference already
+        # db cannot hold 2 preferences under same uid as it is unique
+        # if preference does not exist for user then add normally
+        # else update
+        print(current_user)
 
-        print(houseType, budget, maritalStatus, cpf, ownCar, amenities, preferredLocations)
+        thisPreference = Preference.query.filter_by(id=current_user.get_id()).first()
+        print(thisPreference)
 
-        newPreference = Preference(houseType= houseType, budget=budget, monthlyIncome=monthlyIncome, maritalStatus=maritalStatus, cpf=cpf, ownCar=ownCar, amenities=amenities, preferredLocations=preferredLocations, uid=current_user.get_id())
+        attributes = {"houseType": None, "budget": None, "monthlyIncome": None, "maritalStatus": None, "cpf": None, "ownCar": None, "amenities": None, "preferredLocations": None}
+        
+        attributes["houseType"] = request.form.get('typeOfHouse')
+        attributes["budget"] = request.form.get('budget')
+        attributes["monthlyIncome"] = request.form.get('monthlyIncome')
+        attributes["maritalStatus"] = request.form.get('maritalStatus')
+        attributes["cpf"] = request.form.get('cpfSavings')
+        attributes["ownCar"] = True if request.form.get('ownCar') == "Yes" else False
+        attributes["amenities"] = request.form.getlist('amenities')
+        attributes["preferredLocations"] = request.form.getlist('locations')
 
-        db.session.add(newPreference)
+        if None in attributes.values():
+            flash("Empty fields. All fields must be filled in.")
+        else:
+            if thisPreference == None: # currently does not have preference hence can add to db
+                newPreference = Preference(houseType= attributes["houseType"], budget=attributes["budget"], monthlyIncome=attributes["monthlyIncome"], maritalStatus=attributes["maritalStatus"], cpf=attributes["cpf"], ownCar=attributes["ownCar"], amenities=attributes["amenities"], preferredLocations=attributes["preferredLocations"], uid=current_user.get_id())
+                db.session.add(newPreference)
+            else:
+                thisPreference.houseType = attributes["houseType"]
+                thisPreference.budget = attributes["budget"]
+                thisPreference.monthlyIncome = attributes["monthlyIncome"]
+                thisPreference.maritalStatus = attributes["maritalStatus"]
+                thisPreference.cpf = attributes["cpf"]
+                thisPreference.ownCar = attributes["ownCar"]
+                thisPreference.amenities = attributes["amenities"]
+                thisPreference.preferredLocations = attributes["preferredLocations"]
+
+        print(attributes["houseType"], attributes["budget"], attributes["maritalStatus"], attributes["cpf"], attributes["ownCar"], attributes["amenities"], attributes["preferredLocations"]) # DEBUGGING
+
         db.session.commit()
 
     return render_template("preferences.html", user = current_user)
