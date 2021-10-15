@@ -13,22 +13,22 @@
 
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,600&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
 
     <!-- animate -->
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel = "stylesheet" href="{{ url_for('static',filename='styles/hover.css') }}">
-    
+
     <!-- side css -->
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/sidebar.css') }}">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <!-- bonus css -->
     {% block bonus_css %}
     {% endblock %}
@@ -36,7 +36,7 @@
     <!-- title -->
     <title>
         {% block title %}
-        Base template
+        sidebar template
         {% endblock %}
     </title>
 
@@ -55,20 +55,24 @@
 
         <div class="logo">
                 <span class="name">
-                    Place 
+                    Place
                     Holders
                 </span>
             <div class="imgbtn" id="btn">
                 <img src = "{{ url_for('static',filename='styles/logo/hdb_logo.svg') }}"/>
             </div>
-            
+
         </div>
     </div>
     <div class="logo-details">
         <div class="profile">
             <div class="profile-details">
                 <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" height="152px" width="180px">
-                <div class="name">TESTING!</div>
+                <div class="name">
+                    {% block username %}
+                    Hello, {{user.firstName}} {{user.lastName}}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
@@ -80,6 +84,39 @@
             </a>
             <span class="tooltip">Home</span>
         </li>
+        <li>
+            <a href="/account/settings">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Account</span>
+            </a>
+            <span class="tooltip">Account</span>
+        </li>
+        <li>
+        <a href="#">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">Favorites</span>
+        </a>
+        <span class="tooltip">Favorites</span>
+        </li>
+        <li>
+            <a href="#">
+            <i class='bx bx-cart-alt' ></i>
+            <span class="links_name">Sell My House</span>
+            </a>
+            <span class="tooltip">Sell My House</span>
+        </li>
+        <li>
+        <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Setting</span>
+        </a>
+        <span class="tooltip">Setting</span>
+        </li>
+
+
+
+        <!-- ADDITIONAL IF NEEDED -->
+<!--
         <li>
             <a href="#">
             <i class='bx bx-log-in' ></i>
@@ -94,39 +131,8 @@
             </a>
             <span class="tooltip">Sign Up</span>
         </li>
-
-        <!-- ADDITIONAL IF NEEDED -->
-<!-- 
-        <li>
-            <a href="#">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Account</span>
-            </a>
-            <span class="tooltip">Account</span>
-        </li>
-        <li>
-        <a href="#">
-            <i class='bx bx-heart' ></i>
-            <span class="links_name">Favorites</span>
-        </a>
-        <span class="tooltip">Favorites</span>
-        </li>
-        <li>
-        <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">Setting</span>
-        </a>
-        <span class="tooltip">Setting</span>
-        </li>
-        <li>
-            <a href="#">
-            <i class='bx bx-cart-alt' ></i>
-            <span class="links_name">Sell My House</span>
-            </a>
-            <span class="tooltip">Sell My House</span>
-        </li>
    -->
-  
+
         <!-- <li>
             <a href="#">
             <i class='bx bx-cart-alt' ></i>
@@ -137,16 +143,16 @@
 
         <!-- ENDS HERE -->
 
-        <!-- <li>
+        <li>
             <div class="logout">
-                <a href="#">
+                <a href="/logout">
                 <i class='bx bx-log-out' id="log_out" ></i>
                 <span class="links_name">Logout</span>
                 </a>
                 <span class="tooltip">Logout</span>
             </div>
-        </li> -->
-        
+        </li>
+
     </ul>
   </div>
   <section class="home-section">
@@ -173,7 +179,7 @@
         </div>
 
         {% block main_content %}
-        
+
         {% endblock %}
     </main>
   </section>
@@ -208,5 +214,6 @@
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
   crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -11,7 +11,7 @@
 
 /* todo figure out sass and modify bootstrap colours */
 
-:root {
+/* :root {
     scrollbar-color: rgba(108, 122, 137, 0.45);
     scrollbar-width: 0.25rem;
     --bs-list-group-bg: #eea9c6;
@@ -53,7 +53,7 @@ html {
 ::-webkit-scrollbar {
     width: 0.25rem;
   }
-  
+
 ::-webkit-scrollbar-track {
 background: rgba(108, 122, 137, 0.45);
 }
@@ -106,4 +106,74 @@ li> ul> li {
 }
 .ul {
     border-radius: 1px;
+} */
+
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    margin-top: 30px;
+    font-size:18px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.page-header{
+    display: grid;
+    grid-template-areas:
+        "text btn";
+    padding-bottom: 10px;
+    align-items: end;
+}
+
+.page-header .name{
+    grid-area: text;
+}
+.page-header .btn-container{
+    grid-area: btn;
+    margin-left: 24%;
+}
+.page-header .btn-container #btn{
+    border: none;
+    border-radius: 100px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    /* box-shadow: 2px 3px gray; */
+}
+.line{
+    border-bottom: 3px solid black;
+    width: 70%;
+}
+.output{
+    display: grid;
+    grid-template-areas:
+        "img text line result";
+    grid-template-columns: 300px 250px 40px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.imgbox img{
+    grid-area: img;
+    height: 250px;
+    width: 250px;
+}
+.contentleft{
+    grid-area: text;
+}
+.contentright{
+    grid-area: result;
+}
+.v1{
+    grid-area: line;
+    border-left: 3px solid black;
+    height: 280px;
+}
+.links{
+    display: flex;
+    justify-content: space-between;
+    width: 330px;
 }
