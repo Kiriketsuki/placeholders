@@ -335,7 +335,7 @@ background: rgba(46, 49, 49, 0.8);
 
 .alert-container {
 position: relative;
-width: 100vw;
+width: 100%;
 z-index: 999;
 }
 

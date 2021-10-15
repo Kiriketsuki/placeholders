@@ -115,6 +115,8 @@ li> ul> li {
     margin-left: 2%;
     margin-top: 30px;
     font-size:18px;
+    width: 100vw;
+    height: 100vh;
 }
 
 .page-header{

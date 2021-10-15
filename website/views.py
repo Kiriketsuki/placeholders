@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from .helper import hasDigit, hasSpecialCharacters
-from .models import User, building
+from .models import User, building, Preference
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from . import db
@@ -87,8 +87,9 @@ def signup():
                 db.session.commit()
                 flash('Account created!', category='success')
                 # login_user(newUser, remember=True) # remember allows user to stay logged in
-                return redirect(url_for('views.landing'))
+                return redirect(url_for('views.recommendations'))
             except sqlalchemy.exc.IntegrityError:
+                db.session.rollback()
                 flash('Account already exists.', category='error')
 
     return render_template("sign_up.html", user=current_user)
@@ -130,14 +131,80 @@ def forgot_password():
 def home():
     return render_template("home.html")
 
-@views.route("/account/settings")
+@views.route("/account/settings", methods=["GET", "POST"])
+@login_required
 def profile():
-    args = request.args
-    username = args.get('username')
+    if request.method == "POST":
+        thisUser = User.query.filter_by(id=current_user.get_id()).first()
+
+        if request.form.get('firstName') == "" and request.form.get('lastName') == "" and request.form.get('email') == "" and request.form.get('password') == "":
+            flash("Empty fields.", category='error')
+        else:
+            firstName = thisUser.firstName if request.form.get('firstName') == "" else request.form.get('firstName')
+            lastName = thisUser.lastName if request.form.get('lastName') == "" else request.form.get('lastName')
+            email = thisUser.email if request.form.get('email') == "" else request.form.get('email')
+
+            # Check if credentials meet requirements
+            if hasDigit(firstName):
+                flash('First name must not contain numerical characters.', category='error')
+            elif len(firstName) < 2:
+                flash('First name is too short.', category='error')
+
+            if hasDigit(lastName):
+                flash('Last name must not contain numerical characters.', category='error')
+            elif len(lastName) < 2:
+                flash('Last name is too short.', category='error')
+
+            if len(email) < 10 or "@" not in email:
+                flash('Not a valid email.', category='error')
+
+            if request.form.get('password') == "":
+                pwChanged = False # Boolean var to check if pw changed. False -> pw not changed
+                password = thisUser.password 
+            else: 
+                pwChanged = True # Boolean var to check if pw changed. True -> pw changed
+                password = request.form.get('password')
+                if len(password) < 8:
+                    flash('Password too short.', category='error')
+                elif not hasSpecialCharacters(password):
+                    flash('Password must include at least one special character.', category='error')
+                else:
+                    # Update user profile
+                    thisUser.firstName = firstName
+                    thisUser.lastName = lastName
+                    thisUser.email = email
+                    thisUser.password = generate_password_hash(password, method = 'sha256') if pwChanged else password
+
+                pwChanged = False # Reset
+            
+            db.session.commit()
+            flash('Profile updated!', category='success')
+            print(firstName, lastName, email, password)
+
+        print("Submit")
+        
     return render_template("profile.html", user = current_user)
 
-@views.route("/account/preferences")
+@views.route("/account/preferences", methods=["GET", "POST"])
+@login_required
 def preferences():
+    if request.method == "POST":
+        houseType = request.form.get('typeOfHouse')
+        budget = request.form.get('budget')
+        monthlyIncome = request.form.get('monthlyIncome')
+        maritalStatus = request.form.get('maritalStatus')
+        cpf = request.form.get('cpfSavings')
+        ownCar = True if request.form.get('ownCar') == "Yes" else False
+        amenities = request.form.getlist('amenities')
+        preferredLocations = request.form.getlist('locations')
+
+        print(houseType, budget, maritalStatus, cpf, ownCar, amenities, preferredLocations)
+
+        newPreference = Preference(houseType= houseType, budget=budget, monthlyIncome=monthlyIncome, maritalStatus=maritalStatus, cpf=cpf, ownCar=ownCar, amenities=amenities, preferredLocations=preferredLocations, uid=current_user.get_id())
+
+        db.session.add(newPreference)
+        db.session.commit()
+
     return render_template("preferences.html", user = current_user)
 
 @views.route("/go_to_home")
@@ -158,6 +225,7 @@ def map():
     return render_template("map.html", user=current_user)
 
 @views.route("/compare")
+@login_required
 def compare():
     return render_template("compare.html", user=current_user)
 

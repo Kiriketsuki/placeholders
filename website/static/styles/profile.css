@@ -36,9 +36,10 @@
     background-position: 1.5%;
   } */
 
-  html {
-    height: 110%;
-    width: 100%;
+  body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
   }
   
   .flex-container {
@@ -51,17 +52,17 @@
       width: 250px;
       background-color: gainsboro;
       border-radius: 40px;
-      height: 100vh;
+      height: 95vh;
       justify-content: center;
   }  
   
   .flex-child2 {
       /* flex: 3; */
       margin: 10px 0px 10px 0px;
-      width: 80%;
+      width: 78vw;
       background-color: gainsboro;
       border-radius: 40px;
-      height: 100vh;
+      height: 95vh;
   }  
   
   .flex-child:first-child {

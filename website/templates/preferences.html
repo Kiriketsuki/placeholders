@@ -10,7 +10,7 @@ Preferences
 {% endblock %}
 
 {% block main_content %}
-<form>
+<form method="POST">
     <div class="flex-container">
     
       <div class="flex-child">
@@ -43,7 +43,7 @@ Preferences
                 
                 <div class="form-group">
                   <label for="typeOfHouse">What type of house are you looking for?</label>
-                  <select class="form-control" id="typeOfHouse">
+                  <select class="form-control" id="typeOfHouse" name="typeOfHouse">
                     <option selected disabled value="null" style="color:lightgrey">--Select--</option>
                     <option>1 Room</option>
                     <option>2 Room</option>
@@ -57,7 +57,7 @@ Preferences
               
                 <div class="form-group">
                   <label for="budget">What is your budget?</label>
-                  <select class="form-control" id="budget">
+                  <select class="form-control" id="budget" name="budget">
                     <option selected disabled value="null" style="color:lightgrey">--Select--</option>
                     <option>below $300,000</option>
                     <option>$300,000 to $400,000</option>
@@ -72,7 +72,7 @@ Preferences
                 
                 <div class="form-group">
                   <label for="monthlyIncome">What is your monthly income?(including employer CPF contributions)</label>
-                  <select class="form-control" id="monthlyIncome">
+                  <select class="form-control" id="monthlyIncome" name="monthlyIncome">
                     <option selected disabled value="null" style="color:lightgrey">--Select--</option>
                     <option>below $1,000 </option>
                     <option>$1,000 to $2,000</option>
@@ -89,7 +89,7 @@ Preferences
               
                 <div class="form-group">
                   <label for="maritalStatus">What is your marital status</label>
-                  <select class="form-control" id="maritalStatus">
+                  <select class="form-control" id="maritalStatus" name="maritalStatus">
                     <option selected disabled value="null" style="color:lightgrey">--Select--</option>
                     <option>Married</option>
                     <option>Single</option>
@@ -98,7 +98,7 @@ Preferences
               
                 <div class="form-group">
                   <label for="cpfSavings">What are your current CPF savings?</label>
-                  <select class="form-control" id="cpfSavings">
+                  <select class="form-control" id="cpfSavings" name="cpfSavings">
                     <option selected disabled value="null" style="color:lightgrey">--Select--</option>
                     <option>below $20,000 </option>
                     <option>$20,000 to $40,000</option>
@@ -115,32 +115,25 @@ Preferences
               
                 <div class="form-group">
                   <label for="ownCar">Do you own a car?</label>
-                  <select class="form-control" id="ownCar">
+                  <select class="form-control" id="ownCar" name="ownCar">
                     <option selected disabled value="null" style="color:lightgrey">--Select--</option>
                     <option>Yes</option>
                     <option>No</option>
                   </select>
                 </div>
               
-                <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> -->
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-              
                 <div class="form-group">
                   <label for="amenities">Must-have amenities?</label>
-                  <select class="selectpicker" data-width="100%" multiple data-live-search="true" multiple data-max-options="">
+                  <select class="form-control" data-width="100%" data-live-search="true" data-max-options="" id="amenities" name="amenities">
                     <option>Supermarket</option>
                     <option>Foodcourt</option> 
-                    <!-- update data dict -->
                     <option>Gym</option>
                   </select>
                 </div>  
               
                 <div class="form-group">
                   <label for="locations">Preferred Locations?</label>
-                  <select class="selectpicker" data-width="100%" multiple data-live-search="true" multiple data-max-options="">
+                  <select class="form-control selectpicker" data-width="100%" data-live-search="true" data-max-options="" id="locations" name="locations">
                     <option>Sembawang</option>
                     <option>Woodlands</option>
                     <option>Yishun</option>
@@ -181,5 +174,15 @@ Preferences
     
     </div>
     </form>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 {% endblock %}
 

@@ -1,9 +1,7 @@
 :root {
   box-sizing: border-box;
-  /* --font-size: calc(0.6vw + 0.6vh + 0.5vmin); */
   --font-title: "Lobster", cursive;
   font-family: "Roboto";
-  background-color: rgba(166,226,236,255);
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
