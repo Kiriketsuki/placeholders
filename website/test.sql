@@ -1,2 +1,4 @@
-SELECT *
-FROM preference
+SELECT
+    *
+FROM
+    preference
