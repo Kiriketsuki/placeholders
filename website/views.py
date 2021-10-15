@@ -168,14 +168,16 @@ def base_template():
 
 @views.route("/map")
 def map():
-    return render_template("map.html")
+    return render_template("map.html", user = current_user)
 
 @views.route("/compare")
 def compare():
-    return render_template("compare.html")
+    return render_template("compare.html", user = current_user)
+
 @views.route("/testing")
 def testing():
     return render_template("testing.html")
+
 @views.route("/sidebar")
 def sidebar():
     return render_template("sidebar.html")
