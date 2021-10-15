@@ -1,7 +1,8 @@
+import json
+
 from flask import Flask
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-import json
 
 from . import db
 

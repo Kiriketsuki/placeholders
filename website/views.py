@@ -140,6 +140,7 @@ def logout():
     flash("Logged out successfully!", category="success")
     return redirect(url_for("views.landing"))
 
+
 # TODO: implement this function
 # Forgot password page
 
