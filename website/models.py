@@ -5,11 +5,15 @@ from flask_sqlalchemy import SQLAlchemy
 
 # association table
 recommendations = db.Table('recommendations',
-                            db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-                            db.Column('building_id', db.Integer, db.ForeignKey('building.id'))
-)
+                           db.Column('user_id', db.Integer,
+                                     db.ForeignKey('user.id')),
+                           db.Column('building_id', db.Integer,
+                                     db.ForeignKey('building.id'))
+                           )
 
 # User schema
+
+
 class User(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +21,8 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(150))
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    recommended = db.relationship('building', secondary = recommendations, backref = db.backref('recommended_to', lazy = 'dynamic'))
+    recommended = db.relationship('building', secondary=recommendations, backref=db.backref(
+        'recommended_to', lazy='dynamic'))
     pid = db.relationship('Preference', backref='user', uselist=False)
 
     def __init__(self, firstName, lastName, email, password):
@@ -25,9 +30,10 @@ class User(db.Model, UserMixin):
         self.lastName = lastName
         self.email = email
         self.password = password
-    
+
     def __repr__(self):
         return '<User %r>' % self.email
+
 
 class Preference(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,11 +45,14 @@ class Preference(db.Model):
     ownCar = db.Column(db.Boolean)
     amenities = db.Column(db.JSON)
     preferredLocations = db.Column(db.JSON)
-    uid = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=True)
+    uid = db.Column(db.Integer, db.ForeignKey(
+        'user.id'), unique=True, nullable=True)
 
 # building schema
+
+
 class building(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     month = db.Column(db.DateTime)
     town = db.Column(db.String(150))
     flat_type = db.Column(db.String(150))
