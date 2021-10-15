@@ -81,7 +81,6 @@ body {
   margin: 0.5rem;
   border-radius: 500px;
   height: fit-content;
-  margin: 0;
   transition: transform 200ms ease;
 }
 .center {
