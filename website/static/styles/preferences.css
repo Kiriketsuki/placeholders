@@ -101,13 +101,13 @@ html {
   .navbar {
     grid-area: sidenav;
     width: 4rem;
-    height: 100vh; 
+    height: 100vh;
     position: fixed;
     background-color: rgba(255,255,255,0);
     transition: width 600ms ease;
     overflow: hidden;
 }
-  
+
 .navbar-nav {
     list-style: none;
     padding: 0;
