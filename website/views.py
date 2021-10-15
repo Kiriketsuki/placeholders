@@ -51,11 +51,9 @@ def landing():
                 flash("Logged in successfully!", category="success")
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
-                return redirect(
-                    url_for("views.recommendations", logged_in=True))
+                return redirect(url_for("views.recommendations", logged_in=True))
             else:
-                flash("Incorrect password, please try again.",
-                      category="error")
+                flash("Incorrect password, please try again.", category="error")
         else:
             flash("Email does not exist.", category="error")
 
@@ -90,8 +88,9 @@ def signup():
             flash("Last name cannot be empty.", category="error")
         else:
             if hasDigit(lastName):
-                flash("Last name must not contain numerical characters.",
-                      category="error")
+                flash(
+                    "Last name must not contain numerical characters.", category="error"
+                )
             elif len(lastName) < 2:
                 flash("Last name is too short.", category="error")
 
@@ -140,6 +139,7 @@ def logout():
     flash("Logged out successfully!", category="success")
     return redirect(url_for("views.landing"))
 
+
 # TODO: implement this function
 # Forgot password page
 
@@ -174,18 +174,29 @@ def profile():
     if request.method == "POST":
         thisUser = User.query.filter_by(id=current_user.get_id()).first()
 
-        if (request.form.get("firstName") == ""
-                and request.form.get("lastName") == ""
-                and request.form.get("email") == ""
-                and request.form.get("password") == ""):
+        if (
+            request.form.get("firstName") == ""
+            and request.form.get("lastName") == ""
+            and request.form.get("email") == ""
+            and request.form.get("password") == ""
+        ):
             flash("Empty fields.", category="error")
         else:
-            firstName = (thisUser.firstName if request.form.get("firstName")
-                         == "" else request.form.get("firstName"))
-            lastName = (thisUser.lastName if request.form.get("lastName") == ""
-                        else request.form.get("lastName"))
-            email = (thisUser.email if request.form.get("email") == "" else
-                     request.form.get("email"))
+            firstName = (
+                thisUser.firstName
+                if request.form.get("firstName") == ""
+                else request.form.get("firstName")
+            )
+            lastName = (
+                thisUser.lastName
+                if request.form.get("lastName") == ""
+                else request.form.get("lastName")
+            )
+            email = (
+                thisUser.email
+                if request.form.get("email") == ""
+                else request.form.get("email")
+            )
 
             # Check if credentials meet requirements
             if hasDigit(firstName):
@@ -197,8 +208,9 @@ def profile():
                 flash("First name is too short.", category="error")
 
             if hasDigit(lastName):
-                flash("Last name must not contain numerical characters.",
-                      category="error")
+                flash(
+                    "Last name must not contain numerical characters.", category="error"
+                )
             elif len(lastName) < 2:
                 flash("Last name is too short.", category="error")
 
@@ -224,8 +236,11 @@ def profile():
                     )
                 else:
                     # Update user profile
-                    thisUser.password = (generate_password_hash(
-                        password, method="sha256") if pwChanged else password)
+                    thisUser.password = (
+                        generate_password_hash(password, method="sha256")
+                        if pwChanged
+                        else password
+                    )
 
             thisUser.firstName = firstName
             thisUser.lastName = lastName
@@ -254,8 +269,7 @@ def preferences():
         # else update db row for particular uid
         print(current_user)  # DEBUGGING
 
-        thisPreference = Preference.query.filter_by(
-            id=current_user.get_id()).first()
+        thisPreference = Preference.query.filter_by(id=current_user.get_id()).first()
         print(thisPreference)  # DEBUGGING
 
         attributes = {
@@ -274,17 +288,16 @@ def preferences():
         attributes["monthlyIncome"] = request.form.get("monthlyIncome")
         attributes["maritalStatus"] = request.form.get("maritalStatus")
         attributes["cpf"] = request.form.get("cpfSavings")
-        attributes["ownCar"] = True if request.form.get(
-            "ownCar") == "Yes" else False
+        attributes["ownCar"] = True if request.form.get("ownCar") == "Yes" else False
         attributes["amenities"] = request.form.getlist("amenities")
         attributes["preferredLocations"] = request.form.getlist("locations")
 
         if None in attributes.values():
-            flash("Empty fields. All fields must be filled in.",
-                  category="error")
+            flash("Empty fields. All fields must be filled in.", category="error")
         else:
-            if (thisPreference == None
-                ):  # currently does not have preference hence can add to db
+            if (
+                thisPreference == None
+            ):  # currently does not have preference hence can add to db
                 newPreference = Preference(
                     houseType=attributes["houseType"],
                     budget=attributes["budget"],
@@ -305,8 +318,7 @@ def preferences():
                 thisPreference.cpf = attributes["cpf"]
                 thisPreference.ownCar = attributes["ownCar"]
                 thisPreference.amenities = attributes["amenities"]
-                thisPreference.preferredLocations = attributes[
-                    "preferredLocations"]
+                thisPreference.preferredLocations = attributes["preferredLocations"]
 
             flash("Preferences updated!", category="success")
 
