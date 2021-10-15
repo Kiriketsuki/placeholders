@@ -48,7 +48,7 @@ def landing():
         # If user email exists
         if user:
             if check_password_hash(user.password, password):
-                flash("Logged in succesfully!", category="success")
+                flash("Logged in successfully!", category="success")
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
                 return redirect(
