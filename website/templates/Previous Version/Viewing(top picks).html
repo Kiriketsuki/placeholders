@@ -1,5 +1,4 @@
 {% extends "sidebar_login.html" %}
-<!-- For Viewing pls change the html to : sidebar.html -->
 
 {% block bonus_css %}
 <link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/top_picks.css')}}">
@@ -22,7 +21,6 @@ Recommendations
         </div> -->
     </div>
     <div class="line"></div>
-    {% for to_display in user.recommended %}
     <div class="output">
         <div class="imgbox">
           <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
@@ -38,11 +36,11 @@ Recommendations
         </div>
         <div class="v1"></div>
         <div class="contentright">
-            <p>{{to_display.block}}</p>
-            <p>{{to_display.street_name}}</p>
-            <p>${{to_display.resale_price}}</p>
+            <p>123</p>
+            <p>ANG MO KIO AVE 13</p>
+            <p>$99,999,999</p>
             <p>4-ROOM</p>
-            <p>{{to_display.floor_area_sqm}} sqm</p>
+            <p>64</p>
             <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
             <div class="links">
                 <a href="#">View Map</a>
@@ -52,6 +50,5 @@ Recommendations
         </div>
 
       </div>
-      {% endfor %}
 </div>
 {% endblock %}

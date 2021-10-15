@@ -21,8 +21,9 @@ main{
 p{
     font-size: 0.8em;
     word-wrap: break-word;
+    margin-bottom: 10px;
 }
-img{
+.imgbox img{
     height: 180px;
     width: 200px;
 }
@@ -61,7 +62,7 @@ img{
 }
 .output{
     margin: 37px 20px;
-    height: 350px;
+    height: 430px;
     text-align: center;
 }
 .imgbox {
@@ -71,6 +72,7 @@ img{
 .contentleft, .contentright {
     float: left;
     width: 45%;
+    font-size: 15px;
     text-align: left;
 }
 .vl {

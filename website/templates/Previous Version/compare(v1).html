@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/sidebar.css') }}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/compare.css') }}">
+
+    <title>Compare</title>
+   </head>
+
+
+
+
+
+<body>
+  <div class="sidebar">
+    <div class="logo-top">
+        <!-- <i class='bx bx-log-out' id="log_out" ></i> -->
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <div class="logo-details">
+        <div class="profile">
+            <div class="profile-details">
+                <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" height="152px" width="180px">
+                <div class="name">TESTING!</div>
+            </div>
+        </div>
+    </div>
+    <ul class="nav-list">
+        <li>
+            <a href="#">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+        </li>
+        <li>
+        <a href="#">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">Favorites</span>
+        </a>
+        <span class="tooltip">Favorites</span>
+        </li>
+        <li>
+        <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Setting</span>
+        </a>
+        <span class="tooltip">Setting</span>
+        </li>
+        <li>
+            <a href="#">
+            <i class='bx bx-cart-alt' ></i>
+            <span class="links_name">Sell My House</span>
+            </a>
+            <span class="tooltip">Sell My House</span>
+        </li>
+        <li>
+            <div class="logout">
+                <a href="#">
+                <i class='bx bx-log-out' id="log_out" ></i>
+                <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </div>
+        </li>
+        
+    </ul>
+  </div>
+  <section class="home-section">
+      <!-- Input content here -->
+      <main> 
+        <div class="page-container">
+            <div class="box" style="background-color:#bbb">
+              <div class="output">
+                <div class="imgbox">
+                  <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
+                </div>
+                <div class="contentbox">
+                  <div class="contentleft">
+                    <p>BLOCK</p>
+                    <p>ADDRESS</p>
+                    <p>RESALE PRICE</p>
+                    <p>FLAT TYPE</p>
+                    <p>FLOOR AREA (SQM)</p>
+                    <p>AMENITIES</p>
+                  </div>
+                  <div class="vl"></div>
+                  <div class="contentright">
+                    <p>123</p>
+                    <p>ANG MO KIO AVE 13</p>
+                    <p>$99,999,999</p>
+                    <p>4-ROOM</p>
+                    <p>64</p>
+                    <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+            <div class="box1" style="background-color:#ccc">
+              <div class="output">
+                <div class="imgbox">
+                  <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
+                </div>
+                <div class="contentbox">
+                  <div class="contentleft">
+                    <p>BLOCK</p>
+                    <p>ADDRESS</p>
+                    <p>RESALE PRICE</p>
+                    <p>FLAT TYPE</p>
+                    <p>FLOOR AREA (SQM)</p>
+                    <p>AMENITIES</p>
+                  </div>
+                  <div class="vl"></div>
+                  <div class="contentright">
+                    <p>123</p>
+                    <p>ANG MO KIO AVE 13</p>
+                    <p>$99,999,999</p>
+                    <p>4-ROOM</p>
+                    <p>64</p>
+                    <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+            <div class="box2" style="background-color:#ddd">
+              <div class="output">
+                <div class="imgbox">
+                  <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
+                </div>
+                <div class="contentbox">
+                  <div class="contentleft">
+                    <p>BLOCK</p>
+                    <p>ADDRESS</p>
+                    <p>RESALE PRICE</p>
+                    <p>FLAT TYPE</p>
+                    <p>FLOOR AREA (SQM)</p>
+                    <p>AMENITIES</p>
+                  </div>
+                  <div class="vl"></div>
+                  <div class="contentright">
+                    <p>123</p>
+                    <p>ANG MO KIO AVE 13</p>
+                    <p>$99,999,999</p>
+                    <p>4-ROOM</p>
+                    <p>64</p>
+                    <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+        </div>
+        <div class =btn-container>
+          <a href="/map">
+            <button id="btn" type='button' class="btn">
+              return
+            </button>
+          </a> 
+        </div>
+    
+    
+      </main>
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+</body>
+</html>

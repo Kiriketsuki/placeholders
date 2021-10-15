@@ -36,7 +36,7 @@
     <!-- title -->
     <title>
         {% block title %}
-        Base template
+        sidebar template
         {% endblock %}
     </title>
 
@@ -68,7 +68,11 @@
         <div class="profile">
             <div class="profile-details">
                 <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" height="152px" width="180px">
-                <div class="name">TESTING!</div>
+                <div class="name">
+                    {% block username %}
+                    Hello, {{user.firstName}} {{user.lastName}}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
@@ -80,23 +84,6 @@
             </a>
             <span class="tooltip">Home</span>
         </li>
-        <li>
-            <a href="#">
-            <i class='bx bx-log-in' ></i>
-            <span class="links_name">Login</span>
-            </a>
-            <span class="tooltip">Login</span>
-        </li>
-        <li>
-            <a href="#">
-            <i class='bx bx-user-plus' ></i>
-            <span class="links_name">Sign Up</span>
-            </a>
-            <span class="tooltip">Sign Up</span>
-        </li>
-
-        <!-- ADDITIONAL IF NEEDED -->
-<!-- 
         <li>
             <a href="#">
             <i class='bx bx-user' ></i>
@@ -112,18 +99,37 @@
         <span class="tooltip">Favorites</span>
         </li>
         <li>
+            <a href="#">
+            <i class='bx bx-cart-alt' ></i>
+            <span class="links_name">Sell My House</span>
+            </a>
+            <span class="tooltip">Sell My House</span>
+        </li>
+        <li>
         <a href="#">
             <i class='bx bx-cog' ></i>
             <span class="links_name">Setting</span>
         </a>
         <span class="tooltip">Setting</span>
         </li>
+        
+
+
+        <!-- ADDITIONAL IF NEEDED -->
+<!-- 
         <li>
             <a href="#">
-            <i class='bx bx-cart-alt' ></i>
-            <span class="links_name">Sell My House</span>
+            <i class='bx bx-log-in' ></i>
+            <span class="links_name">Login</span>
             </a>
-            <span class="tooltip">Sell My House</span>
+            <span class="tooltip">Login</span>
+        </li>
+        <li>
+            <a href="#">
+            <i class='bx bx-user-plus' ></i>
+            <span class="links_name">Sign Up</span>
+            </a>
+            <span class="tooltip">Sign Up</span>
         </li>
    -->
   
@@ -137,7 +143,7 @@
 
         <!-- ENDS HERE -->
 
-        <!-- <li>
+        <li>
             <div class="logout">
                 <a href="#">
                 <i class='bx bx-log-out' id="log_out" ></i>
@@ -145,7 +151,7 @@
                 </a>
                 <span class="tooltip">Logout</span>
             </div>
-        </li> -->
+        </li>
         
     </ul>
   </div>
@@ -203,9 +209,6 @@
   crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
   integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-  crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
   crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
 </body>
