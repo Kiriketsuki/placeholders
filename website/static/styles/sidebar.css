@@ -26,7 +26,7 @@
 }
 .sidebar .logo-details{
     opacity: 0;
-    height: 250px;  
+    height: 250px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -367,7 +367,7 @@ body {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
       "side_nav main right_padding";
   grid-template-rows: 1fr;
   grid-template-columns: 3fr 94fr 3fr;
@@ -378,7 +378,7 @@ body {
 /* main {
   grid-area: main;
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
       "title_bar title_bar title_bar title_bar"
       "a b c d"
       "e f g h"
@@ -496,7 +496,7 @@ body {
 .navbar {
   grid-area: sidenav;
   width: 4rem;
-  height: 100vh; 
+  height: 100vh;
   position: fixed;
   background-color: rgba(255,255,255,0);
   transition: width 600ms ease;

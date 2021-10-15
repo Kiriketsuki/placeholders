@@ -7,9 +7,9 @@
     --bg-primary: #23232e;
     --bg-secondary: #141418;
     --transition-speed: 600ms;
-    
+
   }
-  
+
 html {
     height: 100vh;
     width: 100vw;
@@ -100,7 +100,7 @@ p{
     box-shadow: 2px 3px gray;
 }
 .btn-container{
-    text-align: center;  
+    text-align: center;
 }
 
 
@@ -128,6 +128,3 @@ p{
         max-width:250px;
     }
 }
-
-
-

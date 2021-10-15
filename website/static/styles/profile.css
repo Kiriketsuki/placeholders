@@ -7,18 +7,18 @@
     background-color: gainsboro;
     border-radius: 40px;
     height: 100vh;
-}  
+}
 
 .flex-child2 {
     flex: 3;
     background-color: gainsboro;
     border-radius: 40px;
     height: 100vh;
-}  
+}
 
 .flex-child:first-child {
     margin-right: 30px;
-} 
+}
 
 #settingslogo {
     padding-left: 25px;
@@ -27,7 +27,7 @@
     background-repeat: no-repeat;
     background-position: 1.5%;
   }
-  
+
   #editlogo {
     padding-left: 25px;
     background-image: url(../Assets/edit_black_24dp.svg);
@@ -41,12 +41,12 @@
     width: 100vw;
     overflow: hidden;
   }
-  
+
   .flex-container {
       display: flex;
       flex-direction: row;
   }
-  
+
   .flex-child {
       /* flex: 1; */
       width: 250px;
@@ -54,8 +54,8 @@
       border-radius: 40px;
       height: 95vh;
       justify-content: center;
-  }  
-  
+  }
+
   .flex-child2 {
       /* flex: 3; */
       margin: 10px 0px 10px 0px;
@@ -63,18 +63,18 @@
       background-color: gainsboro;
       border-radius: 40px;
       height: 95vh;
-  }  
-  
+  }
+
   .flex-child:first-child {
     margin: 10px 30px 10px 20px;
-  } 
-  
+  }
+
   .clearfix::after {
       content: "";
       clear: both;
       display: table;
     }
-  
+
   #settingslogo {
     padding-right: 30px;
     background-image: url(../Assets/settings_black_24dp.svg);
@@ -82,7 +82,7 @@
     background-repeat: no-repeat;
     background-position: 1.5%;
   }
-  
+
   #editlogo {
     padding-right: 30px;
     background-image: url(../Assets/edit_black_24dp.svg);
@@ -136,10 +136,10 @@
   }
   .btn:hover{
     background-color:skyblue;
-  
+
   }
   .form-group{
-    width: 500px;   
+    width: 500px;
     height: auto;
   }
   .form-control{
