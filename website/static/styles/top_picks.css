@@ -53,7 +53,7 @@ html {
 ::-webkit-scrollbar {
     width: 0.25rem;
   }
-  
+
 ::-webkit-scrollbar-track {
 background: rgba(108, 122, 137, 0.45);
 }
