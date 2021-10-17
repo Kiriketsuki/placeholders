@@ -148,7 +148,7 @@ body {
   grid-area: btn;
   margin-left: 24%;
 }
-.page-header .btn-container #btn {
+.page-header .btn-container .btns {
   border: none;
   border-radius: 100px;
   background-color: black;
@@ -192,4 +192,10 @@ body {
 
 .map {
     max-width: 90vw;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

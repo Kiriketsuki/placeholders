@@ -425,10 +425,9 @@ def home():
         return render_template("most_liked.html", user = guest, to_display = to_return)
 
 #to calculate results
-@views.route("/recommendations")
+@views.route("/calc")
 def to_recommend():
-    guest = User.query.filter_by(firstName = "guest").first()
-    return render_template("calc_reco.html", user = guest)
+    return render_template("calc_reco.html", user = current_user)
 
 # to show results
 @views.route("/recommended")
