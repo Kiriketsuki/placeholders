@@ -36,7 +36,7 @@ def init_db():
         db.session.commit()
 
         # import buildings
-        # todo change 5 to whatever number of buildings you want to import
+        # todo change number in data.head() to whatever number of buildings you want to import
         file = "website/gov_data.csv"
         cwd = os.getcwd()
         data = pd.read_csv(os.path.normcase(os.path.join(cwd, file)))
@@ -94,6 +94,20 @@ def init_db():
             if (random.randint(0,1)):
                 temp_building.favourited_by.append(guest)
             db.session.commit()
+
+        # create sample preferences for guest
+        temp_preference = Preference(
+            houseType = "1 Room",
+            budget = "below $300,000",
+            monthlyIncome = "below $1,000",
+            maritalStatus = "Single",
+            cpf = "below $20,000",
+            ownCar = False,
+            amenities = ["Supermarket"],
+            preferredLocations = ["Woodlands"],
+            uid = 2 # guest's id
+        )
+        db.session.add(temp_preference)
 
         db.session.commit()
     except:

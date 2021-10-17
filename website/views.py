@@ -23,9 +23,10 @@ from .helper import hasSpecialCharacters
 from .models import building
 from .models import Preference
 from .models import User
-from .models import favourites
 
-from sqlalchemy import tuple_, func
+import random
+import json
+from sqlalchemy import func
 
 views = Blueprint("views", __name__)
 
@@ -75,6 +76,27 @@ def landing():
             flash("Email does not exist.", category="error")
 
     return render_template("landing.html", user=current_user)
+
+@views.route("/guest_creation", methods = ["GET", "POST"])
+def create_guest():
+
+    number_gen = len(User.query.order_by(User.id).all())
+    random.seed(number_gen)
+    email = str(random.random())
+
+    temp_user = User(
+        firstName="guest",
+        lastName="",
+        email= email,
+        password=generate_password_hash("", method="sha256"),
+        is_guest = True
+    )
+
+    db.session.add(temp_user)
+    db.session.commit()
+    guest = json.dumps(email, default=lambda x: list(x) if isinstance(x, set) else x)
+    login_user(temp_user, remember=False)
+    return redirect(url_for("views.home", user = guest))
 
 
 # Sign up page
@@ -212,11 +234,6 @@ def forgot_password():
 
     return render_template("forgot_pw.html")
 
-
-@views.route("/update_preferences", methods = ["GET", "POST"])
-@login_required
-def update_preferences():
-    return render_template("update_preferences.html", user = current_user)
 
 @views.route("/account/", methods = ["POST", "GET"])
 @login_required
@@ -380,7 +397,17 @@ def preferences():
 def home():
     list_of_favourited_buildings = sorted(db.session.query(building.id, func.count(User.id)).join(building.favourited_by).group_by(building.id).all(), key = lambda x: x[1])
     first_ten = list_of_favourited_buildings[:10]
+    flag = False
+    args = request.args
+    try:
+        email = args['email']
+        print(email)
+        guest = User.query.filter_by(email = email).first()
+        flag = True
+    except:
+        pass
 
+    print(args)
     # convert from list of numbers into list of buildings
     to_return = []
     for i in first_ten:
@@ -388,31 +415,43 @@ def home():
         temp_building = building.query.filter_by(id = building_id).first()
         to_return.append(temp_building)
 
-    if current_user.is_authenticated:
+    if not flag:
         return render_template("most_liked.html", user = current_user, to_display = to_return)
     else:
-        guest = User.query.filter_by(firstName = "guest").first()
+        print(guest)
         return render_template("most_liked.html", user = guest, to_display = to_return)
 
+#to calculate results
+@views.route("/recommendations")
+def to_recommend():
+    guest = User.query.filter_by(firstName = "guest").first()
+    return render_template("calc_reco.html", user = guest)
 
-
+# to show results
 @views.route("/recommended")
-def recommend():
+def recommended():
     if current_user.is_authenticated:
         return render_template("recommended.html", user=current_user)
     else:
         guest = User.query.filter_by(firstName = "guest").first()
         return render_template("recommended.html", user = guest)
 
+# to add favourites
+@views.route("/add_favourites", methods = ["POST"])
+def add_favourites():
+    building_id = json.loads(request.data)
+    building_id = building_id['building_id']
+    temp_building = building.query.filter_by(id = building_id).first()
+    temp_building.favourited_by.append(current_user)
+    db.session.commit()
+    return jsonify({})
+
+# guest log out
 
 @views.route("/compare")
 @login_required
 def compare():
     return render_template("compare.html", user=current_user)
-
-@views.route("/results")
-def results():
-    return render_template("results.html")
 
 # @views.route("/testing")
 # def testing():
@@ -441,14 +480,16 @@ def csv():
 ##########################################################################################################################################
 @views.route("/jovians_debug")
 def jovian():
-    # ! get list of buildings and how many favourites they have
-    fav_buildings = db.session.query(building.id, func.count(User.id)).join(building.favourited_by).group_by(building.id).all()
+    # # ! get list of buildings and how many favourites they have
+    # fav_buildings = db.session.query(building.id, func.count(User.id)).join(building.favourited_by).group_by(building.id).all()
 
-    # ! get list of users and how many favourites they have
-    fav_users = db.session.query(User.id, func.count(building.id)).join(User.favourites).group_by(User.id).all()
+    # # ! get list of users and how many favourites they have
+    # fav_users = db.session.query(User.id, func.count(building.id)).join(User.favourites).group_by(User.id).all()
 
-    print(fav_buildings)
-    print(fav_users)
+    # print(fav_buildings)
+    # print(fav_users)
+
+
     return ("o")
 
 
