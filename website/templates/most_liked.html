@@ -48,7 +48,9 @@ Recommendations
             <div class="links">
                 <a href="#">View Map</a>
                 <a href="#">Contact</a>
-                <a href="#">Add to Favorites</a>
+                {% if not user.is_guest %}
+                    <a href="#" onclick="add_favourites({{display.id}})">Add to Favorites</a>
+                {% endif %}
             </div>
         </div>
 

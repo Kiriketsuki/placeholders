@@ -96,7 +96,7 @@
 
     <ul class="nav-list">
         <li>
-            <a href="/">
+            <a href="/home">
             <i class='bx bx-grid-alt'></i>
             <span class="links_name">Home</span>
             </a>
@@ -114,16 +114,24 @@
 
         <li>
             <a href="/signup">
-            <i class='bx bx-user-plus' ></i>
+            <i class='bx bx-user-plus'></i>
             <span class="links_name">Sign Up</span>
             </a>
             <span class="tooltip">Sign Up</span>
         </li>
 
+        <li>
+            <a href="/recommendations">
+            <i class='bx bx-user-plus' ></i>
+            <span class="links_name">Get <br> Recommendations!</span>
+            </a>
+            <span class="tooltip">Get Recommendations!</span>
+        </li>
+
         {% else %}
         
         <li>
-            <a href="/account/settings">
+            <a href="/account/">
             <i class='bx bx-user' ></i>
             <span class="links_name">Account</span>
             </a>
@@ -131,7 +139,15 @@
         </li>
 
         <li>
-        <a href="#">
+            <a href="/recommended">
+            <i class='bx bx-user-plus' ></i>
+            <span class="links_name">Get <br> Recommendations!</span>
+            </a>
+            <span class="tooltip">Get Recommendations!</span>
+        </li>
+
+        <li>
+        <a href="/account/favourites">
             <i class='bx bx-heart' ></i>
             <span class="links_name">Favorites</span>
         </a>
@@ -153,6 +169,7 @@
         </a>
         <span class="tooltip">Setting</span>
         </li>
+
 
         <li>
             <div class="logout">
@@ -225,5 +242,7 @@
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
   crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/a2fab740ba.js" crossorigin="anonymous"></script>
+  <script type = "text/javascript" src = "{{url_for('static', filename = 'scripts/add_favourites.js')}}"></script>
+
 </body>
 </html>

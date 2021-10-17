@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block title %}
-Maps
+Favourites
 {% endblock %}
 
 {% block main_content %}
@@ -25,7 +25,7 @@ Maps
 
     <div class="page-container">
         <div class="page-header">
-            <div class="name">{{user.recommended|length}} Results Found </div>
+            <div class="name">{{user.favourites|length}} Results Found </div>
             <div class =btn-container>
                 <a href="/compare">
                   <button id="btn" type='button' class="btn">
@@ -35,7 +35,7 @@ Maps
             </div>
         </div>
         <div class="line"></div>
-        {% for to_display in user.recommended %}
+        {% for to_display in user.favourites %}
         <div class="output">
             <div class="imgbox">
             <img src= "{{url_for('static', filename = to_display.image_path)}}" alt="HDB" >
@@ -60,9 +60,8 @@ Maps
                 <div class="links">
                     <a href="#">View Map</a>
                     <a href="#">Contact</a>
-                    {% if not user.is_guest %}
-                        <a href="#" onclick="add_favourites({{to_display.id}})">Add to Favorites</a>
-                    {% endif %}
+                    <a href="#">Remove from Favourites</a>
+                    <!-- todo remove favourites function -->
                 </div>
             </div>
 

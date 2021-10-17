@@ -3,39 +3,20 @@
 
 {% block bonus_css %}
 <link rel="stylesheet" href="{{ url_for('static',filename='styles/preferences.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/calc_reco.css') }}">
 {% endblock %}
 
 {% block title %}
-Preferences
+Getting Recommendations
 {% endblock %}
 
 {% block main_content %}
 <form method="POST">
     <div class="flex-container">
-
-      <div class="flex-child">
-        <div class="firstbox">
-            <div class="firstbox-header">
-                <a id="settingslogo"></a> Settings
-                <div></div>
-            </div>
-            <div class="line"></div>
-
-            <div class="firstbox-content">
-                <a id="editlogo"></a> <a href="/account/settings" class="btn" role="button">Edit Profile</a>
-                <div></div>
-                <a id="editlogo"></a> <a href="/account/preferences" class="btn" role="button">Edit Preferences</a>
-            </div>
-
-
-        </div>
-            
-      </div>
-
       <div class="flex-child2">
         <div class="secondbox">
             <div class="secondbox-header">
-                <a id="editlogo"></a> Edit Preferences
+                <a id="editlogo"></a> Submit Preferences
                 <div></div>
             </div>
             <div class="line1"></div>
@@ -169,7 +150,7 @@ Preferences
                     <option>Toa Payoh</option>
                   </select>
                 </div>
-                <div><button type="submit" class="btn" id="btn-save">Update Preferences</button></div>
+                <div><button type="submit" class="btn" id="btn-save">Submit Preferences</button></div>
                 <div><a href = "/recommended" class="btn" id="btn-save">Get Recommendations</a></div>
 
             </div>

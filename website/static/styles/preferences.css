@@ -97,8 +97,9 @@ html {
 }
 .btn:hover{
   background-color:skyblue;
+  
 
-  .navbar {
+.navbar {
     grid-area: sidenav;
     width: 4rem;
     height: 100vh;

@@ -446,7 +446,12 @@ def add_favourites():
     db.session.commit()
     return jsonify({})
 
-# guest log out
+# view favourites
+@views.route("/account/favourites")
+def view_favourites():
+    if not current_user.is_guest:
+        return render_template("favourites.html", user = current_user)
+
 
 @views.route("/compare")
 @login_required
