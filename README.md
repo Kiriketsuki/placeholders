@@ -17,8 +17,8 @@ Reset password
 ### /account/preferences
 View account preferences
 
-### /top_picks
+### /home
 Generated based on total likes of every building in our data base
 
-### /results
+### /recommendations
 Generated based on preferences. Map of top results displayed at the top
