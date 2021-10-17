@@ -399,10 +399,10 @@ def home():
 @views.route("/recommended")
 def recommend():
     if current_user.is_authenticated:
-        return render_template("map.html", user=current_user)
+        return render_template("recommended.html", user=current_user)
     else:
         guest = User.query.filter_by(firstName = "guest").first()
-        return render_template("map.html", user = guest)
+        return render_template("recommended.html", user = guest)
 
 
 @views.route("/compare")
