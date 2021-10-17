@@ -23,6 +23,9 @@ from .helper import hasSpecialCharacters
 from .models import building
 from .models import Preference
 from .models import User
+from .models import favourites
+
+from sqlalchemy import tuple_, func
 
 views = Blueprint("views", __name__)
 
@@ -64,7 +67,7 @@ def landing():
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
                 return redirect(
-                    url_for("views.recommendations", logged_in=True))
+                    url_for("views.home", logged_in=True))
             else:
                 flash("Incorrect password, please try again.",
                       category="error")
@@ -133,7 +136,7 @@ def signup():
                 db.session.commit()
                 flash("Account created!", category="success")
                 # login_user(newUser, remember=True) # remember allows user to stay logged in
-                return redirect(url_for("views.recommendations"))
+                return redirect(url_for("views.home"))
             except sqlalchemy.exc.IntegrityError:
                 db.session.rollback()
                 flash("Account already exists.", category="error")
@@ -165,7 +168,7 @@ def login():
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
                 return redirect(
-                    url_for("views.recommendations", logged_in=True))
+                    url_for("views.home", logged_in=True))
             else:
                 flash("Incorrect password, please try again.",
                         category="error")
@@ -215,7 +218,8 @@ def forgot_password():
 def update_preferences():
     return render_template("update_preferences.html", user = current_user)
 
-@views.route("/account")
+@views.route("/account/", methods = ["POST", "GET"])
+@login_required
 def profile():
     if request.method == "POST":
         thisUser = User.query.filter_by(id=current_user.get_id()).first()
@@ -370,22 +374,30 @@ def preferences():
 
     return render_template("preferences.html", user=current_user)
 
-@views.route("/go_to_home")
-def home_redirect():
-    return redirect(url_for("views.home"))
 
 
-@views.route("/recommendations")
-def recommendations():
+@views.route("/home")
+def home():
+    list_of_favourited_buildings = sorted(db.session.query(building.id, func.count(User.id)).join(building.favourited_by).group_by(building.id).all(), key = lambda x: x[1])
+    first_ten = list_of_favourited_buildings[:10]
+
+    # convert from list of numbers into list of buildings
+    to_return = []
+    for i in first_ten:
+        building_id = i[0]
+        temp_building = building.query.filter_by(id = building_id).first()
+        to_return.append(temp_building)
+
     if current_user.is_authenticated:
-        return render_template("top_picks_logged_in.html", user=current_user)
+        return render_template("most_liked.html", user = current_user, to_display = to_return)
     else:
         guest = User.query.filter_by(firstName = "guest").first()
-        return render_template("top_picks_guest.html", user=guest)
+        return render_template("most_liked.html", user = guest, to_display = to_return)
 
 
-@views.route("/map")
-def map():
+
+@views.route("/recommended")
+def recommend():
     if current_user.is_authenticated:
         return render_template("map.html", user=current_user)
     else:
@@ -429,8 +441,15 @@ def csv():
 ##########################################################################################################################################
 @views.route("/jovians_debug")
 def jovian():
-    test = User.query.filter_by(firstName = "admin").first()
-    return (test.firstName)
+    # ! get list of buildings and how many favourites they have
+    fav_buildings = db.session.query(building.id, func.count(User.id)).join(building.favourited_by).group_by(building.id).all()
+
+    # ! get list of users and how many favourites they have
+    fav_users = db.session.query(User.id, func.count(building.id)).join(User.favourites).group_by(User.id).all()
+
+    print(fav_buildings)
+    print(fav_users)
+    return ("o")
 
 
 # get admin function for debug
