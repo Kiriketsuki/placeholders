@@ -9,6 +9,8 @@ from .models import building
 from .models import Preference
 from .models import User
 
+import random
+
 def init_db():
     try:
         print("entered")
@@ -27,7 +29,8 @@ def init_db():
             firstName="guest",
             lastName="",
             email="guest@gmail.com",
-            password=generate_password_hash("", method="sha256")
+            password=generate_password_hash("", method="sha256"),
+            is_guest = True
         )
         db.session.add(guest)
         db.session.commit()
@@ -84,10 +87,12 @@ def init_db():
             db.session.commit()
 
         # attach sample favourites to both guest and admin
-        for i in range(1,6):
+        for i in range(1,11):
             temp_building = building.query.filter_by(id = i).first()
-            temp_building.favourited_by.append(admin)
-            temp_building.favourited_by(guest)
+            if (random.randint(0,1)):
+                temp_building.favourited_by.append(admin)
+            if (random.randint(0,1)):
+                temp_building.favourited_by.append(guest)
             db.session.commit()
 
         db.session.commit()
