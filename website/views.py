@@ -235,9 +235,9 @@ def forgot_password():
     return render_template("forgot_pw.html")
 
 
-@views.route("/account/", methods = ["POST", "GET"])
+@views.route("/account/settings", methods = ["POST", "GET"])
 @login_required
-def profile():
+def account_settings():
     if request.method == "POST":
         thisUser = User.query.filter_by(id=current_user.get_id()).first()
 
@@ -308,8 +308,11 @@ def profile():
 
         print("Submit")
 
-    return render_template("profile.html", user=current_user)
+    return render_template("profile_settings.html", user=current_user)
 
+@views.route("/account/")
+def profile():
+    return render_template("profile.html", user = current_user)
 
 @views.route("/account/preferences", methods=["GET", "POST"])
 @login_required
@@ -457,16 +460,6 @@ def view_favourites():
 @login_required
 def compare():
     return render_template("compare.html", user=current_user)
-
-# @views.route("/testing")
-# def testing():
-#     return render_template("testing.html")
-
-# @views.route("/sidebar")
-# def sidebar():
-#     return render_template("sidebar.html")
-
-######################################################################################
 
 
 @views.route("/csv")
