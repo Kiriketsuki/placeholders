@@ -22,10 +22,11 @@ Recommendations
         </div> -->
     </div>
     <div class="line"></div>
+    
     {% for to_display in user.recommended %}
     <div class="output">
         <div class="imgbox">
-          <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
+          <img src= "{{url_for('static', filename = to_display.image_path)}}" alt="HDB" >
         </div>
         <div class="contentleft">
             <p>BLOCK</p>
@@ -41,7 +42,7 @@ Recommendations
             <p>{{to_display.block}}</p>
             <p>{{to_display.street_name}}</p>
             <p>${{to_display.resale_price}}</p>
-            <p>4-ROOM</p>
+            <p>{{to_display.flat_type}}</p>
             <p>{{to_display.floor_area_sqm}} sqm</p>
             <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
             <div class="links">

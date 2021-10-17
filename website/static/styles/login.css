@@ -1,0 +1,62 @@
+.sign-in-container {
+    width: 25%;
+    min-width: 320px;
+    max-width: 400px;
+    min-height: 110%;
+    background-color: #000000;
+    position: absolute;
+    top: -10%;
+    border-radius: 25px;
+    opacity: 98%;
+    box-shadow: 30px 30px 20px rgba(0, 0, 0, 0.7), 2px 2px 1px rgba(0, 0, 0, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    overflow: hidden;
+    pointer-events: auto;
+  }
+
+  .btn-cross {
+    background-color: transparent;
+    border: none;
+    align-self: flex-end;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    transition: transform 200ms ease;
+  }
+  
+  .btn-cross:hover {
+    transform: scale(1.25);
+  }
+  
+  .sign-in-close {
+    cursor: pointer;
+  }
+  
+  .sign-in-text {
+    font-family: var(--font-title);
+    color: #fff;
+    font-size: 2.5rem;
+    margin-top: 1.25rem;
+    margin-bottom: 3rem;
+  }
+  
+  .flex-vertical {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  
+  input {
+    margin: 0.65rem;
+    min-width: 280px;
+  }

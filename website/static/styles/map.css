@@ -189,3 +189,7 @@ body {
   justify-content: space-between;
   width: 330px;
 }
+
+.map {
+    max-width: 90vw;
+}

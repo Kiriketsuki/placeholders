@@ -42,7 +42,6 @@ views = Blueprint("views", __name__)
 
 @views.route("/", methods=["GET", "POST"])
 def landing():
-    init_db()
 
     if request.method == "POST":
         # Get input from login form
@@ -76,7 +75,6 @@ def landing():
 
 
 # Sign up page
-
 
 @views.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -143,6 +141,38 @@ def signup():
     return render_template("sign_up.html", user=current_user)
 
 
+# login page
+@views.route("/login", methods = ["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+    
+        if email == None:
+            flash("Email required.", category="error")
+        elif password == None:
+            flash("Password required.", category="error")
+    
+        # Check if credentials are valid
+        # Check database for such user
+        user = User.query.filter_by(email=email).first()
+    
+        # If user email exists
+        if user:
+            if check_password_hash(user.password, password):
+                flash("Logged in successfully!", category="success")
+                # remember allows user to stay logged in
+                login_user(user, remember=True)
+                return redirect(
+                    url_for("views.recommendations", logged_in=True))
+            else:
+                flash("Incorrect password, please try again.",
+                        category="error")
+        else:
+            flash("Email does not exist.", category="error")
+
+    return render_template("login.html")
 # Logout user
 
 
@@ -152,8 +182,6 @@ def logout():
     logout_user()
     flash("Logged out successfully!", category="success")
     return redirect(url_for("views.landing"))
-
-
 
 # Forgot password page
 
@@ -342,7 +370,6 @@ def preferences():
 
     return render_template("preferences.html", user=current_user)
 
-
 @views.route("/go_to_home")
 def home_redirect():
     return redirect(url_for("views.home"))
@@ -350,17 +377,20 @@ def home_redirect():
 
 @views.route("/recommendations")
 def recommendations():
-    return render_template("top_picks_logged_in.html", user=current_user)
-
-
-@views.route("/recommendations/guest")
-def recommendations_guest():
-    return render_template("top_picks_guest.html", user=current_user)
+    if current_user.is_authenticated:
+        return render_template("top_picks_logged_in.html", user=current_user)
+    else:
+        guest = User.query.filter_by(firstName = "guest").first()
+        return render_template("top_picks_guest.html", user=guest)
 
 
 @views.route("/map")
 def map():
-    return render_template("map.html", user=current_user)
+    if current_user.is_authenticated:
+        return render_template("map.html", user=current_user)
+    else:
+        guest = User.query.filter_by(firstName = "guest").first()
+        return render_template("map.html", user = guest)
 
 
 @views.route("/compare")
@@ -368,6 +398,9 @@ def map():
 def compare():
     return render_template("compare.html", user=current_user)
 
+@views.route("/results")
+def results():
+    return render_template("results.html")
 
 # @views.route("/testing")
 # def testing():
@@ -385,8 +418,6 @@ def csv():
     return render_template("csv_chart.html", user=current_user)
 
 
-
-
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
@@ -398,79 +429,16 @@ def csv():
 ##########################################################################################################################################
 @views.route("/jovians_debug")
 def jovian():
-    user = User.query.filter_by(firstName="admin").first()
-    for item in user.recommended:
-        print(item.block)
-    return f"{user.recommended[0].block}"
+    test = User.query.filter_by(firstName = "admin").first()
+    return (test.firstName)
 
 
-# !temp fix to add buildings into csv
+# get admin function for debug
+def get_admin():
+    if not current_user.is_authenticated():
+        return User.query.filter_by(firstName = "admin").first()
 
 
-@views.route("/import_buildings")
-def import_buildings():
-    file = "website/gov_data.csv"
-    cwd = os.getcwd()
-    data = pd.read_csv(os.path.normcase(os.path.join(cwd, file)))
-    test = data.head(5)  # adding only 5
-
-    # read from dataframe, create building, commit to db
-    for index, row in test.iterrows():
-        id = row["_id"]
-        month = parser.parse(row["month"])
-        town = row["town"]
-        flat_type = row["flat_type"]
-        block = row["block"]
-        street_name = row["street_name"]
-        storey_range = row["storey_range"]
-        floor_area_sqm = row["floor_area_sqm"]
-        flat_model = row["flat_model"]
-        lease_commence_date = row["lease_commence_date"]
-        remaining_lease = row["remaining_lease"]
-        resale_price = row["resale_price"]
-
-        new_building = building(
-            id=id,
-            month=month,
-            town=town,
-            flat_type=flat_type,
-            block=block,
-            street_name=street_name,
-            storey_range=storey_range,
-            floor_area_sqm=floor_area_sqm,
-            flat_model=flat_model,
-            lease_commence_date=lease_commence_date,
-            resale_price=resale_price,
-            remaining_lease=remaining_lease,
-        )
-        db.session.add(new_building)
-        db.session.commit()
-    return redirect(url_for("views.landing"))
-
-
-def create_admin():
-    admin = User(
-        firstName="admin",
-        lastName="supreme",
-        email="testing@gmail.com",
-        password=generate_password_hash("password", method="sha256"),
-    )
-    db.session.add(admin)
-    db.session.commit()
-    # I HAVENT TOOK CZ2007 IDK HOW TO DATABASE???
-    # the above function imports 5 buildings so ill just add all 5 to my admin account
-    # TODO something something select * from buildings something something add to user
-    for i in range(1, 6):
-        temp_building = building.query.filter_by(id=i).first()
-        temp_building.recommended_to.append(admin)
-        db.session.commit()
-    return redirect(url_for("views.landing"))
-
-
-# ! does not work because I HAVENT LEARNT DATABASES HOW DO I SQL?????
-
-
-@views.route("/testing_sql")
-def testing_sql():
-    for building in db.session.query("building"):
-        print(building.block)
+@views.route('/debug-sentry')
+def trigger_error():
+    division_by_zero = 1 / 0

@@ -5,14 +5,13 @@
 {% endblock %}
 
 {% block title %}
-Recommendations_Guest
+Recommendations Guest
 {% endblock %}
 
 {% block main_content %}
-
 <div class="page-container">
     <div class="page-header">
-        <div class="name">Top Picks </div>
+        <div class="name">Top Picks Guests</div>
         <!-- <div class =btn-container>
             <a href="/compare">
               <button id="btn" type='button' class="btn">
@@ -22,10 +21,13 @@ Recommendations_Guest
         </div> -->
     </div>
     <div class="line"></div>
+
+    {% for to_display in user.recommended %}
     <div class="output">
         <div class="imgbox">
-          <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
+          <img src= "{{url_for('static', filename = to_display.image_path)}}" alt="HDB" >
         </div>
+
         <div class="contentleft">
             <p>BLOCK</p>
             <p>ADDRESS</p>
@@ -35,83 +37,25 @@ Recommendations_Guest
             <p>AMENITIES</p>
             <p> </p>
         </div>
+
         <div class="v1"></div>
+
         <div class="contentright">
-            <p>123</p>
-            <p>ANG MO KIO AVE 13</p>
-            <p>$99,999,999</p>
-            <p>4-ROOM</p>
-            <p>64</p>
+            <p>{{to_display.block}}</p>
+            <p>{{to_display.street_name}}</p>
+            <p>${{to_display.resale_price}}</p>
+            <p>{{to_display.flat_type}}</p>
+            <p>{{to_display.floor_area_sqm}} sqm</p>
             <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
             <div class="links">
                 <a href="#">View Map</a>
                 <a href="#">Contact</a>
                 <a href="#">Add to Favorites</a>
             </div>
+
         </div>
 
-      </div>
-
-    <div class="output">
-        <div class="imgbox">
-          <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
-        </div>
-        <div class="contentleft">
-            <p>BLOCK</p>
-            <p>ADDRESS</p>
-            <p>RESALE PRICE</p>
-            <p>FLAT TYPE</p>
-            <p>FLOOR AREA (SQM)</p>
-            <p>AMENITIES</p>
-            <p> </p>
-        </div>
-        <div class="v1"></div>
-        <div class="contentright">
-            <p>123</p>
-            <p>ANG MO KIO AVE 13</p>
-            <p>$99,999,999</p>
-            <p>4-ROOM</p>
-            <p>64</p>
-            <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
-            <div class="links">
-                <a href="#">View Map</a>
-                <a href="#">Contact</a>
-                <a href="#">Add to Favorites</a>
-            </div>
-        </div>
-
-      </div>
-
-    <div class="output">
-        <div class="imgbox">
-          <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" >
-        </div>
-        <div class="contentleft">
-            <p>BLOCK</p>
-            <p>ADDRESS</p>
-            <p>RESALE PRICE</p>
-            <p>FLAT TYPE</p>
-            <p>FLOOR AREA (SQM)</p>
-            <p>AMENITIES</p>
-            <p> </p>
-        </div>
-        <div class="v1"></div>
-        <div class="contentright">
-            <p>123</p>
-            <p>ANG MO KIO AVE 13</p>
-            <p>$99,999,999</p>
-            <p>4-ROOM</p>
-            <p>64</p>
-            <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
-            <div class="links">
-                <a href="#">View Map</a>
-                <a href="#">Contact</a>
-                <a href="#">Add to Favorites</a>
-            </div>
-        </div>
-
-      </div>
-
+    </div>
+    {% endfor %}
 </div>
-
 {% endblock %}
