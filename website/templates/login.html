@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static',filename='styles/landing.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles/login.css') }}">
 
         <title>Find My HDB</title>
     </head>
@@ -38,29 +39,21 @@
                 <div class="logo">
                     <img src="{{url_for('static',filename='Assets/app_logo-removebg.png')}}" alt="logo" class="logo-img">
                 </div>
-                <div class="btn-container">
-                    <button id="login-btn" type='button' class="btn btn-dark btn-round">Login</button>
-                    <a href="/signup"><button id="register-btn" type='button' class="btn btn-dark btn-round">Register</button></a>
-                    <a href="/home">
-                        <button id="guest-btn" type='button' class="btn btn-secondary btn-round">
-                            Continue as Guest
-                            <div class="icon">
-                                <div class="icon baseline"><img src="{{url_for('static',filename='Assets/arrow_east_black_24dp.svg')}}"
-                                        alt="right arrow"></div>
-                            </div>
-                        </button>
-                    </a>
-                </div>
+
                 <div class="sign-in-container">
                     <button type="button" class="btn-cross">
                         <img src="{{url_for('static',filename='Assets/close_white_24dp.svg')}}" alt="x" class="sign-in-close">
                     </button>
+
                     <h1 class="sign-in-text">Welcome Back</h1>
+
                     <form class="flex-vertical" method="POST">
+
                         <input type="email" id="email" name="email">
                         <input type="password" id="password" name="password">
                         <a href="/forgot_password" class="forgot-pw">Forgot Password?</a>
                         <button type="submit" class="btn btn-light btn-round">Login</button>
+                        
                     </form>
                 </div>
             </div>

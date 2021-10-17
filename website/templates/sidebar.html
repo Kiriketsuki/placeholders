@@ -64,46 +64,72 @@
             
         </div>
     </div>
+
+    {% if user.is_guest %}
+
     <div class="logo-details">
         <div class="profile">
             <div class="profile-details">
-                <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" height="152px" width="180px">
-                <div class="name">TESTING!</div>
+                <img src= "{{ url_for('static',filename= user.photo) }}" alt="HDB" height="152px" width="180px">
+                <div class="name">
+                    Sign up for more!
+                </div>
             </div>
         </div>
     </div>
+
+    {% else %}
+    <div class="logo-details">
+        <div class="profile">
+            <div class="profile-details">
+                <img src= "{{url_for('static', filename = user.photo)}}" alt="HDB" height="152px" width="180px">
+                <div class="name">
+                    {% block username %}
+                    Hello, {{user.firstName}} {{user.lastName}}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
     <ul class="nav-list">
         <li>
-            <a href="#">
+            <a href="/">
             <i class='bx bx-grid-alt'></i>
             <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
         </li>
+
+        {% if user.is_guest %}
         <li>
-            <a href="#">
+            <a href="/login">
             <i class='bx bx-log-in' ></i>
             <span class="links_name">Login</span>
             </a>
             <span class="tooltip">Login</span>
         </li>
+
         <li>
-            <a href="#">
+            <a href="/signup">
             <i class='bx bx-user-plus' ></i>
             <span class="links_name">Sign Up</span>
             </a>
             <span class="tooltip">Sign Up</span>
         </li>
 
-        <!-- ADDITIONAL IF NEEDED -->
-<!-- 
+        {% else %}
+        
         <li>
-            <a href="#">
+            <a href="/account/settings">
             <i class='bx bx-user' ></i>
             <span class="links_name">Account</span>
             </a>
             <span class="tooltip">Account</span>
         </li>
+
         <li>
         <a href="#">
             <i class='bx bx-heart' ></i>
@@ -111,13 +137,7 @@
         </a>
         <span class="tooltip">Favorites</span>
         </li>
-        <li>
-        <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">Setting</span>
-        </a>
-        <span class="tooltip">Setting</span>
-        </li>
+
         <li>
             <a href="#">
             <i class='bx bx-cart-alt' ></i>
@@ -125,28 +145,25 @@
             </a>
             <span class="tooltip">Sell My House</span>
         </li>
-   -->
-  
-        <!-- <li>
-            <a href="#">
-            <i class='bx bx-cart-alt' ></i>
-            <span class="links_name">EXTRA</span>
-            </a>
-            <span class="tooltip">EXTRA</span>
-        </li> -->
 
-        <!-- ENDS HERE -->
+        <li>
+        <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Setting</span>
+        </a>
+        <span class="tooltip">Setting</span>
+        </li>
 
-        <!-- <li>
+        <li>
             <div class="logout">
-                <a href="#">
+                <a href="/logout">
                 <i class='bx bx-log-out' id="log_out" ></i>
                 <span class="links_name">Logout</span>
                 </a>
                 <span class="tooltip">Logout</span>
             </div>
-        </li> -->
-        
+        </li>
+        {% endif %}
     </ul>
   </div>
   <section class="home-section">

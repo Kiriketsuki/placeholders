@@ -67,7 +67,7 @@
     <div class="logo-details">
         <div class="profile">
             <div class="profile-details">
-                <img src= "../static/Assets/john-t-4_ZMMBcz4fU-unsplash.jpg" alt="HDB" height="152px" width="180px">
+                <img src= "{{url_for('static', filename = user.photo)}}" alt="HDB" height="152px" width="180px">
                 <div class="name">
                     {% block username %}
                     Hello, {{user.firstName}} {{user.lastName}}
