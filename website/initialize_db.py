@@ -1,15 +1,12 @@
 import os
+import random
 
 import pandas as pd
 from dateutil import parser
 from werkzeug.security import generate_password_hash
 
 from . import db
-from .models import building
-from .models import Preference
-from .models import User
-
-import random
+from .models import Preference, User, building
 
 
 def init_db():
