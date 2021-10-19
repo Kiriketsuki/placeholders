@@ -8,7 +8,6 @@ from . import db
 
 # from sqlalchemy.event import listen
 
-
 # association table for recommendations
 recommendations = db.Table(
     "recommendations",
@@ -61,7 +60,10 @@ class Preference(db.Model):
     ownCar = db.Column(db.Boolean)
     amenities = db.Column(db.JSON)
     preferredLocations = db.Column(db.JSON)
-    uid = db.Column(db.Integer, db.ForeignKey("user.id"), unique=True, nullable=True)
+    uid = db.Column(db.Integer,
+                    db.ForeignKey("user.id"),
+                    unique=True,
+                    nullable=True)
 
 
 # building schema
