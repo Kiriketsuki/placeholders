@@ -5,15 +5,27 @@ import random
 import pandas as pd
 import sqlalchemy
 from dateutil import parser
-from flask import (Blueprint, flash, jsonify, redirect, render_template,
-                   request, url_for)
-from flask_login import current_user, login_required, login_user, logout_user
+from flask import Blueprint
+from flask import flash
+from flask import jsonify
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import url_for
+from flask_login import current_user
+from flask_login import login_required
+from flask_login import login_user
+from flask_login import logout_user
 from sqlalchemy import func
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 
 from . import db
-from .helper import hasDigit, hasSpecialCharacters
-from .models import Preference, User, building
+from .helper import hasDigit
+from .helper import hasSpecialCharacters
+from .models import building
+from .models import Preference
+from .models import User
 
 views = Blueprint("views", __name__)
 

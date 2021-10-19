@@ -3,10 +3,12 @@ from operator import mul
 
 import flask
 import sentry_sdk
-from flask import Flask, config
+from flask import config
+from flask import Flask
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-from website import createApp, initialize_db
+from website import createApp
+from website import initialize_db
 
 sentry_sdk.init(
     dsn="https://b8534193d8bb4c78b00e134d989d915c@o1039706.ingest.sentry.io/6008629",
