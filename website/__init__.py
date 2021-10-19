@@ -8,6 +8,7 @@ import pandas as pd
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
+
 def createApp():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'abc123'
@@ -16,7 +17,7 @@ def createApp():
 
     from .views import views
 
-    app.register_blueprint(views, url_prefix = "/")
+    app.register_blueprint(views, url_prefix="/")
 
     createDatabase(app, DB_NAME)
     login_manager = LoginManager()
@@ -33,7 +34,8 @@ def createApp():
     with app.app_context():
         init_db()
     return app
-    
+
+
 def createDatabase(app, name):
     if not os.path.exists('website/' + name):
         db.create_all(app=app)
@@ -41,6 +43,5 @@ def createDatabase(app, name):
         from .initialize_db import init_db
         with app.app_context():
             init_db()
-            
-        print("Database created.")
 
+        print("Database created.")

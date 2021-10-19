@@ -11,6 +11,7 @@ from .models import User
 
 import random
 
+
 def init_db():
     try:
         print("entered")
@@ -30,7 +31,7 @@ def init_db():
             lastName="",
             email="guest@gmail.com",
             password=generate_password_hash("", method="sha256"),
-            is_guest = True
+            is_guest=True
         )
         db.session.add(guest)
         db.session.commit()
@@ -70,42 +71,42 @@ def init_db():
                 lease_commence_date=lease_commence_date,
                 resale_price=resale_price,
                 remaining_lease=remaining_lease,
-                image_path = image_path
+                image_path=image_path
             )
             db.session.add(new_building)
             db.session.commit()
 
         # attach sample reccomendations to admin
-        for i in range(1,6):
-            temp_building = building.query.filter_by(id = i).first()
+        for i in range(1, 6):
+            temp_building = building.query.filter_by(id=i).first()
             temp_building.recommended_to.append(admin)
             db.session.commit()
 
-        for i in range(6,11):
-            temp_building = building.query.filter_by(id = i).first()
+        for i in range(6, 11):
+            temp_building = building.query.filter_by(id=i).first()
             temp_building.recommended_to.append(guest)
             db.session.commit()
 
         # attach sample favourites to both guest and admin
-        for i in range(1,11):
-            temp_building = building.query.filter_by(id = i).first()
-            if (random.randint(0,1)):
+        for i in range(1, 11):
+            temp_building = building.query.filter_by(id=i).first()
+            if (random.randint(0, 1)):
                 temp_building.favourited_by.append(admin)
-            if (random.randint(0,1)):
+            if (random.randint(0, 1)):
                 temp_building.favourited_by.append(guest)
             db.session.commit()
 
         # create sample preferences for guest
         temp_preference = Preference(
-            houseType = "1 Room",
-            budget = "below $300,000",
-            monthlyIncome = "below $1,000",
-            maritalStatus = "Single",
-            cpf = "below $20,000",
-            ownCar = False,
-            amenities = ["Supermarket"],
-            preferredLocations = ["Woodlands"],
-            uid = 2 # guest's id
+            houseType="1 Room",
+            budget="below $300,000",
+            monthlyIncome="below $1,000",
+            maritalStatus="Single",
+            cpf="below $20,000",
+            ownCar=False,
+            amenities=["Supermarket"],
+            preferredLocations=["Woodlands"],
+            uid=2  # guest's id
         )
         db.session.add(temp_preference)
 
