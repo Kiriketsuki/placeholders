@@ -154,7 +154,6 @@ def logout():
     return redirect(url_for("views.landing"))
 
 
-
 # Forgot password page
 
 
@@ -182,10 +181,11 @@ def forgot_password():
     return render_template("forgot_pw.html")
 
 
-@views.route("/update_preferences", methods = ["GET", "POST"])
+@views.route("/update_preferences", methods=["GET", "POST"])
 @login_required
 def update_preferences():
-    return render_template("update_preferences.html", user = current_user)
+    return render_template("update_preferences.html", user=current_user)
+
 
 @views.route("/account")
 def profile():
@@ -368,15 +368,22 @@ def map():
 def compare():
     return render_template("compare.html", user=current_user)
 
+
 @views.route("/faq")
 def faq():
     return render_template("faq.html", user=current_user)
+
+
 @views.route("/faq1")
 def faq1():
     return render_template("faq1.html", user=current_user)
+
+
 @views.route("/faq2")
 def faq2():
     return render_template("faq2.html", user=current_user)
+
+
 @views.route("/faq3")
 def faq3():
     return render_template("faq3.html", user=current_user)
@@ -396,8 +403,6 @@ def faq3():
 @views.route("/csv")
 def csv():
     return render_template("csv_chart.html", user=current_user)
-
-
 
 
 ##########################################################################################################################################
