@@ -1,4 +1,4 @@
-{% extends "sidebar_login.html" %}
+{% extends "sidebar.html" %}
 <!-- For Viewing pls change the html to : sidebar.html -->
 
 {% block bonus_css %}
@@ -20,10 +20,12 @@ Preferences
                 <div></div>
             </div>
             <div class="line"></div>
+
             <div class="firstbox-content">
                 <a id="editlogo"></a> <a href="/account/settings" class="btn" role="button">Edit Profile</a>
                 <div></div>
                 <a id="editlogo"></a> <a href="/account/preferences" class="btn" role="button">Edit Preferences</a>
+                <a id="favouritelogo"></a> <a href="/account/favourites" class="btn" role="button">View Favourites</a>
             </div>
 
 
@@ -169,7 +171,7 @@ Preferences
                   </select>
                 </div>
                 <div><button type="submit" class="btn" id="btn-save">Update Preferences</button></div>
-
+                <div><a href = "/recommended" class="btn" id="btn-save">Get Recommendations</a></div>
 
             </div>
 

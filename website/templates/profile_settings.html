@@ -1,0 +1,75 @@
+{% extends "sidebar.html" %}
+<!-- For Viewing pls change the html to : sidebar.html -->
+
+{% block bonus_css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/profile.css') }}">
+{% endblock %}
+
+{% block title %}
+Edit Profile
+{% endblock %}
+
+{% block main_content %}
+<body>
+  <form method="POST">
+    <div class="flex-container">
+
+      <div class="flex-child">
+        <div class="firstbox">
+          <div class="firstbox-header">
+            <a id="settingslogo"></a> Settings
+          </div>
+          <div class="line"></div>
+          <div class="firstbox-content">
+            <a id="editlogo"></a> <a href="/account/settings" class="btn" role="button">Edit Profile</a>
+            <div></div>
+            <a id="editlogo"></a> <a href="/account/preferences" class="btn" role="button">Edit Preferences</a>
+            <a id="favouritelogo"></a> <a href="/account/favourites" class="btn" role="button">View Favourites</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex-child2">
+
+        <div class="secondbox">
+          <div class="secondbox-header">
+            <a id="editlogo"></a> Edit Profile
+            <div></div>
+          </div>
+          <div class="line1"></div>
+          <div class="secondbox-content">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="name" class="form-control" id="firstName" name="firstName" placeholder="">
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="name" class="form-control" id="lastName" name="lastName" placeholder="">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="">
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="">
+            </div>
+
+            <div><button type="submit" class="btn" id="btn-save">Save</button></div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+</body>
+
+{% endblock %}

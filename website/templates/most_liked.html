@@ -1,0 +1,60 @@
+{% extends "sidebar.html" %}
+<!-- For Viewing pls change the html to : sidebar.html -->
+
+{% block bonus_css %}
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/top_picks.css')}}">
+{% endblock %}
+
+{% block title %}
+Recommendations
+{% endblock %}
+
+{% block main_content %}
+<div class="page-container">
+    <div class="page-header">
+        <div class="name">Top Picks</div>
+        <!-- <div class =btn-container>
+            <a href="/compare">
+              <button id="btn" type='button' class="btn">
+                Compare
+              </button>
+            </a> 
+        </div> -->
+    </div>
+    <div class="line"></div>
+    
+    {% for display in to_display %}
+    <div class="output">
+        <div class="imgbox">
+          <img src= "{{url_for('static', filename = display.image_path)}}" alt="HDB" >
+        </div>
+        <div class="contentleft">
+            <p>BLOCK</p>
+            <p>ADDRESS</p>
+            <p>RESALE PRICE</p>
+            <p>FLAT TYPE</p>
+            <p>FLOOR AREA (SQM)</p>
+            <p>AMENITIES</p>
+            <p> </p>
+        </div>
+        <div class="v1"></div>
+        <div class="contentright">
+            <p>{{display.block}}</p>
+            <p>{{display.street_name}}</p>
+            <p>${{display.resale_price}}</p>
+            <p>{{display.flat_type}}</p>
+            <p>{{display.floor_area_sqm}} sqm</p>
+            <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+            <div class="links">
+                <a href="#">View Map</a>
+                <a href="#">Contact</a>
+                {% if not user.is_guest %}
+                    <a href="#" onclick="add_favourites({{display.id}})">Add to Favorites</a>
+                {% endif %}
+            </div>
+        </div>
+
+      </div>
+      {% endfor %}
+</div>
+{% endblock %}

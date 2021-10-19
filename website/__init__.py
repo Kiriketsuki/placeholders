@@ -29,10 +29,18 @@ def createApp():
     def load_user(id):
         return User.query.get(int(id))
 
+    from .initialize_db import init_db
+    with app.app_context():
+        init_db()
     return app
     
 def createDatabase(app, name):
     if not os.path.exists('website/' + name):
         db.create_all(app=app)
+
+        from .initialize_db import init_db
+        with app.app_context():
+            init_db()
+            
         print("Database created.")
 

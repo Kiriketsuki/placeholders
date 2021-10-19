@@ -17,13 +17,16 @@
   z-index: 99;
   transition: all 0.5s ease;
 }
+
 .sidebar.open{
   width: 250px;
 }
+
 .sidebar .logo-top,
 .sidebar.open .logo-top{
   height: 90px;
 }
+
 .sidebar .logo-details{
     opacity: 0;
     height: 250px;
@@ -319,6 +322,7 @@
 html {
   scrollbar-color: rgba(108, 122, 137, 0.45);
   scrollbar-width: 0.25rem;
+  max-width: 100vw;
 }
 
 ::-webkit-scrollbar {
@@ -373,6 +377,7 @@ body {
   grid-template-columns: 3fr 94fr 3fr;
   scrollbar-color: rgba(108, 122, 137, 0.45);
   scrollbar-width: 0.25rem;
+  overflow-x: hidden;
 }
 
 /* main {

@@ -1,0 +1,174 @@
+{% extends "sidebar.html" %}
+<!-- For Viewing pls change the html to : sidebar.html -->
+
+{% block bonus_css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/preferences.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/calc_reco.css') }}">
+{% endblock %}
+
+{% block title %}
+Getting Recommendations
+{% endblock %}
+
+{% block main_content %}
+<form method="POST">
+    <div class="flex-container">
+      <div class="flex-child2">
+        <div class="secondbox">
+            <div class="secondbox-header">
+                <a id="editlogo"></a> Submit Preferences
+                <div></div>
+            </div>
+            <div class="line1"></div>
+            <div class="secondbox-content">
+
+                <div class="form-group">
+                  <label for="typeOfHouse">What type of house are you looking for?</label>
+                  <select class="form-control" id="typeOfHouse" name="typeOfHouse">
+                    <option selected disabled value="null" style="color:lightgrey">--Select--</option>
+                    <option>1 Room</option>
+                    <option>2 Room</option>
+                    <option>3 Room</option>
+                    <option>4 Room</option>
+                    <option>5 Room</option>
+                    <option>3-generation</option>
+                    <option>Executive</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="budget">What is your budget?</label>
+                  <select class="form-control" id="budget" name="budget">
+                    <option selected disabled value="null" style="color:lightgrey">--Select--</option>
+                    <option">Prefer not to say</option>
+                    <option>below $300,000</option>
+                    <option>$300,000 to $400,000</option>
+                    <option>$400,000 to $500,000</option>
+                    <option>$500,000 to $600,000</option>
+                    <option>$600,000 to $700,000</option>
+                    <option>$700,000 to $800,000</option>
+                    <option>$800,000 to $1,000,000</option>
+                    <option>above $1,000,000</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="monthlyIncome">What is your monthly income?(including employer CPF contributions)</label>
+                  <select class="form-control" id="monthlyIncome" name="monthlyIncome">
+                    <option selected disabled value="null" style="color:lightgrey">--Select--</option>
+                    <option">Prefer not to say</option>
+                    <option>below $1,000 </option>
+                    <option>$1,000 to $2,000</option>
+                    <option>$2,000 to $3,000</option>
+                    <option>$3,000 to $4,000</option>
+                    <option>$4,000 to $5,000</option>
+                    <option>$5,000 to $6,000</option>
+                    <option>$6,000 to $7,000</option>
+                    <option>$7,000 to $8,000</option>
+                    <option>$8,000 to $10,000</option>
+                    <option>above $10,000</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="maritalStatus">What is your marital status</label>
+                  <select class="form-control" id="maritalStatus" name="maritalStatus">
+                    <option selected disabled value="null" style="color:lightgrey">--Select--</option>
+                    <option">Prefer not to say</option>
+                    <option>Married</option>
+                    <option>Single</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="cpfSavings">What are your current CPF savings?</label>
+                  <select class="form-control" id="cpfSavings" name="cpfSavings">
+                    <option selected disabled value="null" style="color:lightgrey">--Select--</option>
+                    <option">Prefer not to say</option>
+                    <option>below $20,000 </option>
+                    <option>$20,000 to $40,000</option>
+                    <option>$40,000 to $60,000</option>
+                    <option>$60,000 to $80,000</option>
+                    <option>$80,000 to $100,000</option>
+                    <option>$100,000 to $120,000</option>
+                    <option>$120,000 to $140,000</option>
+                    <option>$140,000 to $160,000</option>
+                    <option>$160,000 to $200,000</option>
+                    <option>above $200,000</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="ownCar">Do you own a car?</label>
+                  <select class="form-control" id="ownCar" name="ownCar">
+                    <option selected disabled value="null" style="color:lightgrey">--Select--</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="amenities">Must-have amenities?</label>
+                  <select class="form-control" data-width="100%" data-live-search="true" data-max-options="" id="amenities" name="amenities">
+                    <option>Supermarket</option>
+                    <option>Foodcourt</option>
+                    <option>Gym</option>
+                    <option">No Preference</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="locations">Preferred Locations?</label>
+                  <select class="form-control selectpicker" data-width="100%" data-live-search="true" data-max-options="" id="locations" name="locations">
+                    <option">No Preference</option>
+                    <option>Sembawang</option>
+                    <option>Woodlands</option>
+                    <option>Yishun</option>
+                    <option>Ang Mo Kio</option>
+                    <option>Hougang</option>
+                    <option>Punggol</option>
+                    <option>Sengkang</option>
+                    <option>Serangoon</option>
+                    <option>Bedok</option>
+                    <option>Pasir Ris</option>
+                    <option>Tampines</option>
+                    <option>Bukit Batok</option>
+                    <option>Bukit Panjang</option>
+                    <option>Choa Chu Kang</option>
+                    <option>Clementi</option>
+                    <option>Jurong East</option>
+                    <option>Jurong West</option>
+                    <option>Tengah</option>
+                    <option>Bishan</option>
+                    <option>Bukit Merah</option>
+                    <option>Bukit Timah</option>
+                    <option>Central Area</option>
+                    <option>Geylang</option>
+                    <option>Kallang/ Whampoa</option>
+                    <option>Marine Parade</option>
+                    <option>Queenstown</option>
+                    <option>Toa Payoh</option>
+                  </select>
+                </div>
+                <div><button type="submit" class="btn" id="btn-save">Submit Preferences</button></div>
+                <div><a href = "/recommended" class="btn" id="btn-save">Get Recommendations</a></div>
+
+            </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    </form>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+{% endblock %}

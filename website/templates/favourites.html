@@ -1,0 +1,73 @@
+{% extends "sidebar.html" %}
+<!-- For Viewing pls change the html to : sidebar.html -->
+
+{% block bonus_css %}
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/map.css')}}">
+{% endblock %}
+
+{% block title %}
+Favourites
+{% endblock %}
+
+{% block main_content %}
+
+<div id = "main_div">
+
+    <ul id = "list" class = "map" onload = "scrollTop = 0">
+        <iframe
+        loading="lazy"
+        allowfullscreen
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC7HKw6ZOf4juz_CS3vRnJhZZTP6ePRnso
+            &q=Space+Needle,Seattle+WA">
+        </iframe>
+        <br>
+    </ul>
+
+    <div class="page-container">
+        <div class="page-header">
+            <div class="name">{{user.favourites|length}} Results Found </div>
+            <div class =btn-container>
+                <a href="/compare">
+                  <button id="btn" type='button' class="btn">
+                    Compare
+                  </button>
+                </a> 
+            </div>
+        </div>
+        <div class="line"></div>
+        {% for to_display in user.favourites %}
+        <div class="output">
+            <div class="imgbox">
+            <img src= "{{url_for('static', filename = to_display.image_path)}}" alt="HDB" >
+            </div>
+            <div class="contentleft">
+                <p>BLOCK</p>
+                <p>ADDRESS</p>
+                <p>RESALE PRICE</p>
+                <p>FLAT TYPE</p>
+                <p>FLOOR AREA (SQM)</p>
+                <p>AMENITIES</p>
+                <p> </p>
+            </div>
+            <div class="v1"></div>
+            <div class="contentright">
+                <p>{{to_display.block}}</p>
+                <p>{{to_display.street_name}}</p>
+                <p>${{to_display.resale_price}}</p>
+                <p>{{to_display.flat_type}}</p>
+                <p>{{to_display.floor_area_sqm}} sqm</p>
+                <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+                <div class="links">
+                    <a href="#">View Map</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Remove from Favourites</a>
+                    <!-- todo remove favourites function -->
+                </div>
+            </div>
+
+        </div>
+      {% endfor %}
+    
+    </div>
+</div>
+{% endblock %}

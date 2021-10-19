@@ -51,6 +51,14 @@ html {
   background-repeat: no-repeat;
   background-position: 1.5%;
 }
+
+#favouritelogo {
+    padding-right: 30px;
+    background-image: url(../Assets/favorite_black_24dp.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: 1.5%;
+  }
 .firstbox{
   width: 250px;
   height: 700px;
@@ -97,8 +105,9 @@ html {
 }
 .btn:hover{
   background-color:skyblue;
+  
 
-  .navbar {
+.navbar {
     grid-area: sidenav;
     width: 4rem;
     height: 100vh;
