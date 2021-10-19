@@ -67,11 +67,9 @@ def landing():
                 flash("Logged in successfully!", category="success")
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
-                return redirect(
-                    url_for("views.home", logged_in=True))
+                return redirect(url_for("views.home", logged_in=True))
             else:
-                flash("Incorrect password, please try again.",
-                      category="error")
+                flash("Incorrect password, please try again.", category="error")
         else:
             flash("Email does not exist.", category="error")
 
@@ -90,18 +88,18 @@ def create_guest():
         lastName="",
         email=email,
         password=generate_password_hash("", method="sha256"),
-        is_guest=True
+        is_guest=True,
     )
 
     db.session.add(temp_user)
     db.session.commit()
-    guest = json.dumps(email, default=lambda x: list(x)
-                       if isinstance(x, set) else x)
+    guest = json.dumps(email, default=lambda x: list(x) if isinstance(x, set) else x)
     login_user(temp_user, remember=False)
     return redirect(url_for("views.home", user=guest))
 
 
 # Sign up page
+
 
 @views.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -128,8 +126,9 @@ def signup():
             flash("Last name cannot be empty.", category="error")
         else:
             if hasDigit(lastName):
-                flash("Last name must not contain numerical characters.",
-                      category="error")
+                flash(
+                    "Last name must not contain numerical characters.", category="error"
+                )
             elif len(lastName) < 2:
                 flash("Last name is too short.", category="error")
 
@@ -191,15 +190,15 @@ def login():
                 flash("Logged in successfully!", category="success")
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
-                return redirect(
-                    url_for("views.home", logged_in=True))
+                return redirect(url_for("views.home", logged_in=True))
             else:
-                flash("Incorrect password, please try again.",
-                      category="error")
+                flash("Incorrect password, please try again.", category="error")
         else:
             flash("Email does not exist.", category="error")
 
     return render_template("login.html")
+
+
 # Logout user
 
 
@@ -209,6 +208,7 @@ def logout():
     logout_user()
     flash("Logged out successfully!", category="success")
     return redirect(url_for("views.landing"))
+
 
 # Forgot password page
 
@@ -243,18 +243,29 @@ def account_settings():
     if request.method == "POST":
         thisUser = User.query.filter_by(id=current_user.get_id()).first()
 
-        if (request.form.get("firstName") == ""
-                and request.form.get("lastName") == ""
-                and request.form.get("email") == ""
-                and request.form.get("password") == ""):
+        if (
+            request.form.get("firstName") == ""
+            and request.form.get("lastName") == ""
+            and request.form.get("email") == ""
+            and request.form.get("password") == ""
+        ):
             flash("Empty fields.", category="error")
         else:
-            firstName = (thisUser.firstName if request.form.get("firstName")
-                         == "" else request.form.get("firstName"))
-            lastName = (thisUser.lastName if request.form.get("lastName") == ""
-                        else request.form.get("lastName"))
-            email = (thisUser.email if request.form.get("email") == "" else
-                     request.form.get("email"))
+            firstName = (
+                thisUser.firstName
+                if request.form.get("firstName") == ""
+                else request.form.get("firstName")
+            )
+            lastName = (
+                thisUser.lastName
+                if request.form.get("lastName") == ""
+                else request.form.get("lastName")
+            )
+            email = (
+                thisUser.email
+                if request.form.get("email") == ""
+                else request.form.get("email")
+            )
 
             # Check if credentials meet requirements
             if hasDigit(firstName):
@@ -266,8 +277,9 @@ def account_settings():
                 flash("First name is too short.", category="error")
 
             if hasDigit(lastName):
-                flash("Last name must not contain numerical characters.",
-                      category="error")
+                flash(
+                    "Last name must not contain numerical characters.", category="error"
+                )
             elif len(lastName) < 2:
                 flash("Last name is too short.", category="error")
 
@@ -293,8 +305,11 @@ def account_settings():
                     )
                 else:
                     # Update user profile
-                    thisUser.password = (generate_password_hash(
-                        password, method="sha256") if pwChanged else password)
+                    thisUser.password = (
+                        generate_password_hash(password, method="sha256")
+                        if pwChanged
+                        else password
+                    )
 
             thisUser.firstName = firstName
             thisUser.lastName = lastName
@@ -328,8 +343,7 @@ def preferences():
         # else update db row for particular uid
         print(current_user)  # DEBUGGING
 
-        thisPreference = Preference.query.filter_by(
-            id=current_user.get_id()).first()
+        thisPreference = Preference.query.filter_by(id=current_user.get_id()).first()
         print(thisPreference)  # DEBUGGING
 
         attributes = {
@@ -348,17 +362,16 @@ def preferences():
         attributes["monthlyIncome"] = request.form.get("monthlyIncome")
         attributes["maritalStatus"] = request.form.get("maritalStatus")
         attributes["cpf"] = request.form.get("cpfSavings")
-        attributes["ownCar"] = True if request.form.get(
-            "ownCar") == "Yes" else False
+        attributes["ownCar"] = True if request.form.get("ownCar") == "Yes" else False
         attributes["amenities"] = request.form.getlist("amenities")
         attributes["preferredLocations"] = request.form.getlist("locations")
 
         if None in attributes.values():
-            flash("Empty fields. All fields must be filled in.",
-                  category="error")
+            flash("Empty fields. All fields must be filled in.", category="error")
         else:
-            if (thisPreference == None
-                ):  # currently does not have preference hence can add to db
+            if (
+                thisPreference == None
+            ):  # currently does not have preference hence can add to db
                 newPreference = Preference(
                     houseType=attributes["houseType"],
                     budget=attributes["budget"],
@@ -379,8 +392,7 @@ def preferences():
                 thisPreference.cpf = attributes["cpf"]
                 thisPreference.ownCar = attributes["ownCar"]
                 thisPreference.amenities = attributes["amenities"]
-                thisPreference.preferredLocations = attributes[
-                    "preferredLocations"]
+                thisPreference.preferredLocations = attributes["preferredLocations"]
 
             flash("Preferences updated!", category="success")
 
@@ -401,13 +413,18 @@ def preferences():
 
 @views.route("/home")
 def home():
-    list_of_favourited_buildings = sorted(db.session.query(building.id, func.count(
-        User.id)).join(building.favourited_by).group_by(building.id).all(), key=lambda x: x[1])
+    list_of_favourited_buildings = sorted(
+        db.session.query(building.id, func.count(User.id))
+        .join(building.favourited_by)
+        .group_by(building.id)
+        .all(),
+        key=lambda x: x[1],
+    )
     first_ten = list_of_favourited_buildings[:10]
     flag = False
     args = request.args
     try:
-        email = args['email']
+        email = args["email"]
         print(email)
         guest = User.query.filter_by(email=email).first()
         flag = True
@@ -423,10 +440,13 @@ def home():
         to_return.append(temp_building)
 
     if not flag:
-        return render_template("most_liked.html", user=current_user, to_display=to_return)
+        return render_template(
+            "most_liked.html", user=current_user, to_display=to_return
+        )
     else:
         print(guest)
         return render_template("most_liked.html", user=guest, to_display=to_return)
+
 
 # to calculate results
 
@@ -434,6 +454,7 @@ def home():
 @views.route("/calc")
 def to_recommend():
     return render_template("calc_reco.html", user=current_user)
+
 
 # to show results
 
@@ -446,17 +467,19 @@ def recommended():
         guest = User.query.filter_by(firstName="guest").first()
         return render_template("recommended.html", user=guest)
 
+
 # to add favourites
 
 
 @views.route("/add_favourites", methods=["POST"])
 def add_favourites():
     building_id = json.loads(request.data)
-    building_id = building_id['building_id']
+    building_id = building_id["building_id"]
     temp_building = building.query.filter_by(id=building_id).first()
     temp_building.favourited_by.append(current_user)
     db.session.commit()
     return jsonify({})
+
 
 # view favourites
 
@@ -498,7 +521,7 @@ def jovian():
     # print(fav_buildings)
     # print(fav_users)
 
-    return ("o")
+    return "o"
 
 
 # get admin function for debug
@@ -507,6 +530,6 @@ def get_admin():
         return User.query.filter_by(firstName="admin").first()
 
 
-@views.route('/debug-sentry')
+@views.route("/debug-sentry")
 def trigger_error():
     division_by_zero = 1 / 0

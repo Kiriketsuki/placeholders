@@ -31,7 +31,7 @@ def init_db():
             lastName="",
             email="guest@gmail.com",
             password=generate_password_hash("", method="sha256"),
-            is_guest=True
+            is_guest=True,
         )
         db.session.add(guest)
         db.session.commit()
@@ -57,7 +57,7 @@ def init_db():
             lease_commence_date = row["lease_commence_date"]
             remaining_lease = row["remaining_lease"]
             resale_price = row["resale_price"]
-            image_path = row['image_path']
+            image_path = row["image_path"]
             new_building = building(
                 id=id,
                 month=month,
@@ -71,7 +71,7 @@ def init_db():
                 lease_commence_date=lease_commence_date,
                 resale_price=resale_price,
                 remaining_lease=remaining_lease,
-                image_path=image_path
+                image_path=image_path,
             )
             db.session.add(new_building)
             db.session.commit()
@@ -90,9 +90,9 @@ def init_db():
         # attach sample favourites to both guest and admin
         for i in range(1, 11):
             temp_building = building.query.filter_by(id=i).first()
-            if (random.randint(0, 1)):
+            if random.randint(0, 1):
                 temp_building.favourited_by.append(admin)
-            if (random.randint(0, 1)):
+            if random.randint(0, 1):
                 temp_building.favourited_by.append(guest)
             db.session.commit()
 
@@ -106,7 +106,7 @@ def init_db():
             ownCar=False,
             amenities=["Supermarket"],
             preferredLocations=["Woodlands"],
-            uid=2  # guest's id
+            uid=2,  # guest's id
         )
         db.session.add(temp_preference)
 
