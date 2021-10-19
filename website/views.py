@@ -460,6 +460,19 @@ def view_favourites():
 def compare():
     return render_template("compare.html", user=current_user)
 
+@views.route("/faq")
+def faq():
+    return render_template("faq.html", user=current_user)
+@views.route("/faq1")
+def faq1():
+    return render_template("faq1.html", user=current_user)
+@views.route("/faq2")
+def faq2():
+    return render_template("faq2.html", user=current_user)
+@views.route("/faq3")
+def faq3():
+    return render_template("faq3.html", user=current_user)
+
 
 @views.route("/csv")
 def csv():
