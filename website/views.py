@@ -473,10 +473,10 @@ def faq2():
 def faq3():
     return render_template("faq3.html", user=current_user)
 
-
-@views.route("/csv")
-def csv():
-    return render_template("csv_chart.html", user=current_user)
+@views.route("/buildings/<block>")
+def buildings(block):
+    to_display = building.query.filter_by(block = block).first()
+    return render_template("buildings.html", user = current_user, building = to_display)
 
 
 ##########################################################################################################################################
