@@ -24,7 +24,7 @@ Edit Profile
                 <div class="line"></div>
 
                 <div class="firstbox-content">
-                    
+
                     <a id="editlogo"></a> <a href="/account/settings" class="btn" role="button">Edit Profile</a>
                     <div></div>
                     <a id="editlogo"></a> <a href="/account/preferences" class="btn" role="button">Edit Preferences</a>
@@ -42,22 +42,22 @@ Edit Profile
                     </div>
 
                     <div class="line1"></div>
-            
+
                     <div class="secondbox-content">
                         <div>
                             <img src = "{{url_for('static', filename = user.photo)}}">
                         </div>
-            
+
                         <div class="form-group">
                             <label for="lastName">Name</label>
                             {{user.firstName}} {{user.lastName}}
                         </div>
-            
+
                         <div class="form-group">
                             <label for="email">Email address</label>
                             {{user.email}}
                         </div>
-            
+
                         <div class="form-group">
                             <label for="password">Number of Favourites</label>
                             {{user.favourites|length}} favourited buildings
