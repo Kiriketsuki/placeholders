@@ -162,3 +162,31 @@ li> ul> li {
     justify-content: space-between;
     width: 330px;
 }
+#wrapper
+{
+	background-color: #EEE;
+	border: 1px solid #999;
+	margin: 5px 0px 5px 2px;
+	padding: 3px;
+    width: 80%;
+}
+.btn-round {
+    margin: 0.5rem;
+    border-radius: 500px;
+    height: fit-content;
+    transition: transform 200ms ease;
+    border:rgb(0, 0, 0);
+    width: 100px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  img {
+
+    width: 1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+  }

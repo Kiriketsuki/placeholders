@@ -1,0 +1,37 @@
+{% extends "sidebar_login.html" %}
+<!-- For Viewing pls change the html to : sidebar.html -->
+
+{% block bonus_css %}
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/faq.css')}}">
+{% endblock %}
+
+{% block title %}
+FAQ
+{% endblock %}
+
+{% block main_content %}
+<div class="page-container">
+    <div class="page-header">
+        <div class="name">FAQ </div>
+    </div>
+    <div class="line"></div><br>
+    <div id="wrapper">
+        <p><b>Q1. How do I find house information?</b></p>
+        <p>You can retrieve housing information by searching using an address or postal code via the search bar at the top left-hand corner of the map.</p>
+        <p><b>Q2. How do I find amenties near an HDB Block?</b></p>
+        <p>You can find amenties near an HDB block under the housing information callout.</p>
+        <p><b>Q3. There was no search result from the address I keyed in. What should I do?</b></p>
+        <p>You can remove "Block" or "Blk" from the address you entered and try searching again. If you are still unable to get a result that means there is no resale HDB flats around the selected area.</p>
+    </div><br><br>
+    <div class="page-header">
+      <div class="name">HDB Guides</div>
+  </div>
+  <div class="line"></div><br>
+  <div id="wrapper">
+        <li><a href="/faq1">Ownership</a></li>
+        <li><a href="/faq2">HDB flat guidelines: Do's & Don'ts</a></li>
+        <li><a href="/faq3">New HDB policies</a></li>
+
+</div><br><br>
+</div>
+{% endblock %}
