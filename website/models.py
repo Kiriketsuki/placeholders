@@ -79,3 +79,4 @@ class building(db.Model):
     remaining_lease = db.Column(db.String(150))
     resale_price = db.Column(db.Float)
     image_path = db.Column(db.String(150))
+    contact = db.Column(db.String(150))

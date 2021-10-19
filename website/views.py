@@ -94,6 +94,12 @@ def create_guest():
 
     db.session.add(temp_user)
     db.session.commit()
+
+    for i in range(1,4):
+        print(i)
+        temp = building.query.filter_by(id = i).first()
+        temp.recommended_to.append(temp_user)
+        db.session.commit()
     guest = json.dumps(email, default=lambda x: list(x) if isinstance(x, set) else x)
     login_user(temp_user, remember=False)
     return redirect(url_for("views.home", user = guest))
@@ -425,8 +431,10 @@ def home():
         return render_template("most_liked.html", user = guest, to_display = to_return)
 
 #to calculate results
-@views.route("/calc")
+@views.route("/calc", methods = ["POST", "GET"])
 def to_recommend():
+    if request.method == 'POST':
+        redirect(url_for("views.recommended"))
     return render_template("calc_reco.html", user = current_user)
 
 # to show results
@@ -445,6 +453,17 @@ def add_favourites():
     building_id = building_id['building_id']
     temp_building = building.query.filter_by(id = building_id).first()
     temp_building.favourited_by.append(current_user)
+    db.session.commit()
+    return jsonify({})
+
+@views.route("/remove_favourites", methods = ["POST"])
+def remove_favourites():
+    print("HERE")
+    building_id = json.loads(request.data)
+    building_id = building_id['building_id']
+    temp_building = building.query.filter_by(id = building_id).first()
+    temp_building.favourited_by.remove(current_user)
+    print("HERE")
     db.session.commit()
     return jsonify({})
 
