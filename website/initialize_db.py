@@ -28,7 +28,7 @@ def init_db():
         file = "website/gov_data.csv"
         cwd = os.getcwd()
         data = pd.read_csv(os.path.normcase(os.path.join(cwd, file)))
-        test = data.head(40)
+        test = data[:100]
 
         # read from dataframe, create building, commit to db
         for index, row in test.iterrows():

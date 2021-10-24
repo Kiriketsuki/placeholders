@@ -1,5 +1,3 @@
-import os
-
 import pandas as pd
 import sqlalchemy
 from dateutil import parser
@@ -23,6 +21,8 @@ from .helper import hasSpecialCharacters
 from .models import building
 from .models import Preference
 from .models import User
+from .models import Recommendation
+from .Recommender import Recommender
 
 import random
 import json
@@ -434,13 +434,98 @@ def home():
 @views.route("/calc", methods = ["POST", "GET"])
 def to_recommend():
     if request.method == 'POST':
-        redirect(url_for("views.recommended"))
+        # Check if db has user preference already
+        # db cannot hold 2 preferences under same uid as it is unique
+        # if preference does not exist for user then add normally
+        # else update db row for particular uid
+        print(current_user)  # DEBUGGING
+
+        thisPreference = Preference.query.filter_by(
+            id=current_user.get_id()).first()
+        print(thisPreference)  # DEBUGGING
+
+        attributes = {
+            "houseType": None,
+            "budget": None,
+            "monthlyIncome": None,
+            "maritalStatus": None,
+            "cpf": None,
+            "ownCar": None,
+            "amenities": None,
+            "preferredLocations": None,
+        }
+
+        attributes["houseType"] = request.form.get("typeOfHouse")
+        attributes["budget"] = request.form.get("budget")
+        attributes["monthlyIncome"] = request.form.get("monthlyIncome")
+        attributes["maritalStatus"] = request.form.get("maritalStatus")
+        attributes["cpf"] = request.form.get("cpfSavings")
+        attributes["ownCar"] = True if request.form.get(
+            "ownCar") == "Yes" else False
+        attributes["amenities"] = request.form.getlist("amenities")
+        attributes["preferredLocations"] = request.form.getlist("locations")
+
+        if None in attributes.values():
+            flash("Empty fields. All fields must be filled in.",
+                  category="error")
+            return render_template("calc_reco.html", user=current_user)
+        else:
+            if (thisPreference == None
+                    ):  # currently does not have preference hence can add to db
+                newPreference = Preference(
+                    houseType=attributes["houseType"],
+                    budget=attributes["budget"],
+                    monthlyIncome=attributes["monthlyIncome"],
+                    maritalStatus=attributes["maritalStatus"],
+                    cpf=attributes["cpf"],
+                    ownCar=attributes["ownCar"],
+                    amenities=attributes["amenities"],
+                    preferredLocations=attributes["preferredLocations"],
+                    uid=current_user.get_id(),
+                )
+                db.session.add(newPreference)
+            else:  # has existing preference hence update row
+                thisPreference.houseType = attributes["houseType"]
+                thisPreference.budget = attributes["budget"]
+                thisPreference.monthlyIncome = attributes["monthlyIncome"]
+                thisPreference.maritalStatus = attributes["maritalStatus"]
+                thisPreference.cpf = attributes["cpf"]
+                thisPreference.ownCar = attributes["ownCar"]
+                thisPreference.amenities = attributes["amenities"]
+                thisPreference.preferredLocations = attributes[
+                    "preferredLocations"]
+
+            flash("Preferences updated!", category="success")
+
+        print(
+            attributes["houseType"],
+            attributes["budget"],
+            attributes["maritalStatus"],
+            attributes["cpf"],
+            attributes["ownCar"],
+            attributes["amenities"],
+            attributes["preferredLocations"],
+        )  # DEBUGGING
+
+        db.session.commit()
+        
+        thisPreference = Preference.query.filter_by(id=current_user.get_id()).first()
+        recommender = Recommender(thisPreference)
+        recommender.run()
+        return render_template("recommended.html", user=current_user)
     return render_template("calc_reco.html", user = current_user)
 
 # to show results
 @views.route("/recommended")
 def recommended():
     if current_user.is_authenticated:
+        thisPreference = Preference.query.filter_by(id=current_user.get_id()).first()
+        if thisPreference:
+            recommender = Recommender(thisPreference)
+            recommender.run()
+            thisRecommendations = Recommendation.query.filter_by(user_id=current_user.get_id()).first()
+        else:
+            flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
         return render_template("recommended.html", user=current_user)
     else:
         guest = User.query.filter_by(firstName = "guest").first()
