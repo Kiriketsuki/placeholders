@@ -22,13 +22,16 @@ favourites = db.Table(
 )
 
 class Recommendation(db.Model):
-    recommendation_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    building_ids = db.Column(db.JSON)
+    user_id = db.Column(db.Integer, primary_key=True)
+    building_id = db.Column(db.Integer, primary_key=True)
+    amenities_type = db.Column(db.String(150))
+    amenities_list = db.Column(db.JSON)
+    num_amenities = db.Column(db.Integer)
+    distance_from_target = db.Column(db.String(150), nullable=True)
+
     # nearby_amenities = db.Column(db.JSON)
 
 # User schema
-
 class User(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -48,8 +51,6 @@ class User(db.Model, UserMixin):
         backref=db.backref("favourited_by", lazy="dynamic"),
     )
 
-    pid = db.relationship("Preference", backref="user", uselist=False)
-    rid = db.relationship("Recommendation", backref="user", uselist=False)
     is_guest = db.Column(db.Boolean, default = False) # to make everything can be based on sidebar.html
 
 class Preference(db.Model):

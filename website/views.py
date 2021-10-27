@@ -23,6 +23,7 @@ from .models import Preference
 from .models import User
 from .models import Recommendation
 from .Recommender import Recommender
+from prettyprinter import pprint
 
 import random
 import json
@@ -77,7 +78,8 @@ def landing():
 
     return render_template("landing.html", user=current_user)
 
-@views.route("/guest_creation", methods = ["GET", "POST"])
+
+@views.route("/guest_creation", methods=["GET", "POST"])
 def create_guest():
 
     number_gen = len(User.query.order_by(User.id).all())
@@ -87,22 +89,23 @@ def create_guest():
     temp_user = User(
         firstName="guest",
         lastName="",
-        email= email,
+        email=email,
         password=generate_password_hash("", method="sha256"),
-        is_guest = True
+        is_guest=True
     )
 
     db.session.add(temp_user)
     db.session.commit()
 
-    for i in range(1,4):
+    for i in range(1, 4):
         print(i)
-        temp = building.query.filter_by(id = i).first()
+        temp = building.query.filter_by(id=i).first()
         temp.recommended_to.append(temp_user)
         db.session.commit()
-    guest = json.dumps(email, default=lambda x: list(x) if isinstance(x, set) else x)
+    guest = json.dumps(email, default=lambda x: list(x)
+                       if isinstance(x, set) else x)
     login_user(temp_user, remember=False)
-    return redirect(url_for("views.home", user = guest))
+    return redirect(url_for("views.home", user=guest))
 
 
 # Sign up page
@@ -163,7 +166,8 @@ def signup():
             try:
                 db.session.commit()
                 flash("Account created!", category="success")
-                # login_user(newUser, remember=True) # remember allows user to stay logged in
+                # remember allows user to stay logged in
+                login_user(newUser, remember=True)
                 return redirect(url_for("views.home"))
             except sqlalchemy.exc.IntegrityError:
                 db.session.rollback()
@@ -173,22 +177,22 @@ def signup():
 
 
 # login page
-@views.route("/login", methods = ["GET", "POST"])
+@views.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
-    
+
         if email == None:
             flash("Email required.", category="error")
         elif password == None:
             flash("Password required.", category="error")
-    
+
         # Check if credentials are valid
         # Check database for such user
         user = User.query.filter_by(email=email).first()
-    
+
         # If user email exists
         if user:
             if check_password_hash(user.password, password):
@@ -199,7 +203,7 @@ def login():
                     url_for("views.home", logged_in=True))
             else:
                 flash("Incorrect password, please try again.",
-                        category="error")
+                      category="error")
         else:
             flash("Email does not exist.", category="error")
 
@@ -241,7 +245,7 @@ def forgot_password():
     return render_template("forgot_pw.html")
 
 
-@views.route("/account/settings", methods = ["POST", "GET"])
+@views.route("/account/settings", methods=["POST", "GET"])
 @login_required
 def account_settings():
     if request.method == "POST":
@@ -316,9 +320,11 @@ def account_settings():
 
     return render_template("profile_settings.html", user=current_user)
 
+
 @views.route("/account/")
 def profile():
-    return render_template("profile.html", user = current_user)
+    return render_template("profile.html", user=current_user)
+
 
 @views.route("/account/preferences", methods=["GET", "POST"])
 @login_required
@@ -331,7 +337,7 @@ def preferences():
         print(current_user)  # DEBUGGING
 
         thisPreference = Preference.query.filter_by(
-            id=current_user.get_id()).first()
+            uid=current_user.get_id()).first()
         print(thisPreference)  # DEBUGGING
 
         attributes = {
@@ -401,17 +407,17 @@ def preferences():
     return render_template("preferences.html", user=current_user)
 
 
-
 @views.route("/home")
 def home():
-    list_of_favourited_buildings = sorted(db.session.query(building.id, func.count(User.id)).join(building.favourited_by).group_by(building.id).all(), key = lambda x: x[1])
+    list_of_favourited_buildings = sorted(db.session.query(building.id, func.count(
+        User.id)).join(building.favourited_by).group_by(building.id).all(), key=lambda x: x[1])
     first_ten = list_of_favourited_buildings[:10]
     flag = False
     args = request.args
     try:
         email = args['email']
         print(email)
-        guest = User.query.filter_by(email = email).first()
+        guest = User.query.filter_by(email=email).first()
         flag = True
     except:
         pass
@@ -421,17 +427,19 @@ def home():
     to_return = []
     for i in first_ten:
         building_id = i[0]
-        temp_building = building.query.filter_by(id = building_id).first()
+        temp_building = building.query.filter_by(id=building_id).first()
         to_return.append(temp_building)
 
     if not flag:
-        return render_template("most_liked.html", user = current_user, to_display = to_return)
+        return render_template("most_liked.html", user=current_user, to_display=to_return)
     else:
         print(guest)
-        return render_template("most_liked.html", user = guest, to_display = to_return)
+        return render_template("most_liked.html", user=guest, to_display=to_return)
 
-#to calculate results
-@views.route("/calc", methods = ["POST", "GET"])
+# to calculate results
+
+
+@views.route("/calc", methods=["POST", "GET"])
 def to_recommend():
     if request.method == 'POST':
         # Check if db has user preference already
@@ -441,7 +449,7 @@ def to_recommend():
         print(current_user)  # DEBUGGING
 
         thisPreference = Preference.query.filter_by(
-            id=current_user.get_id()).first()
+            uid=current_user.get_id()).first()
         print(thisPreference)  # DEBUGGING
 
         attributes = {
@@ -508,45 +516,67 @@ def to_recommend():
         )  # DEBUGGING
 
         db.session.commit()
-        
-        thisPreference = Preference.query.filter_by(id=current_user.get_id()).first()
+
         recommender = Recommender(thisPreference)
         recommender.run()
-        return render_template("recommended.html", user=current_user)
-    return render_template("calc_reco.html", user = current_user)
+        numResults = db.session.execute(
+            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
+        numResults = numResults.first()[0]
+
+        # selects buildings to recommend after reecommender has populated
+        # db with recommendations
+        buildings_to_recommend = db.session.execute(
+            "select * from building b, recommendation r where b.id=r.building_id").all()
+
+        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
+
+    return render_template("calc_reco.html", user=current_user)
 
 # to show results
 @views.route("/recommended")
 def recommended():
     if current_user.is_authenticated:
-        thisPreference = Preference.query.filter_by(id=current_user.get_id()).first()
-        if thisPreference:
+        numResults = db.session.execute(
+            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
+        numResults = numResults.first()[0]
+
+        thisPreference = Preference.query.filter_by(
+            uid=current_user.get_id()).first()
+        thisRecommendation = Recommendation.query.filter_by(
+            user_id=current_user.get_id()).first()
+
+        if not thisPreference:
+            flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
+        elif thisPreference and not thisRecommendation:
             recommender = Recommender(thisPreference)
             recommender.run()
-            thisRecommendations = Recommendation.query.filter_by(user_id=current_user.get_id()).first()
-        else:
-            flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
-        return render_template("recommended.html", user=current_user)
+
+        # selects buildings to recommend after reecommender has populated
+        # db with recommendations
+        buildings_to_recommend = db.session.execute("select * from building b,  recommendation r where b.id=r.building_id").all()
+
+        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
     else:
-        guest = User.query.filter_by(firstName = "guest").first()
-        return render_template("recommended.html", user = guest)
+        guest = User.query.filter_by(firstName="guest").first()
+        return render_template("recommended.html", user=guest)
 
 # to add favourites
-@views.route("/add_favourites", methods = ["POST"])
+@views.route("/add_favourites", methods=["POST"])
 def add_favourites():
     building_id = json.loads(request.data)
     building_id = building_id['building_id']
-    temp_building = building.query.filter_by(id = building_id).first()
+    temp_building = building.query.filter_by(id=building_id).first()
     temp_building.favourited_by.append(current_user)
     db.session.commit()
     return jsonify({})
 
-@views.route("/remove_favourites", methods = ["POST"])
+
+@views.route("/remove_favourites", methods=["POST"])
 def remove_favourites():
     print("HERE")
     building_id = json.loads(request.data)
     building_id = building_id['building_id']
-    temp_building = building.query.filter_by(id = building_id).first()
+    temp_building = building.query.filter_by(id=building_id).first()
     temp_building.favourited_by.remove(current_user)
     print("HERE")
     db.session.commit()
@@ -556,7 +586,7 @@ def remove_favourites():
 @views.route("/account/favourites")
 def view_favourites():
     if not current_user.is_guest:
-        return render_template("favourites.html", user = current_user)
+        return render_template("favourites.html", user=current_user)
 
 
 @views.route("/compare")
@@ -564,23 +594,31 @@ def view_favourites():
 def compare():
     return render_template("compare.html", user=current_user)
 
+
 @views.route("/faq")
 def faq():
     return render_template("faq.html", user=current_user)
+
+
 @views.route("/faq1")
 def faq1():
     return render_template("faq1.html", user=current_user)
+
+
 @views.route("/faq2")
 def faq2():
     return render_template("faq2.html", user=current_user)
+
+
 @views.route("/faq3")
 def faq3():
     return render_template("faq3.html", user=current_user)
 
+
 @views.route("/buildings/<block>")
 def buildings(block):
-    to_display = building.query.filter_by(block = block).first()
-    return render_template("buildings.html", user = current_user, building = to_display)
+    to_display = building.query.filter_by(block=block).first()
+    return render_template("buildings.html", user=current_user, building=to_display)
 
 
 ##########################################################################################################################################
@@ -592,6 +630,14 @@ def buildings(block):
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
+from .Mapper import Mapper
+@views.route("/ivan")
+def ivan():
+    mapper = Mapper()
+    mapper.run()
+
+    return("o")
+
 @views.route("/jovians_debug")
 def jovian():
     # # ! get list of buildings and how many favourites they have
@@ -603,14 +649,13 @@ def jovian():
     # print(fav_buildings)
     # print(fav_users)
 
-
     return ("o")
 
 
 # get admin function for debug
 def get_admin():
     if not current_user.is_authenticated():
-        return User.query.filter_by(firstName = "admin").first()
+        return User.query.filter_by(firstName="admin").first()
 
 
 @views.route('/debug-sentry')

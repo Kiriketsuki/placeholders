@@ -27,7 +27,7 @@ Maps
 
     <div class="page-container">
         <div class="page-header">
-            <div class="name">{{user.recommended|length}} Results Found </div>
+            <div class="name">{{results}} Results Found </div>
 
             <div class = "btn-container">
                 <a href="/calc">
@@ -44,7 +44,7 @@ Maps
             </div>
         </div>
         <div class="line"></div>
-        {% for to_display in user.recommended %}
+        {% for to_display in recommendations %}
         <div class="output">
             <div class="imgbox">
             <img src= "{{url_for('static', filename = to_display.image_path)}}" alt="HDB" >
@@ -65,7 +65,7 @@ Maps
                 <p>${{to_display.resale_price}}</p>
                 <p>{{to_display.flat_type}}</p>
                 <p>{{to_display.floor_area_sqm}} sqm</p>
-                <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+                <p>{{to_display.num_amenities}} {{to_display.amenities_type}} in the vicinity within 500 metres</p>
                 <div class="links">
                     <a href="/buildings/{{to_display.block}}">View Map</a>
                     <a href="mailto:{{to_display.contact}}">Contact</a>

@@ -65,11 +65,11 @@ def init_db():
             db.session.add(new_building)
             db.session.commit()
 
-        # attach sample reccomendations to admin
-        for i in range(1,6):
-            temp_building = building.query.filter_by(id = i).first()
-            temp_building.recommended_to.append(admin)
-            db.session.commit()
+        # # attach sample reccomendations to admin
+        # for i in range(1,6):
+        #     temp_building = building.query.filter_by(id = i).first()
+        #     temp_building.recommended_to.append(admin)
+        #     db.session.commit()
 
         # attach sample favourites to both guest and admin
         for i in range(1,40):
@@ -78,18 +78,18 @@ def init_db():
                 temp_building.favourited_by.append(admin)
 
         # create sample preferences for admin
-        temp_preference = Preference(
-            houseType = "1 Room",
-            budget = "below $300,000",
-            monthlyIncome = "below $1,000",
-            maritalStatus = "Single",
-            cpf = "below $20,000",
-            ownCar = False,
-            amenities = ["Supermarket"],
-            preferredLocations = ["Woodlands"],
-            uid = 1 # guest's id
-        )
-        db.session.add(temp_preference)
+        # temp_preference = Preference(
+        #     houseType = "1 Room",
+        #     budget = "below $300,000",
+        #     monthlyIncome = "below $1,000",
+        #     maritalStatus = "Single",
+        #     cpf = "below $20,000",
+        #     ownCar = False,
+        #     amenities = ["Supermarket"],
+        #     preferredLocations = ["Woodlands"],
+        #     uid = 1 # guest's id
+        # )
+        # db.session.add(temp_preference)
 
         db.session.commit()
     except:
