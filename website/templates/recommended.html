@@ -3,10 +3,11 @@
 
 {% block bonus_css %}
 <link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/map.css')}}">
+<script src="{{url_for('static', filename='scripts/loading.js')}}"></script>
 {% endblock %}
 
 {% block title %}
-Maps
+Recommendations
 {% endblock %}
 
 {% block main_content %}
@@ -65,9 +66,9 @@ Maps
                 <p>${{to_display.resale_price}}</p>
                 <p>{{to_display.flat_type}}</p>
                 <p>{{to_display.floor_area_sqm}} sqm</p>
-                <p>{{to_display.num_amenities}} {{to_display.amenities_type}} in the vicinity within 500 metres</p>
+                <p>{{to_display.num_amenities}} {{to_display.amenities_type}}(s) in the vicinity within 1 km</p>
                 <div class="links">
-                    <a href="/buildings/{{to_display.block}}">View Map</a>
+                    <a href="/buildings/{{to_display.block}}/{{to_display.id}}">View Map</a>
                     <a href="mailto:{{to_display.contact}}">Contact</a>
                     {% if not user.is_guest %}
                         <a href="#" onclick="add_favourites({{to_display.id}})">Add to Favorites</a>

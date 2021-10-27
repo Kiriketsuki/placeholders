@@ -70,10 +70,10 @@ class Preference(db.Model):
 
 
 # building schema
-
-
 class building(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    lat = db.Column(db.Float)
+    lng = db.Column(db.Float)
     month = db.Column(db.DateTime)
     town = db.Column(db.String(150))
     flat_type = db.Column(db.String(150))
@@ -87,3 +87,4 @@ class building(db.Model):
     resale_price = db.Column(db.Float)
     image_path = db.Column(db.String(150))
     contact = db.Column(db.String(150))
+

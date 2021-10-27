@@ -1,4 +1,5 @@
 import os
+from re import M
 
 import pandas as pd
 from dateutil import parser
@@ -8,6 +9,7 @@ from . import db
 from .models import building
 from .models import Preference
 from .models import User
+from .Recommender import Recommender
 
 import random
 
@@ -31,8 +33,9 @@ def init_db():
         test = data[:100]
 
         # read from dataframe, create building, commit to db
+        getLatLng = Recommender(None)
+
         for index, row in test.iterrows():
-            id = row["_id"]
             month = parser.parse(row["month"])
             town = row["town"]
             flat_type = row["flat_type"]
@@ -46,8 +49,12 @@ def init_db():
             resale_price = row["resale_price"]
             image_path = row['image_path']
             contact = row['contact']
+
+            latlng = getLatLng.getLatLng("block " + block + " " + street_name)
+
             new_building = building(
-                id=id,
+                lat=latlng["lat"],
+                lng=latlng["lng"],
                 month=month,
                 town=town,
                 flat_type=flat_type,

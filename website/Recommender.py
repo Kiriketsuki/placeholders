@@ -5,6 +5,7 @@ from .models import Recommendation
 from .models import building
 from flask_login import current_user
 from . import db
+import json
 
 # API KEY FOR GOOGLE API
 from .API import API_KEY
@@ -19,15 +20,17 @@ class Recommender():
         # users current list of prefences in db
         self.preference = preference
 
-    def getLngLat(self, location):
+    def getLatLng(self, location):
         # Convert location to longitude latitude
         geocode = self.client.geocode(location)  # geocode is a json response
 
         # return dict {address, latitude, longitude}
         return dict(address=geocode[0]['formatted_address'], lat=geocode[0]['geometry']['location']['lat'], lng=geocode[0]['geometry']['location']['lng'])
 
-    def distanceMatrix(self, latFrom, lngFrom, latTo, lngTo):
-        matrix = self.client.distance_matrix(latFrom, lngFrom. latTo, lngTo)
+    def distanceMatrix(self, latFrom, lngFrom, toLat, toLng):
+        matrix = self.client.distance_matrix(
+            (latFrom, lngFrom), (toLat, toLng))
+
         return matrix["rows"][0]["elements"][0]["distance"]["text"]
 
     # return list of locations based on user preferred loc
@@ -50,48 +53,51 @@ class Recommender():
             else:
                 idx += 1
 
-        return loc  # returns filtered array of buildings based on location & budget
+        return loc # returns filtered array of buildings based on location & budget
+
+    def filterByDistance(self, latFrom, lngFrom, amenityList):
+        item = 0
+        while (item < len(amenityList)):
+            distance = self.distanceMatrix(
+                latFrom, lngFrom, amenityList[item]["geometry"]["location"]["lat"], amenityList[item]["geometry"]["location"]["lng"])
+            distance = ''.join(
+                (x for x in distance if x.isdigit() or x == '.'))
+
+            # if amenity < threshold distance in km
+            if float(distance) < 1:
+                print(float(distance))
+                amenityList.pop(item)
+            
+            item+=1
+
+        return amenityList
 
     def findRecommendations(self):
         loc = self.getBuildingsByPref()
 
-        # {Building : value} pairs
-        # Each {Building: value} pair contains a dict of
-        # {address: , latitude: , longitude: }
-        loc_dict = {loc[i]: self.getLngLat(
-            "block" + loc[i].block + " " + loc[i].street_name) for i in range(len(loc))}
+        for item in loc:
+            query = db.session.execute(f"SELECT * FROM building WHERE id={item.id}").first()
 
-        # store each building and their nearby amenities
-        for idx, blk in enumerate(loc_dict):
-            bldng = loc[idx]
-            reco = self.client.places_nearby(
-                location=(str(loc_dict[blk]["lat"]) + "," + str(loc_dict[blk]["lng"])), radius=500, type=self.preference.amenities[0])
-            if reco:
-                addRecommended = building.query.filter_by(id=bldng.id).first()
-                addRecommended.recommended_to.append(current_user)
+            # find nearby amenities
+            print(self.preference.amenities[0].lower())
+            hasAmenities = self.client.places_nearby(
+                        location=(str(query.lat) + "," + str(query.lng)), radius=500, type=self.preference.amenities[0].lower())
+            
+            # list of recommendations filtered by distance < 2km from target location
+            result = self.filterByDistance(query.lat, query.lng, hasAmenities["results"])
 
-                newRecommendation = Recommendation(user_id=current_user.get_id(
-                ), building_id=bldng.id, amenities_type=self.preference.amenities[0], amenities_list=reco["results"], num_amenities=len(reco["results"]))
+            print("finding recommendations...")
+            pprint(result)
+            
+            # add to reommendation table in db
+            if result != []:
+                newRecommendation = Recommendation(user_id=current_user.get_id(), building_id=item.id, amenities_type=self.preference.amenities[0], amenities_list=result, num_amenities=len(result))
 
                 db.session.add(newRecommendation)
                 db.session.commit()
 
-        # pprint(building_reco_dict)
-
-        # newRecommendation = Recommendation(user_id=current_user.get_id(),   building_ids=building_reco_dict)
-        # db.session.add(newRecommendation)
-        # db.session.commit()
-
-        # print(thisRecommendation)
-        # reco_dict = dict(name=None, lat=None, lng=None)
-        # for result in reco['results']:
-        #     reco_dict["name"] = result["name"]
-        #     reco_dict["lat"] = result["geometry"]["location"]["lat"]
-        #     reco_dict["lng"] = result["geometry"]["location"]["lng"]
-        #     newRecommendation = recommendations(user_id=current_user.get_id(), building_id=)
-        # pprint(reco_dict)
-
     def run(self):
+        # delete old recommendations to update with new ones
         if Recommendation.query.filter_by(user_id=current_user.get_id()).first():
             Recommendation.query.filter_by(
                 user_id=current_user.get_id()).delete()

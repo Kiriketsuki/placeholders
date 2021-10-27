@@ -23,10 +23,12 @@ from .models import Preference
 from .models import User
 from .models import Recommendation
 from .Recommender import Recommender
+from .Marker import Marker
 from prettyprinter import pprint
 
 import random
 import json
+import os
 from sqlalchemy import func
 
 views = Blueprint("views", __name__)
@@ -519,6 +521,7 @@ def to_recommend():
 
         recommender = Recommender(thisPreference)
         recommender.run()
+
         numResults = db.session.execute(
             'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
         numResults = numResults.first()[0]
@@ -536,24 +539,26 @@ def to_recommend():
 @views.route("/recommended")
 def recommended():
     if current_user.is_authenticated:
-        numResults = db.session.execute(
-            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
-        numResults = numResults.first()[0]
+
 
         thisPreference = Preference.query.filter_by(
             uid=current_user.get_id()).first()
         thisRecommendation = Recommendation.query.filter_by(
             user_id=current_user.get_id()).first()
 
-        if not thisPreference:
-            flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
-        elif thisPreference and not thisRecommendation:
-            recommender = Recommender(thisPreference)
-            recommender.run()
+        # if not thisPreference:
+        #     flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
+        # elif thisPreference and not thisRecommendation:
+        recommender = Recommender(thisPreference)
+        recommender.run()
 
         # selects buildings to recommend after reecommender has populated
         # db with recommendations
         buildings_to_recommend = db.session.execute("select * from building b,  recommendation r where b.id=r.building_id").all()
+
+        numResults = db.session.execute(
+            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
+        numResults = numResults.first()[0]
 
         return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
     else:
@@ -615,10 +620,16 @@ def faq3():
     return render_template("faq3.html", user=current_user)
 
 
-@views.route("/buildings/<block>")
-def buildings(block):
-    to_display = building.query.filter_by(block=block).first()
-    return render_template("buildings.html", user=current_user, building=to_display)
+@views.route("/buildings/<block>/<id>")
+def buildings(block, id):
+    q = db.session.execute(f"SELECT * FROM recommendation r, building b WHERE b.id={id} AND b.id=r.building_id").first()
+    marker = Marker(q.amenities_list, q.lat, q.lng)
+    marker.setMarkers()
+    # fileName = "'" + f'Assets/map_img/{str(current_user.get_id())}.jpg' + "'"
+    # fName = f"url_for('static', filename='Assets/map_img/{str(current_user.get_id())}.jpg')"
+    # fileName = os.path.join('static', 'Assets', 'map_img', f'{current_user.get_id()}.jpg')
+    # print(fileName)
+    return render_template("buildings.html", user=current_user, building=q)
 
 
 ##########################################################################################################################################
@@ -630,12 +641,12 @@ def buildings(block):
 ##########################################################################################################################################
 ##########################################################################################################################################
 ##########################################################################################################################################
-from .Mapper import Mapper
+
 @views.route("/ivan")
 def ivan():
-    mapper = Mapper()
-    mapper.run()
-
+    q = db.session.execute("SELECT")
+    marker = Marker()
+    marker.setMarker()
     return("o")
 
 @views.route("/jovians_debug")
