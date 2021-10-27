@@ -345,22 +345,33 @@ def preferences():
         attributes = {
             "houseType": None,
             "budget": None,
-            "monthlyIncome": None,
-            "maritalStatus": None,
-            "cpf": None,
-            "ownCar": None,
+            # "monthlyIncome": None,
+            # "maritalStatus": None,
+            # "cpf": None,
+            # "ownCar": None,
             "amenities": None,
+            "distance": None,
             "preferredLocations": None,
         }
 
         attributes["houseType"] = request.form.get("typeOfHouse")
         attributes["budget"] = request.form.get("budget")
-        attributes["monthlyIncome"] = request.form.get("monthlyIncome")
-        attributes["maritalStatus"] = request.form.get("maritalStatus")
-        attributes["cpf"] = request.form.get("cpfSavings")
-        attributes["ownCar"] = True if request.form.get(
-            "ownCar") == "Yes" else False
+        # attributes["monthlyIncome"] = request.form.get("monthlyIncome")
+        # attributes["maritalStatus"] = request.form.get("maritalStatus")
+        # attributes["cpf"] = request.form.get("cpfSavings")
+        # attributes["ownCar"] = True if request.form.get(
+        #     "ownCar") == "Yes" else False
         attributes["amenities"] = request.form.getlist("amenities")
+
+        distance = request.form.get("distance")
+        try:
+            distance = "".join((x for x in distance if x.isdigit()))
+        except TypeError:
+            flash("Empty fields. All fields must be filled in.",
+                  category="error")
+        distance = int(distance)
+        attributes["distance"] = distance
+
         attributes["preferredLocations"] = request.form.getlist("locations")
 
         if None in attributes.values():
@@ -372,11 +383,12 @@ def preferences():
                 newPreference = Preference(
                     houseType=attributes["houseType"],
                     budget=attributes["budget"],
-                    monthlyIncome=attributes["monthlyIncome"],
-                    maritalStatus=attributes["maritalStatus"],
-                    cpf=attributes["cpf"],
-                    ownCar=attributes["ownCar"],
+                    # monthlyIncome=attributes["monthlyIncome"],
+                    # maritalStatus=attributes["maritalStatus"],
+                    # cpf=attributes["cpf"],
+                    # ownCar=attributes["ownCar"],
                     amenities=attributes["amenities"],
+                    distance=attributes["distance"],
                     preferredLocations=attributes["preferredLocations"],
                     uid=current_user.get_id(),
                 )
@@ -384,11 +396,12 @@ def preferences():
             else:  # has existing preference hence update row
                 thisPreference.houseType = attributes["houseType"]
                 thisPreference.budget = attributes["budget"]
-                thisPreference.monthlyIncome = attributes["monthlyIncome"]
-                thisPreference.maritalStatus = attributes["maritalStatus"]
-                thisPreference.cpf = attributes["cpf"]
-                thisPreference.ownCar = attributes["ownCar"]
+                # thisPreference.monthlyIncome = attributes["monthlyIncome"]
+                # thisPreference.maritalStatus = attributes["maritalStatus"]
+                # thisPreference.cpf = attributes["cpf"]
+                # thisPreference.ownCar = attributes["ownCar"]
                 thisPreference.amenities = attributes["amenities"]
+                thisPreference.distance = attributes["distance"]
                 thisPreference.preferredLocations = attributes[
                     "preferredLocations"]
 
@@ -397,10 +410,11 @@ def preferences():
         print(
             attributes["houseType"],
             attributes["budget"],
-            attributes["maritalStatus"],
-            attributes["cpf"],
-            attributes["ownCar"],
+            # attributes["maritalStatus"],
+            # attributes["cpf"],
+            # attributes["ownCar"],
             attributes["amenities"],
+            attributes["distance"],
             attributes["preferredLocations"],
         )  # DEBUGGING
 
@@ -439,8 +453,6 @@ def home():
         return render_template("most_liked.html", user=guest, to_display=to_return)
 
 # to calculate results
-
-
 @views.route("/calc", methods=["POST", "GET"])
 def to_recommend():
     if request.method == 'POST':
@@ -457,22 +469,36 @@ def to_recommend():
         attributes = {
             "houseType": None,
             "budget": None,
-            "monthlyIncome": None,
-            "maritalStatus": None,
-            "cpf": None,
-            "ownCar": None,
+            # "monthlyIncome": None,
+            # "maritalStatus": None,
+            # "cpf": None,
+            # "ownCar": None,
             "amenities": None,
+            "distance": None,
             "preferredLocations": None,
         }
 
         attributes["houseType"] = request.form.get("typeOfHouse")
         attributes["budget"] = request.form.get("budget")
-        attributes["monthlyIncome"] = request.form.get("monthlyIncome")
-        attributes["maritalStatus"] = request.form.get("maritalStatus")
-        attributes["cpf"] = request.form.get("cpfSavings")
-        attributes["ownCar"] = True if request.form.get(
-            "ownCar") == "Yes" else False
+        # attributes["monthlyIncome"] = request.form.get("monthlyIncome")
+        # attributes["maritalStatus"] = request.form.get("maritalStatus")
+        # attributes["cpf"] = request.form.get("cpfSavings")
+        # attributes["ownCar"] = True if request.form.get(
+        #     "ownCar") == "Yes" else False
         attributes["amenities"] = request.form.getlist("amenities")
+
+        distance = request.form.get("distance")
+        try:
+            distance = "".join((x for x in distance if x.isdigit()))
+        except TypeError:
+            flash("Empty fields. All fields must be filled in.",
+                  category="error")
+            return render_template("calc_reco.html", user=current_user)
+
+        distance = int(distance)
+        attributes["distance"] = distance
+        print(distance)
+
         attributes["preferredLocations"] = request.form.getlist("locations")
 
         if None in attributes.values():
@@ -485,11 +511,12 @@ def to_recommend():
                 newPreference = Preference(
                     houseType=attributes["houseType"],
                     budget=attributes["budget"],
-                    monthlyIncome=attributes["monthlyIncome"],
-                    maritalStatus=attributes["maritalStatus"],
-                    cpf=attributes["cpf"],
-                    ownCar=attributes["ownCar"],
+                    # monthlyIncome=attributes["monthlyIncome"],
+                    # maritalStatus=attributes["maritalStatus"],
+                    # cpf=attributes["cpf"],
+                    # ownCar=attributes["ownCar"],
                     amenities=attributes["amenities"],
+                    distance = attributes["distance"],
                     preferredLocations=attributes["preferredLocations"],
                     uid=current_user.get_id(),
                 )
@@ -497,11 +524,12 @@ def to_recommend():
             else:  # has existing preference hence update row
                 thisPreference.houseType = attributes["houseType"]
                 thisPreference.budget = attributes["budget"]
-                thisPreference.monthlyIncome = attributes["monthlyIncome"]
-                thisPreference.maritalStatus = attributes["maritalStatus"]
-                thisPreference.cpf = attributes["cpf"]
-                thisPreference.ownCar = attributes["ownCar"]
+                # thisPreference.monthlyIncome = attributes["monthlyIncome"]
+                # thisPreference.maritalStatus = attributes["maritalStatus"]
+                # thisPreference.cpf = attributes["cpf"]
+                # thisPreference.ownCar = attributes["ownCar"]
                 thisPreference.amenities = attributes["amenities"]
+                thisPreference.distance = attributes["distance"]
                 thisPreference.preferredLocations = attributes[
                     "preferredLocations"]
 
@@ -510,9 +538,9 @@ def to_recommend():
         print(
             attributes["houseType"],
             attributes["budget"],
-            attributes["maritalStatus"],
-            attributes["cpf"],
-            attributes["ownCar"],
+            # attributes["maritalStatus"],
+            # attributes["cpf"],
+            # attributes["ownCar"],
             attributes["amenities"],
             attributes["preferredLocations"],
         )  # DEBUGGING
@@ -530,8 +558,12 @@ def to_recommend():
         # db with recommendations
         buildings_to_recommend = db.session.execute(
             "select * from building b, recommendation r where b.id=r.building_id").all()
+        
+        dist = db.session.execute(
+            f"SELECT distance FROM preference WHERE uid={current_user.get_id()}").first()
+        print(dist.distance)
 
-        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
+        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend, distance=dist.distance)
 
     return render_template("calc_reco.html", user=current_user)
 
@@ -546,11 +578,11 @@ def recommended():
         thisRecommendation = Recommendation.query.filter_by(
             user_id=current_user.get_id()).first()
 
-        # if not thisPreference:
-        #     flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
-        # elif thisPreference and not thisRecommendation:
-        recommender = Recommender(thisPreference)
-        recommender.run()
+        if not thisPreference:
+            flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
+        elif thisPreference and not thisRecommendation:
+            recommender = Recommender(thisPreference)
+            recommender.run()
 
         # selects buildings to recommend after reecommender has populated
         # db with recommendations

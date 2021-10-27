@@ -14,6 +14,7 @@ from .Recommender import Recommender
 import random
 
 def init_db():
+    print("initializing db...")
     try:
         # create admin
         admin = User(

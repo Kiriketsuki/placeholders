@@ -60,12 +60,11 @@ class Recommender():
         while (item < len(amenityList)):
             distance = self.distanceMatrix(
                 latFrom, lngFrom, amenityList[item]["geometry"]["location"]["lat"], amenityList[item]["geometry"]["location"]["lng"])
-            distance = ''.join(
-                (x for x in distance if x.isdigit() or x == '.'))
+            distance = ''.join((x for x in distance if x.isdigit() or x == '.'))
 
             # if amenity < threshold distance in km
-            if float(distance) < 1:
-                print(float(distance))
+            if float(distance) < self.preference.distance:
+                # print(float(distance))
                 amenityList.pop(item)
             
             item+=1
@@ -75,19 +74,23 @@ class Recommender():
     def findRecommendations(self):
         loc = self.getBuildingsByPref()
 
+        amenityPreference = self.preference.amenities[0].lower()
+        amenityPreference = "_".join(amenityPreference.split(" "))
+        print(amenityPreference)
+
         for item in loc:
             query = db.session.execute(f"SELECT * FROM building WHERE id={item.id}").first()
 
             # find nearby amenities
-            print(self.preference.amenities[0].lower())
+
             hasAmenities = self.client.places_nearby(
-                        location=(str(query.lat) + "," + str(query.lng)), radius=500, type=self.preference.amenities[0].lower())
+                        location=(str(query.lat) + "," + str(query.lng)), radius=500, type=amenityPreference)
             
             # list of recommendations filtered by distance < 2km from target location
             result = self.filterByDistance(query.lat, query.lng, hasAmenities["results"])
 
             print("finding recommendations...")
-            pprint(result)
+            # pprint(result)
             
             # add to reommendation table in db
             if result != []:

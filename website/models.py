@@ -57,11 +57,12 @@ class Preference(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     houseType = db.Column(db.String(150))
     budget = db.Column(db.String(150))
-    monthlyIncome = db.Column(db.String(150))
-    maritalStatus = db.Column(db.String(150))
-    cpf = db.Column(db.String(150))
-    ownCar = db.Column(db.Boolean)
+    # monthlyIncome = db.Column(db.String(150))
+    # maritalStatus = db.Column(db.String(150))
+    # cpf = db.Column(db.String(150))
+    # ownCar = db.Column(db.Boolean)
     amenities = db.Column(db.JSON)
+    distance = db.Column(db.Integer)
     preferredLocations = db.Column(db.JSON)
     uid = db.Column(db.Integer,
                     db.ForeignKey("user.id"),
