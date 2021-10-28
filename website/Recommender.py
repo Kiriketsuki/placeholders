@@ -25,7 +25,7 @@ class Recommender():
         geocode = self.client.geocode(location)  # geocode is a json response
 
         # return dict {address, latitude, longitude}
-        return dict(address=geocode[0]['formatted_address'], lat=geocode[0]['geometry']['location']['lat'], lng=geocode[0]['geometry']['location']['lng'])
+        return geocode[0]['formatted_address'], geocode[0]['geometry']['location']['lat'], geocode[0]['geometry']['location']['lng']
 
     def distanceMatrix(self, latFrom, lngFrom, toLat, toLng):
         matrix = self.client.distance_matrix(
@@ -81,13 +81,24 @@ class Recommender():
         for item in loc:
             query = db.session.execute(f"SELECT * FROM building WHERE id={item.id}").first()
 
+            if query.lat and query.lng != None:
+                latitude = query.lat
+                longitude = query.lng
+            else:
+                addr, latitude, longitude = self.getLatLng("block " + query.block + " " + query.street_name)
+                db.session.execute(f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={item.id}")
+                # query.lat = latitude
+                # query.lng = longitude
+                # db.commit()
+
+            print(latitude, longitude)
             # find nearby amenities
 
             hasAmenities = self.client.places_nearby(
-                        location=(str(query.lat) + "," + str(query.lng)), radius=500, type=amenityPreference)
+                        location=(str(latitude) + "," + str(longitude)), radius=500, type=amenityPreference)
             
             # list of recommendations filtered by distance < x km from target location {where x is the user defined distance preference}
-            result = self.filterByDistance(query.lat, query.lng, hasAmenities["results"])
+            result = self.filterByDistance(latitude, longitude, hasAmenities["results"])
 
             print("finding recommendations...")
             # pprint(result)

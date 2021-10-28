@@ -657,7 +657,18 @@ def faq3():
 @views.route("/buildings/<block>/<id>")
 def buildings(block, id):
     q = db.session.execute(f"SELECT * FROM recommendation r, building b WHERE b.id={id} AND b.id=r.building_id").first()
-    marker = Marker(q.amenities_list, q.lat, q.lng)
+
+    if q.lat and q.lng != None:
+        latitude = q.lat
+        longitude = q.lng
+    else:
+        recommender = Recommender(None)
+        addr, latitude, longitude = recommender.getLatLng(
+            "block " + q.block + " " + q.street_name)
+        db.session.execute(
+            f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={q.id}")
+
+    marker = Marker(q.amenities_list, latitude, longitude)
     marker.setMarkers()
     # fileName = "'" + f'Assets/map_img/{str(current_user.get_id())}.jpg' + "'"
     # fName = f"url_for('static', filename='Assets/map_img/{str(current_user.get_id())}.jpg')"

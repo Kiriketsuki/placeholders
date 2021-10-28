@@ -30,9 +30,9 @@ def createApp():
     def load_user(id):
         return User.query.get(int(id))
 
-    from .initialize_db import init_db
-    with app.app_context():
-        init_db()
+    # from .initialize_db import init_db
+    # with app.app_context():
+    #     init_db()
     return app
     
 def createDatabase(app, name):
