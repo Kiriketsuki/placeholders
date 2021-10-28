@@ -86,7 +86,7 @@ class Recommender():
             hasAmenities = self.client.places_nearby(
                         location=(str(query.lat) + "," + str(query.lng)), radius=500, type=amenityPreference)
             
-            # list of recommendations filtered by distance < 2km from target location
+            # list of recommendations filtered by distance < x km from target location {where x is the user defined distance preference}
             result = self.filterByDistance(query.lat, query.lng, hasAmenities["results"])
 
             print("finding recommendations...")
