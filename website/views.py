@@ -521,6 +521,7 @@ def to_recommend():
                     uid=current_user.get_id(),
                 )
                 db.session.add(newPreference)
+                db.session.commit()
             else:  # has existing preference hence update row
                 thisPreference.houseType = attributes["houseType"]
                 thisPreference.budget = attributes["budget"]
@@ -532,6 +533,7 @@ def to_recommend():
                 thisPreference.distance = attributes["distance"]
                 thisPreference.preferredLocations = attributes[
                     "preferredLocations"]
+                db.session.commit()
 
             flash("Preferences updated!", category="success")
 
@@ -545,8 +547,9 @@ def to_recommend():
             attributes["preferredLocations"],
         )  # DEBUGGING
 
-        db.session.commit()
-
+        thisPreference = Preference.query.filter_by(
+            uid=current_user.get_id()).first()
+            
         recommender = Recommender(thisPreference)
         recommender.run()
 
@@ -571,7 +574,6 @@ def to_recommend():
 @views.route("/recommended")
 def recommended():
     if current_user.is_authenticated:
-
 
         thisPreference = Preference.query.filter_by(
             uid=current_user.get_id()).first()
