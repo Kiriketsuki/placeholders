@@ -34,7 +34,6 @@ Most Liked Buildings
             <p>RESALE PRICE</p>
             <p>FLAT TYPE</p>
             <p>FLOOR AREA (SQM)</p>
-            <p>AMENITIES</p>
             <p> </p>
         </div>
         <div class="v1"></div>
@@ -44,9 +43,8 @@ Most Liked Buildings
             <p>${{display.resale_price}}</p>
             <p>{{display.flat_type}}</p>
             <p>{{display.floor_area_sqm}} sqm</p>
-            <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
             <div class="links">
-                <a href="/buildings/{{display.block}}">View More</a>
+                <a href="/buildings2/{{display.block}}/{{display.id}}">View More</a>
                 <a href="mailto:{{display.contact}}">Contact</a>
                 {% if not user.is_guest %}
                     <a href="#" onclick="add_favourites({{display.id}})">Add to Favorites</a>

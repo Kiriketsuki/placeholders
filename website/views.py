@@ -425,32 +425,41 @@ def preferences():
 
 @views.route("/home")
 def home():
-    list_of_favourited_buildings = sorted(db.session.query(building.id, func.count(
-        User.id)).join(building.favourited_by).group_by(building.id).all(), key=lambda x: x[1])
-    first_ten = list_of_favourited_buildings[:10]
-    flag = False
-    args = request.args
-    try:
-        email = args['email']
-        print(email)
-        guest = User.query.filter_by(email=email).first()
-        flag = True
-    except:
-        pass
+    # list_of_favourited_buildings = sorted(db.session.query(building.id, func.count(
+    #     User.id)).join(building.favourited_by).group_by(building.id).all(), key=lambda x: x[1])
+    # first_ten = list_of_favourited_buildings[:10]
+    # flag = False
+    # args = request.args
+    # try:
+    #     email = args['email']
+    #     print(email)
+    #     guest = User.query.filter_by(email=email).first()
+    #     flag = True
+    # except:
+    #     pass
+    
+    mostFavourited = db.session.execute(f"SELECT *\
+                                    FROM favourites f, building b\
+                                    WHERE f.building_id=b.id\
+                                    GROUP BY f.building_id\
+                                    HAVING COUNT(*) > 1").all()
+    for i in mostFavourited:
+        print(i.building_id)
 
-    print(args)
+    # print(args)
     # convert from list of numbers into list of buildings
-    to_return = []
-    for i in first_ten:
-        building_id = i[0]
-        temp_building = building.query.filter_by(id=building_id).first()
-        to_return.append(temp_building)
+    # to_return = []
+    # for i in first_ten:
+    #     building_id = i[0]
+    #     temp_building = building.query.filter_by(id=building_id).first()
+    #     to_return.append(temp_building)
 
-    if not flag:
-        return render_template("most_liked.html", user=current_user, to_display=to_return)
-    else:
-        print(guest)
-        return render_template("most_liked.html", user=guest, to_display=to_return)
+    # if not flag:
+    #     return render_template("most_liked.html", user=current_user, to_display=to_return)
+    # else:
+    #     print(guest)
+    #     return render_template("most_liked.html", user=guest, to_display=to_return)
+    return render_template("most_liked.html", user=current_user, to_display=mostFavourited)
 
 # to calculate results
 @views.route("/calc", methods=["POST", "GET"])
@@ -664,6 +673,8 @@ def faq3():
 def buildings(block, id):
     q = db.session.execute(f"SELECT * FROM recommendation r, building b WHERE b.id={id} AND b.id=r.building_id").first()
 
+    print(q)
+
     if q.lat and q.lng != None:
         latitude = q.lat
         longitude = q.lng
@@ -680,7 +691,33 @@ def buildings(block, id):
     # fName = f"url_for('static', filename='Assets/map_img/{str(current_user.get_id())}.jpg')"
     # fileName = os.path.join('static', 'Assets', 'map_img', f'{current_user.get_id()}.jpg')
     # print(fileName)
-    return render_template("buildings.html", user=current_user, building=q)
+    return render_template("buildings.html", user=current_user, building=q, amenities=True)
+
+
+@views.route("/buildings2/<block>/<id>")
+def buildings2(block, id):
+    q = db.session.execute(
+        f"SELECT * FROM building b WHERE b.id={id}").first()
+
+    print(q)
+
+    if q.lat and q.lng != None:
+        latitude = q.lat
+        longitude = q.lng
+    else:
+        recommender = Recommender(None)
+        addr, latitude, longitude = recommender.getLatLng(
+            "block " + q.block + " " + q.street_name)
+        db.session.execute(
+            f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={q.id}")
+
+    marker = Marker(None, latitude, longitude)
+    marker.setMarkers()
+    # fileName = "'" + f'Assets/map_img/{str(current_user.get_id())}.jpg' + "'"
+    # fName = f"url_for('static', filename='Assets/map_img/{str(current_user.get_id())}.jpg')"
+    # fileName = os.path.join('static', 'Assets', 'map_img', f'{current_user.get_id()}.jpg')
+    # print(fileName)
+    return render_template("buildings.html", user=current_user, building=q, amenities=False)
 
 
 ##########################################################################################################################################

@@ -21,10 +21,13 @@ class Marker():
         self.fromLng = fromLng
 
     def setMarkers(self):
-        print(self.amenityList)
-        amenityList = json.loads(self.amenityList)
-        
-        markerList = self.createMarkers(amenityList)
+        if self.amenityList != None:
+            print(self.amenityList)
+            amenityList = json.loads(self.amenityList)
+            
+            markerList = self.createMarkers(amenityList)
+        else:
+            markerList = self.createSingleMarker()
 
         result = self.client.static_map(size=[900, 900], zoom=17, scale=1, maptype="roadmap", markers=markerList)
 
@@ -40,3 +43,6 @@ class Marker():
         markerList.append(StaticMapMarker(locations=[(self.fromLat, self.fromLng)], color="purple", size="large", label="T"))
 
         return markerList
+
+    def createSingleMarker(self):
+        return [StaticMapMarker(locations=[(self.fromLat, self.fromLng)], color="red", size="large", label="A")]
