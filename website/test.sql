@@ -1,1 +1,1 @@
-select * from building
+select * from building b, recommendation r where b.id=r.building_id and user_id = 3

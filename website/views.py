@@ -560,11 +560,12 @@ def to_recommend():
         # selects buildings to recommend after reecommender has populated
         # db with recommendations
         buildings_to_recommend = db.session.execute(
-            "select * from building b, recommendation r where b.id=r.building_id").all()
+            f"select * from building b, recommendation r where b.id=r.building_id and user_id={current_user.get_id()}").all()
         
         dist = db.session.execute(
             f"SELECT distance FROM preference WHERE uid={current_user.get_id()}").first()
         print(dist.distance)
+        print(current_user.get_id())
 
         return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend, distance=dist.distance)
 
@@ -596,8 +597,14 @@ def recommended():
 
         return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
     else:
+        buildings_to_recommend = db.session.execute(
+            "select * from building b,  recommendation r where b.id=r.building_id").all()
+        numResults = db.session.execute(
+            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
+        numResults = numResults.first()[0]
+
         guest = User.query.filter_by(firstName="guest").first()
-        return render_template("recommended.html", user=guest)
+        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
 
 # to add favourites
 @views.route("/add_favourites", methods=["POST"])
@@ -608,7 +615,6 @@ def add_favourites():
     temp_building.favourited_by.append(current_user)
     db.session.commit()
     return jsonify({})
-
 
 @views.route("/remove_favourites", methods=["POST"])
 def remove_favourites():
