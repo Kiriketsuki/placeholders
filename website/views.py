@@ -70,11 +70,9 @@ def landing():
                 flash("Logged in successfully!", category="success")
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
-                return redirect(
-                    url_for("views.home", logged_in=True))
+                return redirect(url_for("views.home", logged_in=True))
             else:
-                flash("Incorrect password, please try again.",
-                      category="error")
+                flash("Incorrect password, please try again.", category="error")
         else:
             flash("Email does not exist.", category="error")
 
@@ -93,7 +91,7 @@ def create_guest():
         lastName="",
         email=email,
         password=generate_password_hash("", method="sha256"),
-        is_guest=True
+        is_guest=True,
     )
 
     db.session.add(temp_user)
@@ -104,13 +102,13 @@ def create_guest():
         temp = building.query.filter_by(id=i).first()
         temp.recommended_to.append(temp_user)
         db.session.commit()
-    guest = json.dumps(email, default=lambda x: list(x)
-                       if isinstance(x, set) else x)
+    guest = json.dumps(email, default=lambda x: list(x) if isinstance(x, set) else x)
     login_user(temp_user, remember=False)
     return redirect(url_for("views.home", user=guest))
 
 
 # Sign up page
+
 
 @views.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -137,8 +135,9 @@ def signup():
             flash("Last name cannot be empty.", category="error")
         else:
             if hasDigit(lastName):
-                flash("Last name must not contain numerical characters.",
-                      category="error")
+                flash(
+                    "Last name must not contain numerical characters.", category="error"
+                )
             elif len(lastName) < 2:
                 flash("Last name is too short.", category="error")
 
@@ -201,15 +200,15 @@ def login():
                 flash("Logged in successfully!", category="success")
                 # remember allows user to stay logged in
                 login_user(user, remember=True)
-                return redirect(
-                    url_for("views.home", logged_in=True))
+                return redirect(url_for("views.home", logged_in=True))
             else:
-                flash("Incorrect password, please try again.",
-                      category="error")
+                flash("Incorrect password, please try again.", category="error")
         else:
             flash("Email does not exist.", category="error")
 
     return render_template("login.html")
+
+
 # Logout user
 
 
@@ -219,6 +218,7 @@ def logout():
     logout_user()
     flash("Logged out successfully!", category="success")
     return redirect(url_for("views.landing"))
+
 
 # Forgot password page
 
@@ -253,18 +253,29 @@ def account_settings():
     if request.method == "POST":
         thisUser = User.query.filter_by(id=current_user.get_id()).first()
 
-        if (request.form.get("firstName") == ""
-                and request.form.get("lastName") == ""
-                and request.form.get("email") == ""
-                and request.form.get("password") == ""):
+        if (
+            request.form.get("firstName") == ""
+            and request.form.get("lastName") == ""
+            and request.form.get("email") == ""
+            and request.form.get("password") == ""
+        ):
             flash("Empty fields.", category="error")
         else:
-            firstName = (thisUser.firstName if request.form.get("firstName")
-                         == "" else request.form.get("firstName"))
-            lastName = (thisUser.lastName if request.form.get("lastName") == ""
-                        else request.form.get("lastName"))
-            email = (thisUser.email if request.form.get("email") == "" else
-                     request.form.get("email"))
+            firstName = (
+                thisUser.firstName
+                if request.form.get("firstName") == ""
+                else request.form.get("firstName")
+            )
+            lastName = (
+                thisUser.lastName
+                if request.form.get("lastName") == ""
+                else request.form.get("lastName")
+            )
+            email = (
+                thisUser.email
+                if request.form.get("email") == ""
+                else request.form.get("email")
+            )
 
             # Check if credentials meet requirements
             if hasDigit(firstName):
@@ -276,8 +287,9 @@ def account_settings():
                 flash("First name is too short.", category="error")
 
             if hasDigit(lastName):
-                flash("Last name must not contain numerical characters.",
-                      category="error")
+                flash(
+                    "Last name must not contain numerical characters.", category="error"
+                )
             elif len(lastName) < 2:
                 flash("Last name is too short.", category="error")
 
@@ -303,8 +315,11 @@ def account_settings():
                     )
                 else:
                     # Update user profile
-                    thisUser.password = (generate_password_hash(
-                        password, method="sha256") if pwChanged else password)
+                    thisUser.password = (
+                        generate_password_hash(password, method="sha256")
+                        if pwChanged
+                        else password
+                    )
 
             thisUser.firstName = firstName
             thisUser.lastName = lastName
@@ -338,8 +353,7 @@ def preferences():
         # else update db row for particular uid
         print(current_user)  # DEBUGGING
 
-        thisPreference = Preference.query.filter_by(
-            uid=current_user.get_id()).first()
+        thisPreference = Preference.query.filter_by(uid=current_user.get_id()).first()
         print(thisPreference)  # DEBUGGING
 
         attributes = {
@@ -367,19 +381,18 @@ def preferences():
         try:
             distance = "".join((x for x in distance if x.isdigit()))
         except TypeError:
-            flash("Empty fields. All fields must be filled in.",
-                  category="error")
+            flash("Empty fields. All fields must be filled in.", category="error")
         distance = int(distance)
         attributes["distance"] = distance
 
         attributes["preferredLocations"] = request.form.getlist("locations")
 
         if None in attributes.values():
-            flash("Empty fields. All fields must be filled in.",
-                  category="error")
+            flash("Empty fields. All fields must be filled in.", category="error")
         else:
-            if (thisPreference == None
-                ):  # currently does not have preference hence can add to db
+            if (
+                thisPreference == None
+            ):  # currently does not have preference hence can add to db
                 newPreference = Preference(
                     houseType=attributes["houseType"],
                     budget=attributes["budget"],
@@ -402,8 +415,7 @@ def preferences():
                 # thisPreference.ownCar = attributes["ownCar"]
                 thisPreference.amenities = attributes["amenities"]
                 thisPreference.distance = attributes["distance"]
-                thisPreference.preferredLocations = attributes[
-                    "preferredLocations"]
+                thisPreference.preferredLocations = attributes["preferredLocations"]
 
             flash("Preferences updated!", category="success")
 
@@ -438,11 +450,13 @@ def home():
     # except:
     #     pass
 
-    mostFavourited = db.session.execute(f"SELECT *\
+    mostFavourited = db.session.execute(
+        f"SELECT *\
                                     FROM favourites f, building b\
                                     WHERE f.building_id=b.id\
                                     GROUP BY f.building_id\
-                                    HAVING COUNT(*) > 1").all()
+                                    HAVING COUNT(*) > 1"
+    ).all()
     for i in mostFavourited:
         print(i.building_id)
 
@@ -459,22 +473,24 @@ def home():
     # else:
     #     print(guest)
     #     return render_template("most_liked.html", user=guest, to_display=to_return)
-    return render_template("most_liked.html", user=current_user, to_display=mostFavourited)
+    return render_template(
+        "most_liked.html", user=current_user, to_display=mostFavourited
+    )
+
 
 # to calculate results
 
 
 @views.route("/calc", methods=["POST", "GET"])
 def to_recommend():
-    if request.method == 'POST':
+    if request.method == "POST":
         # Check if db has user preference already
         # db cannot hold 2 preferences under same uid as it is unique
         # if preference does not exist for user then add normally
         # else update db row for particular uid
         print(current_user)  # DEBUGGING
 
-        thisPreference = Preference.query.filter_by(
-            uid=current_user.get_id()).first()
+        thisPreference = Preference.query.filter_by(uid=current_user.get_id()).first()
         print(thisPreference)  # DEBUGGING
 
         attributes = {
@@ -502,8 +518,7 @@ def to_recommend():
         try:
             distance = "".join((x for x in distance if x.isdigit()))
         except TypeError:
-            flash("Empty fields. All fields must be filled in.",
-                  category="error")
+            flash("Empty fields. All fields must be filled in.", category="error")
             return render_template("calc_reco.html", user=current_user)
 
         distance = int(distance)
@@ -513,12 +528,12 @@ def to_recommend():
         attributes["preferredLocations"] = request.form.getlist("locations")
 
         if None in attributes.values():
-            flash("Empty fields. All fields must be filled in.",
-                  category="error")
+            flash("Empty fields. All fields must be filled in.", category="error")
             return render_template("calc_reco.html", user=current_user)
         else:
-            if (thisPreference == None
-                    ):  # currently does not have preference hence can add to db
+            if (
+                thisPreference == None
+            ):  # currently does not have preference hence can add to db
                 newPreference = Preference(
                     houseType=attributes["houseType"],
                     budget=attributes["budget"],
@@ -542,8 +557,7 @@ def to_recommend():
                 # thisPreference.ownCar = attributes["ownCar"]
                 thisPreference.amenities = attributes["amenities"]
                 thisPreference.distance = attributes["distance"]
-                thisPreference.preferredLocations = attributes[
-                    "preferredLocations"]
+                thisPreference.preferredLocations = attributes["preferredLocations"]
                 db.session.commit()
 
             flash("Preferences updated!", category="success")
@@ -558,29 +572,39 @@ def to_recommend():
             attributes["preferredLocations"],
         )  # DEBUGGING
 
-        thisPreference = Preference.query.filter_by(
-            uid=current_user.get_id()).first()
+        thisPreference = Preference.query.filter_by(uid=current_user.get_id()).first()
 
         recommender = Recommender(thisPreference)
         recommender.run()
 
         numResults = db.session.execute(
-            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
+            "SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id",
+            {"current_user_id": current_user.get_id()},
+        )
         numResults = numResults.first()[0]
 
         # selects buildings to recommend after reecommender has populated
         # db with recommendations
         buildings_to_recommend = db.session.execute(
-            f"select * from building b, recommendation r where b.id=r.building_id and user_id={current_user.get_id()}").all()
+            f"select * from building b, recommendation r where b.id=r.building_id and user_id={current_user.get_id()}"
+        ).all()
 
         dist = db.session.execute(
-            f"SELECT distance FROM preference WHERE uid={current_user.get_id()}").first()
+            f"SELECT distance FROM preference WHERE uid={current_user.get_id()}"
+        ).first()
         print(dist.distance)
         print(current_user.get_id())
 
-        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend, distance=dist.distance)
+        return render_template(
+            "recommended.html",
+            user=current_user,
+            results=numResults,
+            recommendations=buildings_to_recommend,
+            distance=dist.distance,
+        )
 
     return render_template("calc_reco.html", user=current_user)
+
 
 # to show results
 
@@ -589,13 +613,16 @@ def to_recommend():
 def recommended():
     if current_user.is_authenticated:
 
-        thisPreference = Preference.query.filter_by(
-            uid=current_user.get_id()).first()
+        thisPreference = Preference.query.filter_by(uid=current_user.get_id()).first()
         thisRecommendation = Recommendation.query.filter_by(
-            user_id=current_user.get_id()).first()
+            user_id=current_user.get_id()
+        ).first()
 
         if not thisPreference:
-            flash("You currently do not have any preferences set. Please fill them up to see recommendations.", category="error")
+            flash(
+                "You currently do not have any preferences set. Please fill them up to see recommendations.",
+                category="error",
+            )
         elif thisPreference and not thisRecommendation:
             recommender = Recommender(thisPreference)
             recommender.run()
@@ -603,22 +630,39 @@ def recommended():
         # selects buildings to recommend after reecommender has populated
         # db with recommendations
         buildings_to_recommend = db.session.execute(
-            "select * from building b,  recommendation r where b.id=r.building_id").all()
+            "select * from building b,  recommendation r where b.id=r.building_id"
+        ).all()
 
         numResults = db.session.execute(
-            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
+            "SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id",
+            {"current_user_id": current_user.get_id()},
+        )
         numResults = numResults.first()[0]
 
-        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
+        return render_template(
+            "recommended.html",
+            user=current_user,
+            results=numResults,
+            recommendations=buildings_to_recommend,
+        )
     else:
         buildings_to_recommend = db.session.execute(
-            "select * from building b,  recommendation r where b.id=r.building_id").all()
+            "select * from building b,  recommendation r where b.id=r.building_id"
+        ).all()
         numResults = db.session.execute(
-            'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
+            "SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id",
+            {"current_user_id": current_user.get_id()},
+        )
         numResults = numResults.first()[0]
 
         guest = User.query.filter_by(firstName="guest").first()
-        return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
+        return render_template(
+            "recommended.html",
+            user=current_user,
+            results=numResults,
+            recommendations=buildings_to_recommend,
+        )
+
 
 # to add favourites
 
@@ -626,7 +670,7 @@ def recommended():
 @views.route("/add_favourites", methods=["POST"])
 def add_favourites():
     building_id = json.loads(request.data)
-    building_id = building_id['building_id']
+    building_id = building_id["building_id"]
     temp_building = building.query.filter_by(id=building_id).first()
     temp_building.favourited_by.append(current_user)
     db.session.commit()
@@ -637,12 +681,13 @@ def add_favourites():
 def remove_favourites():
     print("HERE")
     building_id = json.loads(request.data)
-    building_id = building_id['building_id']
+    building_id = building_id["building_id"]
     temp_building = building.query.filter_by(id=building_id).first()
     temp_building.favourited_by.remove(current_user)
     print("HERE")
     db.session.commit()
     return jsonify({})
+
 
 # view favourites
 
@@ -682,7 +727,8 @@ def faq3():
 @views.route("/buildings/<block>/<id>")
 def buildings(block, id):
     q = db.session.execute(
-        f"SELECT * FROM recommendation r, building b WHERE b.id={id} AND b.id=r.building_id").first()
+        f"SELECT * FROM recommendation r, building b WHERE b.id={id} AND b.id=r.building_id"
+    ).first()
 
     print(q)
 
@@ -692,9 +738,11 @@ def buildings(block, id):
     else:
         recommender = Recommender(None)
         addr, latitude, longitude = recommender.getLatLng(
-            "block " + q.block + " " + q.street_name)
+            "block " + q.block + " " + q.street_name
+        )
         db.session.execute(
-            f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={q.id}")
+            f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={q.id}"
+        )
 
     marker = Marker(q.amenities_list, latitude, longitude)
     marker.setMarkers()
@@ -702,13 +750,14 @@ def buildings(block, id):
     # fName = f"url_for('static', filename='Assets/map_img/{str(current_user.get_id())}.jpg')"
     # fileName = os.path.join('static', 'Assets', 'map_img', f'{current_user.get_id()}.jpg')
     # print(fileName)
-    return render_template("buildings.html", user=current_user, building=q, amenities=True)
+    return render_template(
+        "buildings.html", user=current_user, building=q, amenities=True
+    )
 
 
 @views.route("/buildings2/<block>/<id>")
 def buildings2(block, id):
-    q = db.session.execute(
-        f"SELECT * FROM building b WHERE b.id={id}").first()
+    q = db.session.execute(f"SELECT * FROM building b WHERE b.id={id}").first()
 
     print(q)
 
@@ -718,9 +767,11 @@ def buildings2(block, id):
     else:
         recommender = Recommender(None)
         addr, latitude, longitude = recommender.getLatLng(
-            "block " + q.block + " " + q.street_name)
+            "block " + q.block + " " + q.street_name
+        )
         db.session.execute(
-            f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={q.id}")
+            f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={q.id}"
+        )
 
     marker = Marker(None, latitude, longitude)
     marker.setMarkers()
@@ -728,7 +779,9 @@ def buildings2(block, id):
     # fName = f"url_for('static', filename='Assets/map_img/{str(current_user.get_id())}.jpg')"
     # fileName = os.path.join('static', 'Assets', 'map_img', f'{current_user.get_id()}.jpg')
     # print(fileName)
-    return render_template("buildings.html", user=current_user, building=q, amenities=False)
+    return render_template(
+        "buildings.html", user=current_user, building=q, amenities=False
+    )
 
 
 ##########################################################################################################################################
@@ -741,12 +794,13 @@ def buildings2(block, id):
 ##########################################################################################################################################
 ##########################################################################################################################################
 
+
 @views.route("/ivan")
 def ivan():
     q = db.session.execute("SELECT")
     marker = Marker()
     marker.setMarker()
-    return("o")
+    return "o"
 
 
 @views.route("/jovians_debug")
@@ -760,7 +814,7 @@ def jovian():
     # print(fav_buildings)
     # print(fav_users)
 
-    return ("o")
+    return "o"
 
 
 # get admin function for debug
@@ -769,6 +823,6 @@ def get_admin():
         return User.query.filter_by(firstName="admin").first()
 
 
-@views.route('/debug-sentry')
+@views.route("/debug-sentry")
 def trigger_error():
     division_by_zero = 1 / 0

@@ -14,7 +14,7 @@ from prettyprinter import pprint
 # Returns the list of building ids to recommend
 
 
-class Recommender():
+class Recommender:
     def __init__(self, preference):
         # init client
         self.client = googlemaps.Client(key=API_KEY)
@@ -27,11 +27,14 @@ class Recommender():
         geocode = self.client.geocode(location)  # geocode is a json response
 
         # return dict {address, latitude, longitude}
-        return geocode[0]['formatted_address'], geocode[0]['geometry']['location']['lat'], geocode[0]['geometry']['location']['lng']
+        return (
+            geocode[0]["formatted_address"],
+            geocode[0]["geometry"]["location"]["lat"],
+            geocode[0]["geometry"]["location"]["lng"],
+        )
 
     def distanceMatrix(self, latFrom, lngFrom, toLat, toLng):
-        matrix = self.client.distance_matrix(
-            (latFrom, lngFrom), (toLat, toLng))
+        matrix = self.client.distance_matrix((latFrom, lngFrom), (toLat, toLng))
 
         return matrix["rows"][0]["elements"][0]["distance"]["text"]
 
@@ -44,13 +47,24 @@ class Recommender():
         # loc is an array of building references
         loc = building.query.filter_by(town=preferredLoc[0].upper()).all()
 
-        switch = {"below $300,000": 300000, "$300,000 to $400,000": 400000, "$400,000 to $500,000": 500000, "$500,000 to $600,000": 600000,
-                  "$600,000 to $700,000": 700000, "$700,000 to $800,000": 800000, "$800,000 to $1,000,000": 1000000, "above $1,000,000": float("inf")}
+        switch = {
+            "below $300,000": 300000,
+            "$300,000 to $400,000": 400000,
+            "$400,000 to $500,000": 500000,
+            "$500,000 to $600,000": 600000,
+            "$600,000 to $700,000": 700000,
+            "$700,000 to $800,000": 800000,
+            "$800,000 to $1,000,000": 1000000,
+            "above $1,000,000": float("inf"),
+        }
 
         # filter loc array according to user's house type and budget
         idx = 0
-        while (idx < len(loc)):
-            if loc[idx].flat_type != self.preference.houseType.upper() or loc[idx].resale_price > switch[self.preference.budget]:
+        while idx < len(loc):
+            if (
+                loc[idx].flat_type != self.preference.houseType.upper()
+                or loc[idx].resale_price > switch[self.preference.budget]
+            ):
                 loc.pop(idx)
             else:
                 idx += 1
@@ -59,11 +73,14 @@ class Recommender():
 
     def filterByDistance(self, latFrom, lngFrom, amenityList):
         item = 0
-        while (item < len(amenityList)):
+        while item < len(amenityList):
             distance = self.distanceMatrix(
-                latFrom, lngFrom, amenityList[item]["geometry"]["location"]["lat"], amenityList[item]["geometry"]["location"]["lng"])
-            distance = ''.join(
-                (x for x in distance if x.isdigit() or x == '.'))
+                latFrom,
+                lngFrom,
+                amenityList[item]["geometry"]["location"]["lat"],
+                amenityList[item]["geometry"]["location"]["lng"],
+            )
+            distance = "".join((x for x in distance if x.isdigit() or x == "."))
 
             # if amenity < threshold distance in km
             if float(distance) < self.preference.distance:
@@ -83,16 +100,19 @@ class Recommender():
 
         for item in loc:
             query = db.session.execute(
-                f"SELECT * FROM building WHERE id={item.id}").first()
+                f"SELECT * FROM building WHERE id={item.id}"
+            ).first()
 
             if query.lat and query.lng != None:
                 latitude = query.lat
                 longitude = query.lng
             else:
                 addr, latitude, longitude = self.getLatLng(
-                    "block " + query.block + " " + query.street_name)
+                    "block " + query.block + " " + query.street_name
+                )
                 db.session.execute(
-                    f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={item.id}")
+                    f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={item.id}"
+                )
                 # query.lat = latitude
                 # query.lng = longitude
                 # db.commit()
@@ -101,19 +121,26 @@ class Recommender():
             # find nearby amenities
 
             hasAmenities = self.client.places_nearby(
-                location=(str(latitude) + "," + str(longitude)), radius=500, type=amenityPreference)
+                location=(str(latitude) + "," + str(longitude)),
+                radius=500,
+                type=amenityPreference,
+            )
 
             # list of recommendations filtered by distance < x km from target location {where x is the user defined distance preference}
-            result = self.filterByDistance(
-                latitude, longitude, hasAmenities["results"])
+            result = self.filterByDistance(latitude, longitude, hasAmenities["results"])
 
             print("finding recommendations...")
             # pprint(result)
 
             # add to reommendation table in db
             if result != []:
-                newRecommendation = Recommendation(user_id=current_user.get_id(
-                ), building_id=item.id, amenities_type=self.preference.amenities[0], amenities_list=result, num_amenities=len(result))
+                newRecommendation = Recommendation(
+                    user_id=current_user.get_id(),
+                    building_id=item.id,
+                    amenities_type=self.preference.amenities[0],
+                    amenities_list=result,
+                    num_amenities=len(result),
+                )
 
                 db.session.add(newRecommendation)
                 db.session.commit()
@@ -121,8 +148,7 @@ class Recommender():
     def run(self):
         # delete old recommendations to update with new ones
         if Recommendation.query.filter_by(user_id=current_user.get_id()).first():
-            Recommendation.query.filter_by(
-                user_id=current_user.get_id()).delete()
+            Recommendation.query.filter_by(user_id=current_user.get_id()).delete()
             db.session.commit()
 
         self.findRecommendations()

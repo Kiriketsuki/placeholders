@@ -2,8 +2,10 @@ from operator import mul
 
 import flask
 from website import createApp, initialize_db
+
 # import sentry_sdk
 from flask import Flask, config
+
 # from sentry_sdk.integrations.flask import FlaskIntegration
 import multiprocessing
 
@@ -20,5 +22,5 @@ import multiprocessing
 
 app = createApp()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

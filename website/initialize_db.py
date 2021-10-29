@@ -49,8 +49,8 @@ def init_db():
             lease_commence_date = row["lease_commence_date"]
             remaining_lease = row["remaining_lease"]
             resale_price = row["resale_price"]
-            image_path = row['image_path']
-            contact = row['contact']
+            image_path = row["image_path"]
+            contact = row["contact"]
 
             latlng = getLatLng.getLatLng("block " + block + " " + street_name)
 
@@ -69,7 +69,7 @@ def init_db():
                 resale_price=resale_price,
                 remaining_lease=remaining_lease,
                 image_path=image_path,
-                contact=contact
+                contact=contact,
             )
             db.session.add(new_building)
             db.session.commit()
@@ -83,7 +83,7 @@ def init_db():
         # attach sample favourites to both guest and admin
         for i in range(1, 40):
             temp_building = building.query.filter_by(id=i).first()
-            if (random.randint(0, 1)):
+            if random.randint(0, 1):
                 temp_building.favourited_by.append(admin)
 
         # create sample preferences for admin
