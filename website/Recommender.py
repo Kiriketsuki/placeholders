@@ -1,15 +1,13 @@
-import googlemaps
-
-from .models import building
-from .models import Recommendation
-from .models import building
-from flask_login import current_user
-from . import db
 import json
 
+import googlemaps
+from flask_login import current_user
+from prettyprinter import pprint
+
+from . import db
 # API KEY FOR GOOGLE API
 from .API import API_KEY
-from prettyprinter import pprint
+from .models import Recommendation, building
 
 # Returns the list of building ids to recommend
 
