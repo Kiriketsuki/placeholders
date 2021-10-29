@@ -28,9 +28,11 @@ class Marker:
         else:
             markerList = self.createSingleMarker()
 
-        result = self.client.static_map(
-            size=[900, 900], zoom=17, scale=1, maptype="roadmap", markers=markerList
-        )
+        result = self.client.static_map(size=[900, 900],
+                                        zoom=17,
+                                        scale=1,
+                                        maptype="roadmap",
+                                        markers=markerList)
 
         with open(f"website/static/Assets/map_img/marker.jpg", "wb+") as f:
             obj = list(result)
@@ -41,14 +43,12 @@ class Marker:
     def createMarkers(self, amenityList):
         markerList = [
             StaticMapMarker(
-                locations=[
-                    (i["geometry"]["location"]["lat"], i["geometry"]["location"]["lng"])
-                ],
+                locations=[(i["geometry"]["location"]["lat"],
+                            i["geometry"]["location"]["lng"])],
                 color="red",
                 size="large",
                 label="A",
-            )
-            for i in amenityList
+            ) for i in amenityList
         ]
 
         markerList.append(
@@ -57,8 +57,7 @@ class Marker:
                 color="purple",
                 size="large",
                 label="T",
-            )
-        )
+            ))
 
         return markerList
 
