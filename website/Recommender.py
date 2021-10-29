@@ -12,6 +12,8 @@ from .API import API_KEY
 from prettyprinter import pprint
 
 # Returns the list of building ids to recommend
+
+
 class Recommender():
     def __init__(self, preference):
         # init client
@@ -53,21 +55,22 @@ class Recommender():
             else:
                 idx += 1
 
-        return loc # returns filtered array of buildings based on location & budget
+        return loc  # returns filtered array of buildings based on location & budget
 
     def filterByDistance(self, latFrom, lngFrom, amenityList):
         item = 0
         while (item < len(amenityList)):
             distance = self.distanceMatrix(
                 latFrom, lngFrom, amenityList[item]["geometry"]["location"]["lat"], amenityList[item]["geometry"]["location"]["lng"])
-            distance = ''.join((x for x in distance if x.isdigit() or x == '.'))
+            distance = ''.join(
+                (x for x in distance if x.isdigit() or x == '.'))
 
             # if amenity < threshold distance in km
             if float(distance) < self.preference.distance:
                 # print(float(distance))
                 amenityList.pop(item)
-            
-            item+=1
+
+            item += 1
 
         return amenityList
 
@@ -79,14 +82,17 @@ class Recommender():
         print(amenityPreference)
 
         for item in loc:
-            query = db.session.execute(f"SELECT * FROM building WHERE id={item.id}").first()
+            query = db.session.execute(
+                f"SELECT * FROM building WHERE id={item.id}").first()
 
             if query.lat and query.lng != None:
                 latitude = query.lat
                 longitude = query.lng
             else:
-                addr, latitude, longitude = self.getLatLng("block " + query.block + " " + query.street_name)
-                db.session.execute(f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={item.id}")
+                addr, latitude, longitude = self.getLatLng(
+                    "block " + query.block + " " + query.street_name)
+                db.session.execute(
+                    f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={item.id}")
                 # query.lat = latitude
                 # query.lng = longitude
                 # db.commit()
@@ -95,17 +101,19 @@ class Recommender():
             # find nearby amenities
 
             hasAmenities = self.client.places_nearby(
-                        location=(str(latitude) + "," + str(longitude)), radius=500, type=amenityPreference)
-            
+                location=(str(latitude) + "," + str(longitude)), radius=500, type=amenityPreference)
+
             # list of recommendations filtered by distance < x km from target location {where x is the user defined distance preference}
-            result = self.filterByDistance(latitude, longitude, hasAmenities["results"])
+            result = self.filterByDistance(
+                latitude, longitude, hasAmenities["results"])
 
             print("finding recommendations...")
             # pprint(result)
-            
+
             # add to reommendation table in db
             if result != []:
-                newRecommendation = Recommendation(user_id=current_user.get_id(), building_id=item.id, amenities_type=self.preference.amenities[0], amenities_list=result, num_amenities=len(result))
+                newRecommendation = Recommendation(user_id=current_user.get_id(
+                ), building_id=item.id, amenities_type=self.preference.amenities[0], amenities_list=result, num_amenities=len(result))
 
                 db.session.add(newRecommendation)
                 db.session.commit()

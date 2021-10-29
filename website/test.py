@@ -55,7 +55,7 @@
 # m3 = StaticMapMarker(
 #     locations=["Tok,AK"], size="mid", color="0xFFFF00", label="C"
 # )
-                       
+
 # res = client.static_map(size=[1000, 1000], zoom=13, scale=1, maptype='roadmap', markers=[m1, m2])
 
 # with open("website/testimg.jpg", "wb") as f:

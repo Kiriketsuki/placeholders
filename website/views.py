@@ -437,7 +437,7 @@ def home():
     #     flag = True
     # except:
     #     pass
-    
+
     mostFavourited = db.session.execute(f"SELECT *\
                                     FROM favourites f, building b\
                                     WHERE f.building_id=b.id\
@@ -462,6 +462,8 @@ def home():
     return render_template("most_liked.html", user=current_user, to_display=mostFavourited)
 
 # to calculate results
+
+
 @views.route("/calc", methods=["POST", "GET"])
 def to_recommend():
     if request.method == 'POST':
@@ -525,7 +527,7 @@ def to_recommend():
                     # cpf=attributes["cpf"],
                     # ownCar=attributes["ownCar"],
                     amenities=attributes["amenities"],
-                    distance = attributes["distance"],
+                    distance=attributes["distance"],
                     preferredLocations=attributes["preferredLocations"],
                     uid=current_user.get_id(),
                 )
@@ -558,7 +560,7 @@ def to_recommend():
 
         thisPreference = Preference.query.filter_by(
             uid=current_user.get_id()).first()
-            
+
         recommender = Recommender(thisPreference)
         recommender.run()
 
@@ -570,7 +572,7 @@ def to_recommend():
         # db with recommendations
         buildings_to_recommend = db.session.execute(
             f"select * from building b, recommendation r where b.id=r.building_id and user_id={current_user.get_id()}").all()
-        
+
         dist = db.session.execute(
             f"SELECT distance FROM preference WHERE uid={current_user.get_id()}").first()
         print(dist.distance)
@@ -581,6 +583,8 @@ def to_recommend():
     return render_template("calc_reco.html", user=current_user)
 
 # to show results
+
+
 @views.route("/recommended")
 def recommended():
     if current_user.is_authenticated:
@@ -598,7 +602,8 @@ def recommended():
 
         # selects buildings to recommend after reecommender has populated
         # db with recommendations
-        buildings_to_recommend = db.session.execute("select * from building b,  recommendation r where b.id=r.building_id").all()
+        buildings_to_recommend = db.session.execute(
+            "select * from building b,  recommendation r where b.id=r.building_id").all()
 
         numResults = db.session.execute(
             'SELECT COUNT(*) FROM Recommendation WHERE user_id = :current_user_id', {'current_user_id': current_user.get_id()})
@@ -616,6 +621,8 @@ def recommended():
         return render_template("recommended.html", user=current_user, results=numResults, recommendations=buildings_to_recommend)
 
 # to add favourites
+
+
 @views.route("/add_favourites", methods=["POST"])
 def add_favourites():
     building_id = json.loads(request.data)
@@ -624,6 +631,7 @@ def add_favourites():
     temp_building.favourited_by.append(current_user)
     db.session.commit()
     return jsonify({})
+
 
 @views.route("/remove_favourites", methods=["POST"])
 def remove_favourites():
@@ -637,6 +645,8 @@ def remove_favourites():
     return jsonify({})
 
 # view favourites
+
+
 @views.route("/account/favourites")
 def view_favourites():
     if not current_user.is_guest:
@@ -671,7 +681,8 @@ def faq3():
 
 @views.route("/buildings/<block>/<id>")
 def buildings(block, id):
-    q = db.session.execute(f"SELECT * FROM recommendation r, building b WHERE b.id={id} AND b.id=r.building_id").first()
+    q = db.session.execute(
+        f"SELECT * FROM recommendation r, building b WHERE b.id={id} AND b.id=r.building_id").first()
 
     print(q)
 
@@ -736,6 +747,7 @@ def ivan():
     marker = Marker()
     marker.setMarker()
     return("o")
+
 
 @views.route("/jovians_debug")
 def jovian():

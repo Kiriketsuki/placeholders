@@ -13,6 +13,7 @@ from .Recommender import Recommender
 
 import random
 
+
 def init_db():
     print("initializing db...")
     try:
@@ -67,8 +68,8 @@ def init_db():
                 lease_commence_date=lease_commence_date,
                 resale_price=resale_price,
                 remaining_lease=remaining_lease,
-                image_path = image_path,
-                contact = contact
+                image_path=image_path,
+                contact=contact
             )
             db.session.add(new_building)
             db.session.commit()
@@ -80,9 +81,9 @@ def init_db():
         #     db.session.commit()
 
         # attach sample favourites to both guest and admin
-        for i in range(1,40):
-            temp_building = building.query.filter_by(id = i).first()
-            if (random.randint(0,1)):
+        for i in range(1, 40):
+            temp_building = building.query.filter_by(id=i).first()
+            if (random.randint(0, 1)):
                 temp_building.favourited_by.append(admin)
 
         # create sample preferences for admin

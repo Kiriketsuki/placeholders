@@ -9,17 +9,18 @@ from . import db
 
 # association table for recommendations
 recommendations = db.Table(
-    "recommendations", 
+    "recommendations",
     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
     db.Column("building_id", db.Integer, db.ForeignKey("building.id")),
 )
 
 # association table for favourites
 favourites = db.Table(
-    "favourites", 
+    "favourites",
     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
     db.Column("building_id", db.Integer, db.ForeignKey("building.id")),
 )
+
 
 class Recommendation(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
@@ -32,6 +33,8 @@ class Recommendation(db.Model):
     # nearby_amenities = db.Column(db.JSON)
 
 # User schema
+
+
 class User(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -39,7 +42,7 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(150))
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    photo = db.Column(db.String(150), default = "assets/user_photo/default.jpg")
+    photo = db.Column(db.String(150), default="assets/user_photo/default.jpg")
     recommended = db.relationship(
         "building",
         secondary=recommendations,
@@ -51,7 +54,9 @@ class User(db.Model, UserMixin):
         backref=db.backref("favourited_by", lazy="dynamic"),
     )
 
-    is_guest = db.Column(db.Boolean, default = False) # to make everything can be based on sidebar.html
+    # to make everything can be based on sidebar.html
+    is_guest = db.Column(db.Boolean, default=False)
+
 
 class Preference(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -88,4 +93,3 @@ class building(db.Model):
     resale_price = db.Column(db.Float)
     image_path = db.Column(db.String(150))
     contact = db.Column(db.String(150))
-
