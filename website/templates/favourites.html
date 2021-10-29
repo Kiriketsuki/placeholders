@@ -58,9 +58,9 @@ Favourites
                 <p>{{to_display.floor_area_sqm}} sqm</p>
                 <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
                 <div class="links">
-                    <a href="#">View Map</a>
+                    <a href="/buildings/{{to_display.block}}">View Map</a>
                     <a href="#">Contact</a>
-                    <a href="#">Remove from Favourites</a>
+                    <a href="#" onclick="remove_favourites({{to_display.id}})">Remove from Favourites</a>
                     <!-- todo remove favourites function -->
                 </div>
             </div>

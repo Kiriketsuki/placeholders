@@ -3,10 +3,11 @@
 
 {% block bonus_css %}
 <link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/map.css')}}">
+<script src="{{url_for('static', filename='scripts/loading.js')}}"></script>
 {% endblock %}
 
 {% block title %}
-Maps
+Recommendations
 {% endblock %}
 
 {% block main_content %}
@@ -14,18 +15,20 @@ Maps
 <div id = "main_div">
 
     <ul id = "list" class = "map" onload = "scrollTop = 0">
-        <iframe
-        loading="lazy"
-        allowfullscreen
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC7HKw6ZOf4juz_CS3vRnJhZZTP6ePRnso
-            &q=Space+Needle,Seattle+WA">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.720293809179!2d103.67788015026969!3d1.3442419619632229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0f750415f4a3%3A0x5d08d1fae5a05362!2sComputational%20Intelligence%20Lab%20(CIL)!5e0!3m2!1sen!2ssg!4v1634663514829!5m2!1sen!2ssg" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
         </iframe>
         <br>
     </ul>
 
     <div class="page-container">
         <div class="page-header">
-            <div class="name">{{user.recommended|length}} Results Found </div>
+            <div class="name">{{results}} Results Found </div>
 
             <div class = "btn-container">
                 <a href="/calc">
@@ -42,7 +45,7 @@ Maps
             </div>
         </div>
         <div class="line"></div>
-        {% for to_display in user.recommended %}
+        {% for to_display in recommendations %}
         <div class="output">
             <div class="imgbox">
             <img src= "{{url_for('static', filename = to_display.image_path)}}" alt="HDB" >
@@ -63,10 +66,10 @@ Maps
                 <p>${{to_display.resale_price}}</p>
                 <p>{{to_display.flat_type}}</p>
                 <p>{{to_display.floor_area_sqm}} sqm</p>
-                <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+                <p>{{to_display.num_amenities}} {{to_display.amenities_type}}(s) in the vicinity within {{distance}} km</p>
                 <div class="links">
-                    <a href="#">View Map</a>
-                    <a href="#">Contact</a>
+                    <a href="/buildings/{{to_display.block}}/{{to_display.id}}">View Map</a>
+                    <a href="mailto:{{to_display.contact}}">Contact</a>
                     {% if not user.is_guest %}
                         <a href="#" onclick="add_favourites({{to_display.id}})">Add to Favorites</a>
                     {% endif %}

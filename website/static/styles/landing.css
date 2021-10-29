@@ -2,7 +2,6 @@
   box-sizing: border-box;
   --font-title: "Lobster", cursive;
   font-family: "Roboto";
-  background-color: rgba(166,226,236,255);
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;

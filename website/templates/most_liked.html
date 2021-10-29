@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block title %}
-Recommendations
+Most Liked Buildings
 {% endblock %}
 
 {% block main_content %}
 <div class="page-container">
     <div class="page-header">
-        <div class="name">Top Picks</div>
+        <div class="name">Most Liked Buildings!</div>
         <!-- <div class =btn-container>
             <a href="/compare">
               <button id="btn" type='button' class="btn">
@@ -34,7 +34,6 @@ Recommendations
             <p>RESALE PRICE</p>
             <p>FLAT TYPE</p>
             <p>FLOOR AREA (SQM)</p>
-            <p>AMENITIES</p>
             <p> </p>
         </div>
         <div class="v1"></div>
@@ -44,16 +43,14 @@ Recommendations
             <p>${{display.resale_price}}</p>
             <p>{{display.flat_type}}</p>
             <p>{{display.floor_area_sqm}} sqm</p>
-            <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
             <div class="links">
-                <a href="#">View Map</a>
-                <a href="#">Contact</a>
+                <a href="/buildings2/{{display.block}}/{{display.id}}">View More</a>
+                <a href="mailto:{{display.contact}}">Contact</a>
                 {% if not user.is_guest %}
                     <a href="#" onclick="add_favourites({{display.id}})">Add to Favorites</a>
                 {% endif %}
             </div>
         </div>
-
       </div>
       {% endfor %}
 </div>

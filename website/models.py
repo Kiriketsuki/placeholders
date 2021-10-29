@@ -21,8 +21,17 @@ favourites = db.Table(
     db.Column("building_id", db.Integer, db.ForeignKey("building.id")),
 )
 
-# User schema
+class Recommendation(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    building_id = db.Column(db.Integer, primary_key=True)
+    amenities_type = db.Column(db.String(150))
+    amenities_list = db.Column(db.JSON)
+    num_amenities = db.Column(db.Integer)
+    distance_from_target = db.Column(db.String(150), nullable=True)
 
+    # nearby_amenities = db.Column(db.JSON)
+
+# User schema
 class User(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -42,19 +51,18 @@ class User(db.Model, UserMixin):
         backref=db.backref("favourited_by", lazy="dynamic"),
     )
 
-    pid = db.relationship("Preference", backref="user", uselist=False)
-
     is_guest = db.Column(db.Boolean, default = False) # to make everything can be based on sidebar.html
 
 class Preference(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     houseType = db.Column(db.String(150))
     budget = db.Column(db.String(150))
-    monthlyIncome = db.Column(db.String(150))
-    maritalStatus = db.Column(db.String(150))
-    cpf = db.Column(db.String(150))
-    ownCar = db.Column(db.Boolean)
+    # monthlyIncome = db.Column(db.String(150))
+    # maritalStatus = db.Column(db.String(150))
+    # cpf = db.Column(db.String(150))
+    # ownCar = db.Column(db.Boolean)
     amenities = db.Column(db.JSON)
+    distance = db.Column(db.Integer)
     preferredLocations = db.Column(db.JSON)
     uid = db.Column(db.Integer,
                     db.ForeignKey("user.id"),
@@ -63,10 +71,10 @@ class Preference(db.Model):
 
 
 # building schema
-
-
 class building(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    lat = db.Column(db.Float)
+    lng = db.Column(db.Float)
     month = db.Column(db.DateTime)
     town = db.Column(db.String(150))
     flat_type = db.Column(db.String(150))
@@ -79,3 +87,5 @@ class building(db.Model):
     remaining_lease = db.Column(db.String(150))
     resale_price = db.Column(db.Float)
     image_path = db.Column(db.String(150))
+    contact = db.Column(db.String(150))
+
