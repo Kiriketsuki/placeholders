@@ -5,9 +5,10 @@ from flask_login import current_user
 from prettyprinter import pprint
 
 from . import db
-# API KEY FOR GOOGLE API
 from .API import API_KEY
-from .models import Recommendation, building
+from .models import building
+from .models import Recommendation
+# API KEY FOR GOOGLE API
 
 # Returns the list of building ids to recommend
 
