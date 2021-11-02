@@ -80,10 +80,10 @@ def init_db():
         #     db.session.commit()
 
         # attach sample favourites to both guest and admin
-        for i in range(1,40):
-            temp_building = building.query.filter_by(id = i).first()
-            if (random.randint(0,1)):
-                temp_building.favourited_by.append(admin)
+#         for i in range(1,40):
+#             temp_building = building.query.filter_by(id = i).first()
+#             if (random.randint(0,1)):
+#                 temp_building.favourited_by.append(admin)
 
         # create sample preferences for admin
         # temp_preference = Preference(
