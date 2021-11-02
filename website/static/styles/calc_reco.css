@@ -132,6 +132,15 @@ html {
       filter: grayscale(100%) opacity(1);
       transition: var(--transition-speed);
   }
+
+  .alert_container {
+      width: 70vw;
+      z-index: 999;
+  }
+
+  .alert {
+      width:50%;
+  }
   
   .link-text {
       display: none;
