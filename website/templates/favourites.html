@@ -40,7 +40,7 @@ Favourites
                           <th>RESALE PRICE</th>
                           <th>FLAT TYPE</th>
                           <th>FLOOR AREA (SQM)</th>
-                          <th>AMENITIES</th>
+                          <!-- <th>AMENITIES</th> -->
                         </tr>
                         {% for to_display in user.favourites %}
                         <tr>
@@ -49,7 +49,7 @@ Favourites
                           <td>${{to_display.resale_price}}</td>
                           <td>{{to_display.flat_type}}</td>
                           <td>{{to_display.floor_area_sqm}} sqm</td>
-                          <td>School(1km), Coffee Shop(800m), MRT(2km)</td>
+                          <!-- <td>School(1km), Coffee Shop(800m), MRT(2km)</td> -->
                         </tr>
                         {% endfor %}
                       </table>
@@ -71,7 +71,7 @@ Favourites
                     <p>RESALE PRICE</p>
                     <p>FLAT TYPE</p>
                     <p>FLOOR AREA (SQM)</p>
-                    <p>AMENITIES</p>
+                    <!-- <p>AMENITIES</p> -->
                     <p> </p>
                 </div>
                 <div class="v1"></div>
@@ -81,7 +81,7 @@ Favourites
                     <p>${{to_display.resale_price}}</p>
                     <p>{{to_display.flat_type}}</p>
                     <p>{{to_display.floor_area_sqm}} sqm</p>
-                    <p>School(1km), Coffee Shop(800m), MRT(2km)</p>
+                    <!-- <p>School(1km), Coffee Shop(800m), MRT(2km)</p> -->
                     <div class="links">
                         <a href="/buildings/{{to_display.block}}">View Map</a>
                         <a href="#">Contact</a>
