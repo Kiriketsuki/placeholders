@@ -20,7 +20,6 @@ from website import initialize_db
 #     traces_sample_rate=1.0
 # )
 
-
 app = createApp()
 
 if __name__ == "__main__":

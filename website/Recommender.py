@@ -33,7 +33,8 @@ class Recommender:
         )
 
     def distanceMatrix(self, latFrom, lngFrom, toLat, toLng):
-        matrix = self.client.distance_matrix((latFrom, lngFrom), (toLat, toLng))
+        matrix = self.client.distance_matrix((latFrom, lngFrom),
+                                             (toLat, toLng))
 
         return matrix["rows"][0]["elements"][0]["distance"]["text"]
 
@@ -60,10 +61,8 @@ class Recommender:
         # filter loc array according to user's house type and budget
         idx = 0
         while idx < len(loc):
-            if (
-                loc[idx].flat_type != self.preference.houseType.upper()
-                or loc[idx].resale_price > switch[self.preference.budget]
-            ):
+            if (loc[idx].flat_type != self.preference.houseType.upper()
+                    or loc[idx].resale_price > switch[self.preference.budget]):
                 loc.pop(idx)
             else:
                 idx += 1
@@ -79,7 +78,8 @@ class Recommender:
                 amenityList[item]["geometry"]["location"]["lat"],
                 amenityList[item]["geometry"]["location"]["lng"],
             )
-            distance = "".join((x for x in distance if x.isdigit() or x == "."))
+            distance = "".join(
+                (x for x in distance if x.isdigit() or x == "."))
 
             # if amenity < threshold distance in km
             if float(distance) < self.preference.distance:
@@ -99,16 +99,15 @@ class Recommender:
 
         for item in loc:
             query = db.session.execute(
-                f"SELECT * FROM building WHERE id={item.id}"
-            ).first()
+                f"SELECT * FROM building WHERE id={item.id}").first()
 
             if query.lat and query.lng != None:
                 latitude = query.lat
                 longitude = query.lng
             else:
-                addr, latitude, longitude = self.getLatLng(
-                    "block " + query.block + " " + query.street_name
-                )
+                addr, latitude, longitude = self.getLatLng("block " +
+                                                           query.block + " " +
+                                                           query.street_name)
                 db.session.execute(
                     f"UPDATE building SET lat={latitude}, lng={longitude} WHERE id={item.id}"
                 )
@@ -126,7 +125,8 @@ class Recommender:
             )
 
             # list of recommendations filtered by distance < x km from target location {where x is the user defined distance preference}
-            result = self.filterByDistance(latitude, longitude, hasAmenities["results"])
+            result = self.filterByDistance(latitude, longitude,
+                                           hasAmenities["results"])
 
             print("finding recommendations...")
             # pprint(result)
@@ -146,8 +146,10 @@ class Recommender:
 
     def run(self):
         # delete old recommendations to update with new ones
-        if Recommendation.query.filter_by(user_id=current_user.get_id()).first():
-            Recommendation.query.filter_by(user_id=current_user.get_id()).delete()
+        if Recommendation.query.filter_by(
+                user_id=current_user.get_id()).first():
+            Recommendation.query.filter_by(
+                user_id=current_user.get_id()).delete()
             db.session.commit()
 
         self.findRecommendations()
