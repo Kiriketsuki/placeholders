@@ -1,4 +1,5 @@
 import os
+from re import M
 
 import pandas as pd
 from dateutil import parser
@@ -8,12 +9,13 @@ from . import db
 from .models import building
 from .models import Preference
 from .models import User
+from .Recommender import Recommender
 
 import random
 
 def init_db():
+    print("initializing db...")
     try:
-        print("entered")
         # create admin
         admin = User(
             firstName="admin",
@@ -24,27 +26,17 @@ def init_db():
         db.session.add(admin)
         db.session.commit()
 
-        # create guest
-        guest = User(
-            firstName="guest",
-            lastName="",
-            email="guest@gmail.com",
-            password=generate_password_hash("", method="sha256"),
-            is_guest = True
-        )
-        db.session.add(guest)
-        db.session.commit()
-
         # import buildings
         # todo change number in data.head() to whatever number of buildings you want to import
         file = "website/gov_data.csv"
         cwd = os.getcwd()
         data = pd.read_csv(os.path.normcase(os.path.join(cwd, file)))
-        test = data.head(10)  # adding only 5
+        test = data[:100]
 
         # read from dataframe, create building, commit to db
+        getLatLng = Recommender(None)
+
         for index, row in test.iterrows():
-            id = row["_id"]
             month = parser.parse(row["month"])
             town = row["town"]
             flat_type = row["flat_type"]
@@ -57,8 +49,13 @@ def init_db():
             remaining_lease = row["remaining_lease"]
             resale_price = row["resale_price"]
             image_path = row['image_path']
+            contact = row['contact']
+
+            latlng = getLatLng.getLatLng("block " + block + " " + street_name)
+
             new_building = building(
-                id=id,
+                lat=latlng["lat"],
+                lng=latlng["lng"],
                 month=month,
                 town=town,
                 flat_type=flat_type,
@@ -70,44 +67,37 @@ def init_db():
                 lease_commence_date=lease_commence_date,
                 resale_price=resale_price,
                 remaining_lease=remaining_lease,
-                image_path = image_path
+                image_path = image_path,
+                contact = contact
             )
             db.session.add(new_building)
             db.session.commit()
 
-        # attach sample reccomendations to admin
-        for i in range(1,6):
-            temp_building = building.query.filter_by(id = i).first()
-            temp_building.recommended_to.append(admin)
-            db.session.commit()
-
-        for i in range(6,11):
-            temp_building = building.query.filter_by(id = i).first()
-            temp_building.recommended_to.append(guest)
-            db.session.commit()
+        # # attach sample reccomendations to admin
+        # for i in range(1,6):
+        #     temp_building = building.query.filter_by(id = i).first()
+        #     temp_building.recommended_to.append(admin)
+        #     db.session.commit()
 
         # attach sample favourites to both guest and admin
-        for i in range(1,11):
+        for i in range(1,40):
             temp_building = building.query.filter_by(id = i).first()
             if (random.randint(0,1)):
                 temp_building.favourited_by.append(admin)
-            if (random.randint(0,1)):
-                temp_building.favourited_by.append(guest)
-            db.session.commit()
 
-        # create sample preferences for guest
-        temp_preference = Preference(
-            houseType = "1 Room",
-            budget = "below $300,000",
-            monthlyIncome = "below $1,000",
-            maritalStatus = "Single",
-            cpf = "below $20,000",
-            ownCar = False,
-            amenities = ["Supermarket"],
-            preferredLocations = ["Woodlands"],
-            uid = 2 # guest's id
-        )
-        db.session.add(temp_preference)
+        # create sample preferences for admin
+        # temp_preference = Preference(
+        #     houseType = "1 Room",
+        #     budget = "below $300,000",
+        #     monthlyIncome = "below $1,000",
+        #     maritalStatus = "Single",
+        #     cpf = "below $20,000",
+        #     ownCar = False,
+        #     amenities = ["Supermarket"],
+        #     preferredLocations = ["Woodlands"],
+        #     uid = 1 # guest's id
+        # )
+        # db.session.add(temp_preference)
 
         db.session.commit()
     except:

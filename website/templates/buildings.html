@@ -1,0 +1,106 @@
+{% extends "sidebar.html" %}
+
+{% block bonus_css %}
+<link rel = "stylesheet" href = "{{url_for('static', filename = 'styles/buildings.css')}}">
+{% endblock %}
+
+{% block title %}
+Block {{building.block}}
+{% endblock %}
+
+{% block main_content %}
+
+<div id = "main_div">
+    <!-- <ul id = "list" class = "map" onload = "scrollTop = 0">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d510562.45330268116!2d103.56405349164459!3d1.313984343024645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da11238a8b9375%3A0x887869cf52abf5c4!2sSingapore!5e0!3m2!1sen!2ssg!4v1634658518300!5m2!1sen!2ssg" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </ul> -->
+    
+
+    <h1>
+        Block {{building.block}}
+    </h1>
+
+    
+        <div id = "image_container">
+            <img class="building-img" src = "{{url_for('static', filename = building.image_path)}}">
+
+            <img class="map-img" src="{{ url_for('static', filename='Assets/map_img/marker.jpg') }}" alt="">
+        </div>
+
+    <div id="second_div">
+        <div id = "content">
+            <div id = "left_content">
+                <p>TOWN</p>
+                <p>FLAT TYPE</p>
+                <p>FlAT MODEL</p>
+                <p>FLOOR AREA (SQM)</p>
+                <p>STREET NAME</p>
+                <p>RESALE PRICE</p>
+                <p>MONTH</p>
+                <p>REMAINING LEASE</p>
+                <p>LEASE COMMENCE YEAR</p>
+                <p>STOREY RANGE</p>
+                {% if amenities %}
+                <p>AMENITIES</p>
+                {% endif %}
+                <p>CONTACT EMAIL</p>
+                <p> </p>
+
+            </div>
+            
+            <div class="v1"></div>
+            
+            <div id = "right_content">
+                <ul id = "building_info" class = "list-group list-group-flush">
+                    <li class = "list-group-item" id = "town">
+                        {{building.town}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.flat_type}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.flat_model}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.floor_area_sqm}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.street_name}}
+                    </li>
+                    <li class = "list-group-item">
+                        ${{building.resale_price}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.month}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.remaining_lease}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.lease_commence_date}}
+                    </li>
+                    <li class = "list-group-item">
+                        {{building.storey_range}}
+                    </li>
+                    {% if amenities %}
+                    <li class = "list-group-item">
+                        {{building.num_amenities}} {{building.amenities_type}}(s) in the vicinity within 1 km
+                    </li>
+                    {% endif %}
+                    <li class = "list-group-item">
+                       <a href="mailto:{{building.contact}}">{{building.contact}}</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

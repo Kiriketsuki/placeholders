@@ -40,6 +40,8 @@
         {% endblock %}
     </title>
 
+    <link rel = "icon" href = "{{ url_for('static',filename='styles/logo/hdb_logo.svg') }}" type = "image/x=icon">
+
    </head>
 
 
@@ -54,7 +56,7 @@
 
 
         <div class="logo">
-                <span class="name">
+                <span class="name" onclick="window.location.href='/'">
                     Place 
                     Holders
                 </span>

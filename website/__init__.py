@@ -10,6 +10,7 @@ DB_NAME = "database.db"
 
 def createApp():
     app = Flask(__name__)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'abc123'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
@@ -29,9 +30,9 @@ def createApp():
     def load_user(id):
         return User.query.get(int(id))
 
-    from .initialize_db import init_db
-    with app.app_context():
-        init_db()
+    # from .initialize_db import init_db
+    # with app.app_context():
+    #     init_db()
     return app
     
 def createDatabase(app, name):

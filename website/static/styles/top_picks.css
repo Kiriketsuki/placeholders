@@ -155,10 +155,13 @@ li> ul> li {
 .v1{
     grid-area: line;
     border-left: 3px solid black;
-    height: 280px;
+    height: 100%;
 }
-.links{
+.links {
     display: flex;
-    justify-content: space-between;
-    width: 330px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    height: 1vh;
+    /* width: 330px; */
+    gap: 2vw;
 }
