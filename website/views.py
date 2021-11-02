@@ -441,8 +441,7 @@ def home():
     mostFavourited = db.session.execute(f"SELECT *\
                                     FROM favourites f, building b\
                                     WHERE f.building_id=b.id\
-                                    GROUP BY f.building_id\
-                                    HAVING COUNT(*) > 1").all()
+                                    GROUP BY f.building_id").all()
     for i in mostFavourited:
         print(i.building_id)
 
