@@ -31,6 +31,10 @@ import json
 import os
 from sqlalchemy import func
 
+from . import mail
+from flask_mail import Message
+from .email import send_password_reset_email, generate_password
+
 views = Blueprint("views", __name__)
 
 
@@ -226,7 +230,11 @@ def logout():
 @views.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
     if request.method == "POST":
-        email = request.POST.get("email")
+        email = request.form.get("email")
+        # msg = Message("heyyyyy its me again", sender='noreply@test2006.com', recipients=[email])
+        # msg.body = "HI HOW ARE YOU"
+        # mail.send(msg)
+        # flash("Email Sent", category="success")
 
         if email == None:
             flash("Email required.", category="error")
@@ -242,7 +250,14 @@ def forgot_password():
             # generate random new password
             # reset database with the new password
             # send email containing new password to user
-            pass
+            resetuser = User.query.filter_by(email = email).first()
+            password = generate_password()
+
+            send_password_reset_email(email, password)
+            resetuser.password = generate_password_hash(password, method="sha256")
+            db.session.commit()
+            flash("Email Sent", category="success")
+            
 
     return render_template("forgot_pw.html")
 

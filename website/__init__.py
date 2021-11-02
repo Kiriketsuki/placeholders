@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager
 import pandas as pd
+from flask_mail import Mail
 # from .models import import_buildings
 
 db = SQLAlchemy()
@@ -14,6 +15,15 @@ def createApp():
     app.config['SECRET_KEY'] = 'abc123'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
+
+    app.config['MAIL_SERVER']='smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = 'testingproject2006@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'Testing2oo6!'
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
+    global mail 
+    mail = Mail(app)
 
     from .views import views
 
