@@ -3,8 +3,15 @@
 -- group by building_id
 -- having count(*) > 1
 
-select *
-from favourites f, building b
-where f.building_id = b.id
-group by f.building_id
-having count(*) > 1;
+SELECT
+    *
+FROM
+    favourites f,
+    building b
+WHERE
+    f.building_id = b.id
+GROUP BY
+    f.building_id
+HAVING
+    count(*) > 1;
+
