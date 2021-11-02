@@ -6,9 +6,10 @@ from googlemaps.maps import StaticMapMarker
 from prettyprinter import pprint
 
 from . import db
-# API KEY FOR GOOGLE API
 from .API import API_KEY
-from .models import Recommendation, building
+from .models import building
+from .models import Recommendation
+# API KEY FOR GOOGLE API
 
 
 class Marker:

@@ -7,7 +7,9 @@ from dateutil import parser
 from werkzeug.security import generate_password_hash
 
 from . import db
-from .models import Preference, User, building
+from .models import building
+from .models import Preference
+from .models import User
 from .Recommender import Recommender
 
 
