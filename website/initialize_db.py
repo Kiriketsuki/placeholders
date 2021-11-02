@@ -31,7 +31,7 @@ def init_db():
         file = "website/gov_data.csv"
         cwd = os.getcwd()
         data = pd.read_csv(os.path.normcase(os.path.join(cwd, file)))
-        test = data[:100]
+        test = data[:500]
 
         # read from dataframe, create building, commit to db
         getLatLng = Recommender(None)
@@ -51,11 +51,11 @@ def init_db():
             image_path = row['image_path']
             contact = row['contact']
 
-            latlng = getLatLng.getLatLng("block " + block + " " + street_name)
+#             latlng = getLatLng.getLatLng("block " + block + " " + street_name)
 
             new_building = building(
-                lat=latlng["lat"],
-                lng=latlng["lng"],
+                lat=None,
+                lng=None,
                 month=month,
                 town=town,
                 flat_type=flat_type,
