@@ -3,6 +3,7 @@ import json
 from flask import Flask
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+
 # from sqlalchemy.event import listen
 
 from . import db
@@ -31,6 +32,7 @@ class Recommendation(db.Model):
     distance_from_target = db.Column(db.String(150), nullable=True)
 
     # nearby_amenities = db.Column(db.JSON)
+
 
 # User schema
 
@@ -69,10 +71,7 @@ class Preference(db.Model):
     amenities = db.Column(db.JSON)
     distance = db.Column(db.Integer)
     preferredLocations = db.Column(db.JSON)
-    uid = db.Column(db.Integer,
-                    db.ForeignKey("user.id"),
-                    unique=True,
-                    nullable=True)
+    uid = db.Column(db.Integer, db.ForeignKey("user.id"), unique=True, nullable=True)
 
 
 # building schema

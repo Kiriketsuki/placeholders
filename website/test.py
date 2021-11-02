@@ -1,4 +1,3 @@
-
 # from werkzeug.local import F
 # from API import API_KEY
 # import googlemaps
@@ -66,5 +65,5 @@
 # print(list(res))
 
 s = "Movie"
-s = '_'.join(s.split(" "))
+s = "_".join(s.split(" "))
 print(s)
