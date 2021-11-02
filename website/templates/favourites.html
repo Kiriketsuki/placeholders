@@ -16,20 +16,20 @@ Favourites
       localStorage.setItem("textvalue",checks);
       document.getElementById("myForm").style.display = "block";
     }
-    
+
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
     </script>
 <div id = "main_div">
-    
+
     <div class="page-container">
         <div class="page-header">
             <div class="name">{{user.favourites|length}} Results Found </div>
             <div class =btn-container>
                   <button id="btn" type='button' class="open-button"onclick="openForm()">
                     Compare
-                  </button> 
+                  </button>
             </div>
             <div class="form-popup" id="myForm">
                 <form action="/action_page.php" class="form-container">
@@ -60,7 +60,7 @@ Favourites
         <div class="line"></div>
         <form action="compare.html">
             {% for to_display in user.favourites %}
-            <div class="output"> 
+            <div class="output">
                 <div class="imgbox">
                 <img src= "{{url_for('static', filename = to_display.image_path)}}" alt="HDB" >
                 </div>

@@ -1,4 +1,4 @@
--- select building_id, COUNT(*) 
+-- select building_id, COUNT(*)
 -- from favourites, building
 -- group by building_id
 -- having count(*) > 1
@@ -14,4 +14,3 @@ GROUP BY
     f.building_id
 HAVING
     count(*) > 1;
-

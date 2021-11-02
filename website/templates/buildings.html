@@ -12,22 +12,22 @@ Block {{building.block}}
 
 <div id = "main_div">
     <!-- <ul id = "list" class = "map" onload = "scrollTop = 0">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d510562.45330268116!2d103.56405349164459!3d1.313984343024645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da11238a8b9375%3A0x887869cf52abf5c4!2sSingapore!5e0!3m2!1sen!2ssg!4v1634658518300!5m2!1sen!2ssg" 
-            width="600" 
-            height="450" 
-            style="border:0;" 
-            allowfullscreen="" 
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d510562.45330268116!2d103.56405349164459!3d1.313984343024645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da11238a8b9375%3A0x887869cf52abf5c4!2sSingapore!5e0!3m2!1sen!2ssg!4v1634658518300!5m2!1sen!2ssg"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
             loading="lazy">
         </iframe>
     </ul> -->
-    
+
 
     <h1>
         Block {{building.block}}
     </h1>
 
-    
+
         <div id = "image_container">
             <img class="building-img" src = "{{url_for('static', filename = building.image_path)}}">
 
@@ -54,9 +54,9 @@ Block {{building.block}}
                 <p> </p>
 
             </div>
-            
+
             <div class="v1"></div>
-            
+
             <div id = "right_content">
                 <ul id = "building_info" class = "list-group list-group-flush">
                     <li class = "list-group-item" id = "town">
@@ -95,7 +95,7 @@ Block {{building.block}}
                     </li>
                     {% endif %}
                     <li class = "list-group-item">
-                       <a href="mailto:{{building.contact}}">{{building.contact}}</a> 
+                       <a href="mailto:{{building.contact}}">{{building.contact}}</a>
                     </li>
                 </ul>
             </div>
