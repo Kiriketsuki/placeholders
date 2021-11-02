@@ -1,13 +1,12 @@
+# from sentry_sdk.integrations.flask import FlaskIntegration
+import multiprocessing
 from operator import mul
 
 import flask
-from website import createApp, initialize_db
-
 # import sentry_sdk
 from flask import Flask, config
 
-# from sentry_sdk.integrations.flask import FlaskIntegration
-import multiprocessing
+from website import createApp, initialize_db
 
 # sentry_sdk.init(
 #     dsn="https://b8534193d8bb4c78b00e134d989d915c@o1039706.ingest.sentry.io/6008629",

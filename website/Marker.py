@@ -1,17 +1,14 @@
+import json
+
 import googlemaps
-from googlemaps.maps import StaticMapMarker
-
-from .models import building
-from .models import Recommendation
-from .models import building
 from flask_login import current_user
-from . import db
-
-# API KEY FOR GOOGLE API
-from .API import API_KEY
+from googlemaps.maps import StaticMapMarker
 from prettyprinter import pprint
 
-import json
+from . import db
+# API KEY FOR GOOGLE API
+from .API import API_KEY
+from .models import Recommendation, building
 
 
 class Marker:

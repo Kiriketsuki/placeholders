@@ -1,4 +1,5 @@
 import os
+import random
 from re import M
 
 import pandas as pd
@@ -6,12 +7,8 @@ from dateutil import parser
 from werkzeug.security import generate_password_hash
 
 from . import db
-from .models import building
-from .models import Preference
-from .models import User
+from .models import Preference, User, building
 from .Recommender import Recommender
-
-import random
 
 
 def init_db():

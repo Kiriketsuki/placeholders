@@ -4,9 +4,10 @@ from flask import Flask
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 
+from . import db
+
 # from sqlalchemy.event import listen
 
-from . import db
 
 # association table for recommendations
 recommendations = db.Table(
